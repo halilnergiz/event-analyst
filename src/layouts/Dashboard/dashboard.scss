@@ -1,0 +1,9 @@
+.dash-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f7f7f7;
+  .dash-content{
+    margin: 1rem;
+  }
+}

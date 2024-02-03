@@ -1,0 +1,35 @@
+.user-profile-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: text;
+  margin-top: 6rem;
+  .profile-card {
+    width: max-content;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.15);
+    padding: 3rem;
+    border-radius: 12px;
+    background-color: #ffff;
+    .avatar {
+      display: flex;
+      justify-content: center;
+      padding: 1rem;
+      .MuiAvatar-root {
+        padding: 2rem;
+      }
+    }
+    .user-inf {
+      display: flex;
+      flex-direction: column;
+      font-size: 18px;
+      margin-top: 1.4rem;
+      & > div {
+        margin: 1rem;
+        .inf-labels{
+            font-weight: 700;
+        }
+      }
+      
+    }
+  }
+}
