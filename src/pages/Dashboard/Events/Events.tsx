@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
-import { IEvents } from '../../types/user.type';
-import { EventCard } from '../../components';
+import { IEvents } from '../../../types';
+import { EventCard } from '../../../components';
 
 interface Props {
     events: IEvents[];

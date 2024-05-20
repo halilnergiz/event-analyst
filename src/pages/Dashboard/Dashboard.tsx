@@ -1,13 +1,14 @@
-import React, { useEffect } from 'react';
-import { Header } from '../../components/index';
-import { Main } from '../Main/Main';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import { Header } from '../../layouts/Header/Header';
+import { Main } from '../../layouts/Main/Main';
 
 export const Dashboard = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const auth = () => {            
+        const auth = () => {
             if (!localStorage.getItem('access_token')) {
                 alert('Lütfen giriş yapınız');
                 navigate('/');

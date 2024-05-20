@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { BarChart, DefaultizedPieValueType, PieChart, pieArcLabelClasses } from '@mui/x-charts';
+import axios from 'axios';
 
+import { BarChart, DefaultizedPieValueType, PieChart, pieArcLabelClasses } from '@mui/x-charts';
 import ErrorIcon from '@mui/icons-material/Error';
 
-import axios from 'axios';
-import { IEvents, IEventPerson } from '../../types/user.type';
+
 import { UploadPhotos } from '../UploadPhotos/UploadPhotos';
+import { IEventPerson, IEvents } from '../../../types';
 
 interface IRaceCounts {
     [key: string]: number;
@@ -88,7 +89,7 @@ export const EventAnalyses = () => {
                 } else {
                     setEventPersonCheck(false);
                     alert('Etkinlik Fotoğraflarını Yükleyiniz');
-                    navigate(`/dashboard/events/${eventId}/upload-photos`)
+                    navigate(`/dashboard/events/${eventId}/upload-photos`);
                 }
             } catch (err) {
                 setEventCheck(false);

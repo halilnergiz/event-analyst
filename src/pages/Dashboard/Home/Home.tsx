@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { Events } from '../Events/Events';
-import { CreateEventPopUp } from '../../components';
+import { useEffect, useState } from 'react';
+
 import axios from 'axios';
-import { IEvents } from '../../types/user.type';
+
+import { Events } from '../Events/Events';
+import { IEvents } from '../../../types';
+import { CreateEventPopUp } from '../../../components';
 
 export const Home = () => {
     const [eventState, setEventState] = useState<Boolean>(false);
     const [events, setEvents] = useState<IEvents[]>([]);
-    const userId = localStorage.getItem('userId');
 
     useEffect(() => {
         const getUserEvents = async () => {
@@ -23,14 +24,12 @@ export const Home = () => {
             }
         };
         getUserEvents();
-    }, [eventState, userId]);
+    }, [eventState]);
 
     return (
         <>
             {
                 eventState ? (
-                    // TODO: create useContext structure. The component will have a url (into <Route/>)
-                    // The error that refresh & being-shown will be fixed thanks to this
                     <Events events={events} />
                 ) : (
                     <div className="no-event">

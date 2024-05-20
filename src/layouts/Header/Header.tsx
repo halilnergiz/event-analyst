@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import Dropdown from '../Dropdown/Dropdown';
-import { CreateEventPopUp } from '../Popup/CreateEventPopUp';
+import Dropdown from '../../components/Dropdown/Dropdown';
+import { CreateEventPopUp } from '../../components/Popup/CreateEventPopUp';
 
 export const Header = () => {
     const navigate = useNavigate();
