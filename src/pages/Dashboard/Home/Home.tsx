@@ -1,35 +1,30 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 
 import axios from 'axios';
 
+import { useDashContext } from '../../../context/dash-context';
 import { Events } from '../Events/Events';
 import { CreateEventPopUp } from '../../../components';
-import { IEvents } from '../../../types';
 
 export const Home = () => {
-    const [eventState, setEventState] = useState<Boolean>(false);
-    const [events, setEvents] = useState<IEvents[]>([]);
+    const { events, setEvents } = useDashContext();
 
     useEffect(() => {
         const getUserEvents = async () => {
             try {
                 const res = await axios.get(`get_all_events/`);
-                const { data } = res;
-                setEvents(data);
-                if (data.length !== 0) {
-                    setEventState(true);
-                }
+                setEvents(res.data);
             } catch (err) {
                 console.log(err);
             }
         };
         getUserEvents();
-    }, [eventState]);
+    }, []);
 
     return (
         <>
             {
-                eventState ? (
+                (true) ? (
                     <Events events={events} />
                 ) : (
                     <div className="no-event">

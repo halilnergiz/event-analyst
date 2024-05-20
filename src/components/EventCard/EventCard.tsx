@@ -9,13 +9,13 @@ interface IEventCard {
 }
 
 export const EventCard = ({ eventId, title, createdAt }: IEventCard) => {
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
     const routeDetails = () => {
-        navigate(`/dashboard/events/${eventId}`)
+        navigate(`event-detail/${eventId}/`);
     };
 
     return (
-        <Card sx={{ width: 320, justifyContent:'space-between' }}>
+        <Card sx={{ width: 320, justifyContent: 'space-between' }}>
             <AspectRatio minHeight="120px" maxHeight="200px">
                 <img
                     src="/images/card-bg.jpg"
@@ -34,7 +34,7 @@ export const EventCard = ({ eventId, title, createdAt }: IEventCard) => {
                     size="sm"
                     color="primary"
                     fullWidth
-                    style={{height:'3rem', position:'relative', bottom:'0'}}
+                    style={{ height: '3rem', position: 'relative', bottom: '0' }}
                     onClick={routeDetails}
                 >
                     İçeriğe Git

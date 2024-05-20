@@ -1,7 +1,9 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+
 import { Header, Main } from '../../layouts';
+import DashContextProvider from '../../context/dash-context';
 
 export const Dashboard = () => {
     const navigate = useNavigate();
@@ -17,11 +19,13 @@ export const Dashboard = () => {
     }, [navigate]);
 
     return (
-        <div className='dash-container'>
-            <div className='dash-content'>
-                <Header />
-                <Main />
+        <DashContextProvider>
+            <div className='dash-container'>
+                <div className='dash-content'>
+                    <Header />
+                    <Main />
+                </div>
             </div>
-        </div>
+        </DashContextProvider>
     );
 };
