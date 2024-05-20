@@ -37,21 +37,20 @@ export const Login = () => {
     });
 
     const onLoginSubmit = async (inputs: ILoginForm) => {
-        await axios.post('login/', {
-            'username': inputs.username,
-            'password': inputs.password,
-        }, {
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        }).then((res) => {
+        try {
+            const res = await axios.post('login/', {
+                'username': inputs.username,
+                'password': inputs.password,
+            });
             localStorage.setItem('access_token', `${res.data.token}`);
+            localStorage.setItem('username', `${res.data.user.username}`);
+            localStorage.setItem('email', `${res.data.user.email}`);
             navigate('/dashboard');
             console.log(res);
-        }).catch((err) => {
-            console.log(err.response.data.non_field_errors);
+        } catch (error) {
+            console.log(error);
             alert('Hatalı email veya şifre');
-        });
+        }
     };
 
     return (
