@@ -7,8 +7,8 @@ export const Dashboard = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const auth = () => {
-            if (!localStorage.getItem('userId')) {
+        const auth = () => {            
+            if (!localStorage.getItem('access_token')) {
                 alert('Lütfen giriş yapınız');
                 navigate('/');
             }

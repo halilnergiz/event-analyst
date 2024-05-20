@@ -1,21 +1,20 @@
-import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 
+import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
-
+import * as yup from 'yup';
 import { Button, TextField } from '@mui/material';
 
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
+import { ILoginForm } from '../../types';
 
-import { IUser } from '../../types/user.type';
+
 
 const loginSchema = yup.object({
-    email: yup
+    username: yup
         .string()
-        .matches(/^[a-zA-Z0-9ğüşöçİĞÜŞÖÇ]+@[a-zA-Z0-9.-]+\.[a-zA-Z]/, 'Email formatına uygun değil')
-        .min(3, 'En az 3 karakter')
+        .matches(/^[a-zA-Z0-9]+$/, 'Sadece harf ve sayı')
+        .min(4, 'En az 4 karakter')
         .max(50, 'En fazla 50 karakter')
         .trim()
         .required('Zorunlu alan'),
@@ -26,50 +25,34 @@ const loginSchema = yup.object({
         .required('Zorunlu alan')
 });
 
-interface ILoginForm {
-    email: string,
-    password: string,
-}
-
 export const Login = () => {
     const navigate = useNavigate();
+
     const { register, handleSubmit, formState: { errors } } = useForm<ILoginForm>({
         defaultValues: {
-            email: '',
+            username: '',
             password: '',
         },
         resolver: yupResolver(loginSchema)
     });
 
     const onLoginSubmit = async (inputs: ILoginForm) => {
-        try {
-            // TODO: user check implementation will be delete - it will be at Backend
-            const res = await axios.get(`${process.env.REACT_APP_API_ENDPOINT}/users`);
-            const { data } = res;
-            const checkUserDB = data.find((user: IUser) => {
-                if (user.email === inputs.email && user.password === inputs.password) {
-                    localStorage.setItem('userId', `${user.id}`);
-                    localStorage.setItem('userName', `${user.username}`);
-                    localStorage.setItem('userMail', `${user.email}`);
-                    return user.email;
-                }
-            });
-
-            // Login process after the verifications
-            if (!!checkUserDB) {
-                navigate('/dashboard');
-            } else {
-                alert('Hatalı email veya şifre');
+        await axios.post('login/', {
+            'username': inputs.username,
+            'password': inputs.password,
+        }, {
+            headers: {
+                'Content-Type': 'application/json',
             }
-        } catch (err) {
-            console.log(err);
-            alert('Başarısız Bağlantı İsteği');
-        }
+        }).then((res) => {
+            localStorage.setItem('access_token', `${res.data.token}`);
+            navigate('/dashboard');
+            console.log(res);
+        }).catch((err) => {
+            console.log(err.response.data.non_field_errors);
+            alert('Hatalı email veya şifre');
+        });
     };
-
-    useEffect(() => {
-        localStorage.clear();
-    }, []);
 
     return (
         <div className='login'>
@@ -78,18 +61,17 @@ export const Login = () => {
                     <form className='login-form' onSubmit={handleSubmit(onLoginSubmit)} autoComplete='off' >
                         <div className="title">
                             <h2>Giriş Yap</h2>
-                            {/* <img src="./images/event-analyst-logo.png" alt="" /> */}
                         </div>
                         <div className="user-infs">
-                            <div className="form-field email">
+                            <div className="form-field username">
                                 <TextField
                                     variant='outlined'
-                                    label='Email'
+                                    label='Kullanıcı adı'
                                     size='small'
-                                    error={Boolean(errors.email)}
-                                    {...register('email')}
+                                    error={Boolean(errors.username)}
+                                    {...register('username')}
                                 />
-                                {errors.email?.message && <p className='error'> {errors.email?.message}</p>}
+                                {errors.username?.message && <p className='error'> {errors.username?.message}</p>}
                             </div>
                             <div className="form-field password">
                                 <TextField
