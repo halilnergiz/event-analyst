@@ -1,8 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Header } from '../../layouts/Header/Header';
-import { Main } from '../../layouts/Main/Main';
+import { Header, Main } from '../../layouts';
 
 export const Dashboard = () => {
     const navigate = useNavigate();

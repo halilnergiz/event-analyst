@@ -1,9 +1,9 @@
-import React from 'react';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useNavigate } from 'react-router-dom';
-import { CreateEventPopUp } from '../Popup/CreateEventPopUp';
 
-const Dropdown = () => {
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+
+
+export const Dropdown = () => {
     const navigate = useNavigate();
     const logout = () => {
         localStorage.clear();
@@ -41,5 +41,3 @@ const Dropdown = () => {
         </div>
     );
 };
-
-export default Dropdown;

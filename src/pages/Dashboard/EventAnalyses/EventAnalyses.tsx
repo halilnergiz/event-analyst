@@ -6,7 +6,6 @@ import axios from 'axios';
 import { BarChart, DefaultizedPieValueType, PieChart, pieArcLabelClasses } from '@mui/x-charts';
 import ErrorIcon from '@mui/icons-material/Error';
 
-
 import { UploadPhotos } from '../UploadPhotos/UploadPhotos';
 import { IEventPerson, IEvents } from '../../../types';
 

@@ -1,6 +1,6 @@
-import React from 'react';
-import { AspectRatio, Button, Card, CardContent, Typography } from '@mui/joy';
 import { useNavigate } from 'react-router-dom';
+
+import { AspectRatio, Button, Card, CardContent, Typography } from '@mui/joy';
 
 interface IEventCard {
     eventId: string,

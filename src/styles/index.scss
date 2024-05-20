@@ -1,15 +1,18 @@
 @import url('../pages/Login/login.scss');
 @import url('../pages/Register/register.scss');
-@import url('../layouts/Dashboard/dashboard.scss');
-@import url('../components/Header/header.scss');
-@import url('../components/Dropdown/dropdown.scss');
+@import url('../pages/Dashboard/dashboard.scss');
+
+@import url('../layouts/Header/header.scss');
 @import url('../layouts/Main/main.scss');
-@import url('../pages/EventAnalyses/event-analyses.scss');
-@import url('../pages/Home/home.scss');
-@import url('../pages/Events/events.scss');
+
+@import url('../components/Dropdown/dropdown.scss');
 @import url('../components/Popup/create-event-popup.scss');
-@import url('../pages/Profile/profile.scss');
-@import url('../pages/UploadPhotos/upload-photos.scss');
+
+@import url('../pages/Dashboard/EventAnalyses/event-analyses.scss');
+@import url('../pages/Dashboard/Home/home.scss');
+@import url('../pages/Dashboard/Events/events.scss');
+@import url('../pages/Dashboard/Profile/profile.scss');
+@import url('../pages/Dashboard/UploadPhotos/upload-photos.scss');
 @import url('../pages/NotMatch/no-match.scss');
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&family=Quicksand:wght@400;500;700&display=swap');

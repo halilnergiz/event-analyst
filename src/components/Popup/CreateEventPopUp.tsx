@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+
+import axios from 'axios';
 
 import { Button, DialogContent, DialogTitle, FormControl, FormLabel, Input, Modal, ModalDialog, Stack } from '@mui/joy';
 import { Add } from '@mui/icons-material';
 
-import * as yup from 'yup';
-import { useForm } from 'react-hook-form';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
 interface ICreateEvent {
-    userId: string,
+    userId: string;
     eventName: string;
-    eventDescription: string,
-    persons: []
+    eventDescription: string;
+    persons: [];
 }
 
 export const CreateEventPopUp = () => {

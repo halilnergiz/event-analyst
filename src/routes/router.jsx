@@ -2,15 +2,15 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import App from '../App';
 import {
-  Register,
-  Login,
-  Home,
-  Profile,
+  Dashboard,
   EventAnalyses,
-  UploadPhotos,
+  Home,
+  Login,
   NoMatch,
+  Profile,
+  Register,
+  UploadPhotos,
 } from '../pages';
-import { Dashboard } from '../layouts';
 
 const router = createBrowserRouter([
   {

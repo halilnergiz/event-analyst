@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 import { Events } from '../Events/Events';
-import { IEvents } from '../../../types';
 import { CreateEventPopUp } from '../../../components';
+import { IEvents } from '../../../types';
 
 export const Home = () => {
     const [eventState, setEventState] = useState<Boolean>(false);
