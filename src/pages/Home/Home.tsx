@@ -12,7 +12,7 @@ export const Home = () => {
     useEffect(() => {
         const getUserEvents = async () => {
             try {
-                const res = await axios.get(`${process.env.REACT_APP_API_ENDPOINT}/events?userId=${userId}`);
+                const res = await axios.get(`get_all_events/`);
                 const { data } = res;
                 setEvents(data);
                 if (data.length !== 0) {
@@ -29,7 +29,7 @@ export const Home = () => {
         <>
             {
                 eventState ? (
-                    // TODO: create useContext structure. The component will have a url (into <Route/>) 
+                    // TODO: create useContext structure. The component will have a url (into <Route/>)
                     // The error that refresh & being-shown will be fixed thanks to this
                     <Events events={events} />
                 ) : (

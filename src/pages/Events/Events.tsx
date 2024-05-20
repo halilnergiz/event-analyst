@@ -11,11 +11,13 @@ export const Events = ({ events }: Props) => {
         <div className='my-events'>
             {
                 events?.map((event: IEvents) => {
+                    console.log(event);
+                    const convertedDate = new Date(event.createdAt);
                     return <EventCard
-                        key={event.id}
-                        eventId={event.id}
-                        title={event.event_name}
-                        createdAt={'12.01.2024'}
+                        key={event.eventId}
+                        eventId={event.eventId}
+                        title={event.title}
+                        createdAt={`${convertedDate.getDate()}/${convertedDate.getMonth() + 1}/${convertedDate.getFullYear()} ${convertedDate.getHours()}:${convertedDate.getMinutes()}`}
                     />;
                 })
             }
