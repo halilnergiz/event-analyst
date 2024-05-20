@@ -9,14 +9,14 @@ const Dropdown = () => {
         localStorage.clear();
         navigate('/');
     };
-    const username = localStorage.getItem('username');
+    const userName = localStorage.getItem('username');
 
     return (
         <div className="sec-center">
             <input className="dropdown" type="checkbox" id="dropdown" name="dropdown" />
             <label className="for-dropdown" htmlFor="dropdown" >
                 <AccountCircleIcon />
-                <span> {username} </span>
+                <span> {userName} </span>
             </label>
             <div className="section-dropdown">
                 <span
