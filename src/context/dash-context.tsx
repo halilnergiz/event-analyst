@@ -2,7 +2,6 @@ import React, { createContext, useContext, useState } from 'react';
 
 import { IEvents } from '../types';
 
-
 interface IDashContext {
     events: IEvents[];
     setEvents: React.Dispatch<React.SetStateAction<IEvents[]>>;

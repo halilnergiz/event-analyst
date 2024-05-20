@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import axios from 'axios';
@@ -7,17 +6,11 @@ import axios from 'axios';
 import { Button, DialogContent, DialogTitle, FormControl, FormLabel, Input, Modal, ModalDialog, Stack } from '@mui/joy';
 import { Add } from '@mui/icons-material';
 
-import { ICreateEvent, IEvents } from '../../types';
+import { ICreateEvent } from '../../types';
 import { useDashContext } from '../../context/dash-context';
-
-interface ICreateEventPopUp {
-    events: IEvents[];
-    setEvents: React.Dispatch<React.SetStateAction<IEvents[]>>;
-}
 
 export const CreateEventPopUp = () => {
     const [open, setOpen] = useState(false);
-    const navigate = useNavigate();
     const { events, setEvents } = useDashContext();
 
     const { register, handleSubmit, formState: { errors } } = useForm<ICreateEvent>({
