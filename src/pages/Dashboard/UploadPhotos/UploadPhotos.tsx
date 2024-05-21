@@ -1,6 +1,5 @@
 import { styled } from '@mui/material/styles';
-import Button from '@mui/material/Button';
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import { Dropzone } from '../../../components';
 
 const VisuallyHiddenInput = styled('input')({
     clip: 'rect(0 0 0 0)',
@@ -18,14 +17,7 @@ export const UploadPhotos = () => {
     return (
         <div className='upload-photos-container'>
             <div className='upload-button-container'>
-                <Button
-                    component='label'
-                    variant='contained'
-                    startIcon={<CloudUploadIcon />}
-                >
-                    Etkinlik Fotoğraflarını Yükle
-                    <VisuallyHiddenInput type='file' />
-                </Button>
+                <Dropzone />
             </div>
         </div>
     );

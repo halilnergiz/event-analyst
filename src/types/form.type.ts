@@ -1,3 +1,5 @@
+import { FileWithPath } from 'react-dropzone';
+
 export interface IRegisterForm {
     username: string;
     email: string,
@@ -19,3 +21,8 @@ export interface ICreateEvent {
     latitude?: number;
     address?: string;
 };
+
+export interface ImgFilePreview {
+    file: FileWithPath;
+    preview: string;
+}

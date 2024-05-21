@@ -1,0 +1,30 @@
+.dropzone-container {
+  width: 100%;
+  padding: 20px;
+  border: 2px dashed #66B3FF;
+  text-align: center;
+
+  .dropzone {
+    padding: 20px;
+    border: 2px dashed #66B3FF;
+    cursor: pointer;
+  }
+  .img-element {
+    position: relative;
+    display: inline-block;
+    margin: 20px;
+    .img-preview {
+      display: block;
+      width: 150px;
+      height: auto;
+    }
+
+    .cancel-icon {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      cursor: pointer;
+      color: red;
+    }
+  }
+}

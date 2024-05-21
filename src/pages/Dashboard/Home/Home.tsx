@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import axios from 'axios';
 
@@ -25,7 +25,9 @@ export const Home = () => {
         <>
             {
                 (true) ? (
-                    <Events events={events} />
+                    <>
+                        <Events events={events} />
+                    </>
                 ) : (
                     <div className="no-event">
                         <h2>
