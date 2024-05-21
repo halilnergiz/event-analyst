@@ -9,36 +9,40 @@ import { Add } from '@mui/icons-material';
 import { ICreateEvent } from '../../types';
 import { useDashContext } from '../../context/dash-context';
 
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+
 export const CreateEventPopUp = () => {
     const [open, setOpen] = useState(false);
     const { events, setEvents } = useDashContext();
 
     const { register, handleSubmit, formState: { errors } } = useForm<ICreateEvent>({
         defaultValues: {
-            title: '',
-            description: '',
-            start_date: new Date('2024-05-10T10:00:00'),
-            end_date: new Date('2024-05-10T12:00:00'),
-            longitude: 41.015137,
-            latitude: 28.979530,
-            address: 'Event Address 1',
+            title: undefined,
+            description: undefined,
+            start_date: new Date('2024-05-10T10:00:00'), // start_date: new Date(''),
+            end_date: new Date('2024-05-10T12:00:00'), // end_date: new Date(''),
+            longitude: undefined,
+            latitude: undefined,
+            address: undefined,
         }
     });
-
     const onCreateEvent: SubmitHandler<ICreateEvent> = async (data: ICreateEvent) => {
         try {
             const res = await axios.post(`create_event/`, {
                 title: data.title,
                 description: data.description,
-                start_date: data.start_date,
-                end_date: data.end_date,
-                longitude: data.longitude,
-                latitude: data.latitude,
+                start_date: data.start_date, // start_date: new Date(`${data.start_date}`),
+                end_date: data.end_date, // end_date: new Date(`${data.end_date}`),
+                longitude: data.longitude as number,
+                latitude: data.latitude as number,
                 address: data.address,
             });
             alert('Etkinlik Oluşturuldu');
             setOpen(false);
             setEvents([...events, res.data]);
+            console.log(res.data);
         } catch (err) {
             alert('Başarısız Bağlantı İsteği');
             console.log(err);
@@ -69,6 +73,28 @@ export const CreateEventPopUp = () => {
                             <FormControl>
                                 <FormLabel>Açıklama</FormLabel>
                                 <Input {...register('description')} autoComplete='off' />
+                            </FormControl>
+                            <FormControl>
+                                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                    <DatePicker label="Başlangıç Tarihi" name="startDate" slotProps={{ textField: { size: 'small' } }} />
+                                </LocalizationProvider>
+                            </FormControl>
+                            <FormControl>
+                                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                    <DatePicker label="Bitiş Tarihi" name="startDate" slotProps={{ textField: { size: 'small' } }} />
+                                </LocalizationProvider>
+                            </FormControl>
+                            <FormControl>
+                                <FormLabel>Enlem</FormLabel>
+                                <Input {...register('latitude')} autoComplete='off' />
+                            </FormControl>
+                            <FormControl>
+                                <FormLabel>Boylam</FormLabel>
+                                <Input {...register('longitude')} autoComplete='off' />
+                            </FormControl>
+                            <FormControl>
+                                <FormLabel>Adres</FormLabel>
+                                <Input {...register('address')} autoComplete='off' />
                             </FormControl>
                             <Button type="submit">Oluştur</Button>
                         </Stack>
