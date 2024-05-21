@@ -6,8 +6,8 @@ export interface ILoginForm {
 export interface ICreateEvent {
     title: string;
     description?: string;
-    start_date?: string;
-    end_date?: string;
+    start_date?: Date;
+    end_date?: Date;
     longitude?: number;
     latitude?: number;
     address?: string;

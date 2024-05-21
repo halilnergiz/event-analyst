@@ -1,17 +1,15 @@
-export interface IEventPerson {
-    name: string;
-    surname: string;
-    gender: 'Female' | 'Male';
-    age: number;
-    race: string;
-}
-
-export interface IEvents {
-    event_owner: string;
+export interface IEvent {
+    event_owner: number;
     eventId: string;
     title: string;
-    createdAt: string;
-    persons: IEventPerson[];
+    description: string;
+    start_date: Date;
+    end_date: Date;
+    longitude: number;
+    latitude: number;
+    address: string;
+    updatedAt: Date;
+    createdAt: Date;
 }
 
 export interface IUser {

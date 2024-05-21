@@ -1,15 +1,15 @@
 import { EventCard } from '../../../components';
-import { IEvents } from '../../../types';
+import { IEvent } from '../../../types';
 
 interface Props {
-    events: IEvents[];
+    events: IEvent[];
 }
 
 export const Events = ({ events }: Props) => {
     return (
         <div className='my-events'>
             {
-                events?.map((event: IEvents) => {
+                events?.map((event: IEvent) => {
                     console.log(event);
                     const convertedDate = new Date(event.createdAt);
                     return <EventCard

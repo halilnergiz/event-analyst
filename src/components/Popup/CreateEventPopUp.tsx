@@ -17,8 +17,8 @@ export const CreateEventPopUp = () => {
         defaultValues: {
             title: '',
             description: '',
-            start_date: '2024-05-10T10:00:00',
-            end_date: '2024-05-10T12:00:00',
+            start_date: new Date('2024-05-10T10:00:00'),
+            end_date: new Date('2024-05-10T12:00:00'),
             longitude: 41.015137,
             latitude: 28.979530,
             address: 'Event Address 1',

@@ -1,10 +1,10 @@
 import React, { createContext, useContext, useState } from 'react';
 
-import { IEvents } from '../types';
+import { IEvent } from '../types';
 
 interface IDashContext {
-    events: IEvents[];
-    setEvents: React.Dispatch<React.SetStateAction<IEvents[]>>;
+    events: IEvent[];
+    setEvents: React.Dispatch<React.SetStateAction<IEvent[]>>;
 }
 
 export const DashContext = createContext<IDashContext | undefined>(undefined);
@@ -14,7 +14,7 @@ interface IDashContextProvider {
 }
 
 const DashContextProvider = ({ children }: IDashContextProvider) => {
-    const [events, setEvents] = useState<IEvents[]>([]);
+    const [events, setEvents] = useState<IEvent[]>([]);
 
     return (
         <DashContext.Provider value={{ events, setEvents }}>
