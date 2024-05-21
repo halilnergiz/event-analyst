@@ -1,3 +1,10 @@
+export interface IRegisterForm {
+    username: string;
+    email: string,
+    password: string,
+    password_again: string,
+}
+
 export interface ILoginForm {
     username: string;
     password: string;

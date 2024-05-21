@@ -1,20 +1,20 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 import axios from 'axios';
 
 import { Button, TextField } from '@mui/material';
 
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
+import { IRegisterForm } from '../../types';
 
 const registerSchema = yup.object({
     username: yup
         .string()
         .matches(/^[a-zA-Z0-9ğüşıöçĞÜŞİÖÇ.\s]+$/, 'Kullanıcı adı formatına uygun değil')
         .min(3, 'En az 3 karakter')
-        .max(50, 'En fazla 50 karakter')
+        .max(30, 'En fazla 30 karakter')
         .required("Zorunlu Alan")
     ,
     email: yup
@@ -38,13 +38,6 @@ const registerSchema = yup.object({
         .required('Zorunlu alan'),
 });
 
-interface IRegisterForm {
-    username: string;
-    email: string,
-    password: string,
-    password_again: string,
-}
-
 export const Register = () => {
     const navigate = useNavigate();
     const { register, handleSubmit, formState: { errors } } = useForm<IRegisterForm>({
@@ -59,30 +52,13 @@ export const Register = () => {
 
     const onRegisterSubmit = async (inputs: IRegisterForm) => {
         try {
-            // TODO: user check implementation will be delete - it will be at Backend
-            const res = await axios.get(`${process.env.REACT_APP_API_ENDPOINT}/users`);
-            const { data } = res;
-
-            const checkUserDB = data.find((user: IRegisterForm) => {
-                if (user.email === inputs.email)
-                    return user.email;
+            await axios.post('register/', {
+                username: inputs.username,
+                email: inputs.email,
+                password: inputs.password,
             });
-
-
-            // Create user process after the verifications
-            if (!!checkUserDB) {
-                alert('Bu mail ile kullanıcı mevcut');
-            } else {
-                await axios.post(`${process.env.REACT_APP_API_ENDPOINT}/users`, {
-                    username: inputs.username,
-                    email: inputs.email,
-                    password: inputs.password,
-                    events: [],
-                });
-                alert('Kayıt Başarılı, Lütfen Giriş Yapınız');
-                navigate('/');
-            }
-
+            alert('Kayıt Başarılı, Lütfen Giriş Yapınız');
+            navigate('/');
         } catch (err) {
             alert('Başarısız Bağlantı İsteği');
             console.log(err);
