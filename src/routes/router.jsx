@@ -41,10 +41,6 @@ const router = createBrowserRouter([
             path: 'event-analyses/:eventId',
             element: <EventAnalyses />,
           },
-          {
-            path: 'upload-photos',
-            element: <UploadPhotos />,
-          },
         ],
       },
       {
