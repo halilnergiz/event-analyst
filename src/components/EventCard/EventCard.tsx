@@ -11,7 +11,7 @@ interface IEventCard {
 export const EventCard = ({ eventId, title, createdAt }: IEventCard) => {
     const navigate = useNavigate();
     const routeDetails = () => {
-        navigate(`event-detail/${eventId}/`);
+        navigate(`event-analyses/${eventId}/`);
     };
 
     return (

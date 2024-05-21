@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import axios from 'axios';
 
@@ -7,112 +7,22 @@ import { BarChart, DefaultizedPieValueType, PieChart, pieArcLabelClasses } from 
 import ErrorIcon from '@mui/icons-material/Error';
 
 import { UploadPhotos } from '../UploadPhotos/UploadPhotos';
-import { IEventPerson, IEvents } from '../../../types';
+import { IEvent } from '../../../types';
 
-interface IRaceCounts {
-    [key: string]: number;
-}
 
 export const EventAnalyses = () => {
-    // const navigate = useNavigate();
-    // const { eventId } = useParams();
-    const [eventCheck, setEventCheck] = useState<Boolean>(false);
-    // const [eventPersonCheck, setEventPersonCheck] = useState<Boolean>(false);
+    const { eventId } = useParams();
+    const [event, setEvent] = useState<IEvent>();
 
-    // const [eventName, setEventName] = useState<string>('');
-    // const [femaleCount, setFemaleCount] = useState<number>(0);
-    // const [maleCount, setMaleCount] = useState<number>(0);
-    // const [raceVariety, setRaceVariety] = useState<IRaceCounts>();
-    // const [participantAges, setParticipantAges] = useState<number[]>([]);
-
-    //     const getParticipantData = (data: IEvents[]) => {
-    //         let female = 0;
-    //         let male = 0;
-    //         const races: string[] = [];
-    //         const ages = {
-    //             '18 Yaş altı': 0,
-    //             '18-25 Yaş': 0,
-    //             '26-35 Yaş': 0,
-    //             '36-45 Yaş': 0,
-    //             '46-60 Yaş': 0,
-    //             '60 Yaş üzeri': 0,
-    //         };
-    // 
-    //         data[0].persons.forEach((person: IEventPerson) => {
-    // 
-    //             person.gender === 'Female' ? female += 1 : male += 1;
-    // 
-    //             races.push(person.race);
-    // 
-    //             switch (true) {
-    //                 case (person.age < 18):
-    //                     ages['18 Yaş altı'] = ages['18 Yaş altı'] + 1; break;
-    //                 case (person.age > 18 && person.age <= 25):
-    //                     ages['18-25 Yaş'] = ages['18-25 Yaş'] + 1; break;
-    //                 case (person.age > 25 && person.age <= 35):
-    //                     ages['26-35 Yaş'] = ages['26-35 Yaş'] + 1; break;
-    //                 case (person.age > 35 && person.age <= 46):
-    //                     ages['36-45 Yaş'] = ages['36-45 Yaş'] + 1; break;
-    //                 case (person.age > 46 && person.age <= 60):
-    //                     ages['46-60 Yaş'] = ages['46-60 Yaş'] + 1; break;
-    //                 case (person.age > 60):
-    //                     ages['60 Yaş üzeri'] = ages['60 Yaş üzeri'] + 1; break;
-    //             }
-    //         });
-    // 
-    //         setFemaleCount(female);
-    //         setMaleCount(male);
-    // 
-    //         const raceObj: IRaceCounts = {};
-    //         races.forEach((element: string) => {
-    //             raceObj[element] = (raceObj[element] || 0) + 1;
-    //         });
-    // 
-    //         setRaceVariety(raceObj);
-    // 
-    //         setParticipantAges(Object.values(ages));
-    //     };
-
-    // useEffect(() => {
-    //     const checkEvent = async () => {
-    //         try {
-    //             const res = await axios.get(`event_detail/${eventId}/`);
-    //             const { data } = res;
-    //             setEventCheck(true);
-    //             setEventName(data.title);
-    //             console.log(res);
-    // if (data[0].persons.length) {
-    // setEventPersonCheck(true);
-    // getParticipantData(data as IEvents[]);
-    // } else {
-    // setEventPersonCheck(false);
-    // alert('Etkinlik Fotoğraflarını Yükleyiniz');
-    // navigate(`/dashboard/event-detail/${eventId}/upload-photos`);  
-    // }
-    //         } catch (err) {
-    //             setEventCheck(false);
-    //             console.log(err);
-    //         }
-    //     };
-    //     checkEvent();
-    // }, [eventCheck, eventId]);
-
-    // chart data
-
-    //     const participantRaces = () => {
-    //         const keys = Object.keys(raceVariety || {});
-    //         const values = Object.values(raceVariety || {});
-    //         const data = [];
-    // 
-    //         for (let i = 0; i < keys.length; i++) {
-    //             data.push({
-    //                 id: i,
-    //                 value: values[i],
-    //                 label: keys[i]
-    //             });
-    //         }
-    //         return data;
-    //     };
+    useEffect(() => {
+        console.log(eventId);
+        const getEventAnalyses = async () => {
+            const res = await axios.get(`event_detail/${eventId}/`);
+            console.log(res.data);
+            setEvent(res.data);
+        };
+        getEventAnalyses();
+    }, []);
 
     // TEMPORARY DUMMY DATA
     const participantGenders = [
@@ -120,9 +30,10 @@ export const EventAnalyses = () => {
         { id: 1, value: 15, label: 'Erkek Katılımcı' },
     ];
 
-    const TOTAL = participantGenders?.map((item) => item.value).reduce((a, b) => a + b, 0);
+    const TotalGender = participantGenders?.map((item) => item.value).reduce((a, b) => a + b, 0);
+
     const getArcLabel = (params: DefaultizedPieValueType) => {
-        const percent = params.value / TOTAL;
+        const percent = params.value / TotalGender;
         return `${(percent * 100).toFixed(1)}%`;
     };
 
@@ -133,9 +44,11 @@ export const EventAnalyses = () => {
         { id: 2, value: 2, label: 'Asian' },
         { id: 3, value: 7, label: 'Hispanic' },
     ];
-    const TOTAL2 = participantRaces?.map((item) => item.value).reduce((a, b) => a + b, 0);
+
+    const TotalRace = participantRaces?.map((item) => item.value).reduce((a, b) => a + b, 0);
+    
     const getArcLabel2 = (params: DefaultizedPieValueType) => {
-        const percent = params.value / TOTAL2;
+        const percent = params.value / TotalRace;
         return `${(percent * 100).toFixed(1)}%`;
     };
 
@@ -144,7 +57,7 @@ export const EventAnalyses = () => {
     return (
         <>
             {
-                !!eventCheck ? (
+                !event ? (
                     <div className='not-found'>
                         <ErrorIcon />
                         <h3>
@@ -153,7 +66,7 @@ export const EventAnalyses = () => {
                     </div>
                 ) : (
                     <>
-                        <h1 className='event-name'> {"{eventName}"} </h1>
+                        <h1 className='event-name'> {event.title} </h1>
                         <div className="upper-area">
                             <div className='chart gender'>
                                 <h3>Cinsiyet Analizi</h3>

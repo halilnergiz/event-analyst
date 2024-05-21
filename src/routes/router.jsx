@@ -38,7 +38,7 @@ const router = createBrowserRouter([
             element: <Profile />,
           },
           {
-            path: 'event-analyses',
+            path: 'event-analyses/:eventId',
             element: <EventAnalyses />,
           },
           {
