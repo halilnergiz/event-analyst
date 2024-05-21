@@ -59,52 +59,39 @@ export const EventAnalyses = () => {
     return (
         <>
             {
-                !event ? (
-                    <div className='not-found'>
-                        <ErrorIcon />
-                        <h3>
-                            Etkinlik Bulunamadı
-                        </h3>
-                    </div>
+                !photo ? (
+                    <>
+                        <UploadPhotos />
+                    </>
                 ) : (
                     <>
-                        {
-                            !photo ? (
-                                <>
-                                    <UploadPhotos />
-                                </>
-                            ) : (
-                                <>
-                                    <h1 className='event-name'> {event.title} </h1>
-                                    <div className="upper-area">
-                                        <div className='chart gender'>
-                                            <h3>Cinsiyet Analizi</h3>
-                                            <MuiPieChart participiants={participantGenders} arcLabel={getArcLabel} colors={['#f0c1c0', '#97d6f4']} width={550} height={300} />
-                                        </div>
+                        <h1 className='event-name'> {event?.title} </h1>
+                        <div className="upper-area">
+                            <div className='chart gender'>
+                                <h3>Cinsiyet Analizi</h3>
+                                <MuiPieChart participiants={participantGenders} arcLabel={getArcLabel} colors={['#f0c1c0', '#97d6f4']} width={550} height={300} />
+                            </div>
 
-                                        <div className='chart race'>
-                                            <h3>Irk Analizi</h3>
-                                            <MuiPieChart participiants={participantRaces} arcLabel={getArcLabel2} width={550} height={300} />
-                                        </div>
-                                    </div>
+                            <div className='chart race'>
+                                <h3>Irk Analizi</h3>
+                                <MuiPieChart participiants={participantRaces} arcLabel={getArcLabel2} width={550} height={300} />
+                            </div>
+                        </div>
 
-                                    <div className="lower-area">
-                                        <div className="chart age">
-                                            <h3>Yaş Analizi</h3>
-                                            <MuiBarChart chartName='Yaş Aralığı' xAxisLabels={[
-                                                '18 Yaş Altı',
-                                                '18-25 Yaş',
-                                                '26-35 Yaş',
-                                                '36-45 Yaş',
-                                                '46-60 Yaş',
-                                                '60 Yaş Üzeri'
-                                            ]} seriesData={participantAges} width={600} height={300} />
-                                        </div>
-                                        <MuiBarChartDataInfo participiants={participantAges} />
-                                    </div>
-                                </>
-                            )
-                        }
+                        <div className="lower-area">
+                            <div className="chart age">
+                                <h3>Yaş Analizi</h3>
+                                <MuiBarChart chartName='Yaş Aralığı' xAxisLabels={[
+                                    '18 Yaş Altı',
+                                    '18-25 Yaş',
+                                    '26-35 Yaş',
+                                    '36-45 Yaş',
+                                    '46-60 Yaş',
+                                    '60 Yaş Üzeri'
+                                ]} seriesData={participantAges} width={600} height={300} />
+                            </div>
+                            <MuiBarChartDataInfo participiants={participantAges} />
+                        </div>
                     </>
                 )
             }
