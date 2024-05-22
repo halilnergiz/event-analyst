@@ -3,14 +3,12 @@ import { createBrowserRouter } from 'react-router-dom';
 import App from '../App';
 import {
   Dashboard,
-  EventAnalyses,
   EventContent,
   Home,
   Login,
   NoMatch,
   Profile,
   Register,
-  UploadPhotos,
 } from '../pages';
 
 const router = createBrowserRouter([
