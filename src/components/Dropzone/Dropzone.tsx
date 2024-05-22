@@ -4,6 +4,7 @@ import { useDropzone, FileWithPath } from 'react-dropzone';
 
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import CancelTwoToneIcon from '@mui/icons-material/CancelTwoTone';
+import { Alert, Button, Typography } from '@mui/material';
 
 import { ImgFilePreview } from '../../types';
 
@@ -51,6 +52,9 @@ export const Dropzone = () => {
 
     return (
         <section className="dropzone-container">
+            <div className={`photo-alert${!files.length ? '-active' : ''}`}>
+                <Alert severity="warning">Etkinliğe ait hiçbir fotoğraf bulunamadı. Lütfen fotoğraf yükleyiniz</Alert>
+            </div>
             <div {...getRootProps({ className: 'dropzone' })}>
                 <input {...getInputProps()} />
                 <p className='select-text' >Görselleri buraya sürükleyip bırakın veya tıklayarak seçin</p>
@@ -58,9 +62,10 @@ export const Dropzone = () => {
                 <p>(Sadece *.png *.jpg ve *.jpeg formatı)</p>
             </div>
             <aside>
-                <h4>Yüklenen Görseller</h4>
+                <Typography display={!files.length ? 'none' : 'block'} variant='subtitle1' >Yüklenen Görseller</Typography>
                 <ul className='selected-img-list'>{fileElements}</ul>
             </aside>
+            <Button variant='contained' disabled={!files.length}>Yükle</Button>
         </section>
     );
 };

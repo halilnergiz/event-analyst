@@ -4,6 +4,7 @@ import App from '../App';
 import {
   Dashboard,
   EventAnalyses,
+  EventContent,
   Home,
   Login,
   NoMatch,
@@ -38,8 +39,8 @@ const router = createBrowserRouter([
             element: <Profile />,
           },
           {
-            path: 'event-analyses/:eventId',
-            element: <EventAnalyses />,
+            path: 'event/:eventId',
+            element: <EventContent />,
           },
         ],
       },

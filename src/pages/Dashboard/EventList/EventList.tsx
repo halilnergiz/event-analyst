@@ -5,7 +5,7 @@ interface Props {
     events: IEvent[];
 }
 
-export const Events = ({ events }: Props) => {
+export const EventList = ({ events }: Props) => {
     return (
         <div className='my-events'>
             {

@@ -1,12 +1,20 @@
 .dropzone-container {
   width: 100%;
   padding: 20px;
-  border: 2px dashed #66B3FF;
+//   border: 2px dashed #66b3ff;
   text-align: center;
+
+  .photo-alert {
+    display: none;
+  }
+
+  .photo-alert-active{
+    margin-bottom: 2rem;
+  }
 
   .dropzone {
     padding: 20px;
-    border: 2px dashed #66B3FF;
+    border: 2px dashed #66b3ff;
     cursor: pointer;
   }
   .img-element {

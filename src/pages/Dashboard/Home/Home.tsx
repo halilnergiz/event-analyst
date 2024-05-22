@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import axios from 'axios';
 
 import { useDashContext } from '../../../context/dash-context';
-import { Events } from '../Events/Events';
+import { EventList } from '../EventList/EventList';
 import { CreateEventPopUp } from '../../../components';
 
 export const Home = () => {
@@ -26,7 +26,7 @@ export const Home = () => {
             {
                 (true) ? (
                     <>
-                        <Events events={events} />
+                        <EventList events={events} />
                     </>
                 ) : (
                     <div className="no-event">

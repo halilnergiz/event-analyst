@@ -1,27 +1,27 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import axios from 'axios';
 
 import { DefaultizedPieValueType } from '@mui/x-charts';
-import ErrorIcon from '@mui/icons-material/Error';
 
-import { UploadPhotos } from '../UploadPhotos/UploadPhotos';
-import { IEvent } from '../../../types';
 import { MuiPieChart, MuiBarChart, MuiBarChartDataInfo } from '../../../components';
+import { IEvent } from '../../../types';
 
 
 export const EventAnalyses = () => {
     const { eventId } = useParams();
-
     const [event, setEvent] = useState<IEvent>();
-    const [photo, setPhoto] = useState();
 
     useEffect(() => {
         const getEventAnalyses = async () => {
-            const res = await axios.get(`event_detail/${eventId}/`);
-            console.log(res.data);
-            setEvent(res.data);
+            try {
+                const res = await axios.get(`event_detail/${eventId}/`);
+                console.log(res.data);
+                setEvent(res.data);
+            } catch (err) {
+                console.log(err);
+            }
         };
         getEventAnalyses();
     }, []);
@@ -58,43 +58,33 @@ export const EventAnalyses = () => {
 
     return (
         <>
-            {
-                !photo ? (
-                    <>
-                        <UploadPhotos />
-                    </>
-                ) : (
-                    <>
-                        <h1 className='event-name'> {event?.title} </h1>
-                        <div className="upper-area">
-                            <div className='chart gender'>
-                                <h3>Cinsiyet Analizi</h3>
-                                <MuiPieChart participiants={participantGenders} arcLabel={getArcLabel} colors={['#f0c1c0', '#97d6f4']} width={550} height={300} />
-                            </div>
+            <h1 className='event-name'> {event?.title} </h1>
+            <div className="upper-area">
+                <div className='chart gender'>
+                    <h3>Cinsiyet Analizi</h3>
+                    <MuiPieChart participiants={participantGenders} arcLabel={getArcLabel} colors={['#f0c1c0', '#97d6f4']} width={550} height={300} />
+                </div>
 
-                            <div className='chart race'>
-                                <h3>Irk Analizi</h3>
-                                <MuiPieChart participiants={participantRaces} arcLabel={getArcLabel2} width={550} height={300} />
-                            </div>
-                        </div>
+                <div className='chart race'>
+                    <h3>Irk Analizi</h3>
+                    <MuiPieChart participiants={participantRaces} arcLabel={getArcLabel2} width={550} height={300} />
+                </div>
+            </div>
 
-                        <div className="lower-area">
-                            <div className="chart age">
-                                <h3>Yaş Analizi</h3>
-                                <MuiBarChart chartName='Yaş Aralığı' xAxisLabels={[
-                                    '18 Yaş Altı',
-                                    '18-25 Yaş',
-                                    '26-35 Yaş',
-                                    '36-45 Yaş',
-                                    '46-60 Yaş',
-                                    '60 Yaş Üzeri'
-                                ]} seriesData={participantAges} width={600} height={300} />
-                            </div>
-                            <MuiBarChartDataInfo participiants={participantAges} />
-                        </div>
-                    </>
-                )
-            }
+            <div className="lower-area">
+                <div className="chart age">
+                    <h3>Yaş Analizi</h3>
+                    <MuiBarChart chartName='Yaş Aralığı' xAxisLabels={[
+                        '18 Yaş Altı',
+                        '18-25 Yaş',
+                        '26-35 Yaş',
+                        '36-45 Yaş',
+                        '46-60 Yaş',
+                        '60 Yaş Üzeri'
+                    ]} seriesData={participantAges} width={600} height={300} />
+                </div>
+                <MuiBarChartDataInfo participiants={participantAges} />
+            </div>
         </>
     );
 };
