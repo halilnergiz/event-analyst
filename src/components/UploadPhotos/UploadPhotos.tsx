@@ -1,4 +1,4 @@
-import { Dropzone } from '../../../components';
+import { Dropzone } from '../Dropzone/Dropzone';
 
 export const UploadPhotos = () => {
     return (

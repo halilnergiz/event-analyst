@@ -5,8 +5,9 @@ import axios from 'axios';
 
 import { DefaultizedPieValueType } from '@mui/x-charts';
 
-import { MuiPieChart, MuiBarChart, MuiBarChartDataInfo } from '../../../components';
-import { IEvent } from '../../../types';
+import { MuiBarChart, MuiBarChartDataInfo, MuiPieChart } from '../Charts/MuiCharts';
+import { IEvent } from '../../types';
+
 
 
 export const EventAnalyses = () => {

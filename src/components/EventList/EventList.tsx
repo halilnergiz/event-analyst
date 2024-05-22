@@ -1,5 +1,5 @@
-import { EventCard } from '../../../components';
-import { IEvent } from '../../../types';
+import { IEvent } from '../../types';
+import { EventCard } from '../EventCard/EventCard';
 
 interface Props {
     events: IEvent[];

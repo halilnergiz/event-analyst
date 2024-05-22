@@ -3,8 +3,8 @@ import { useParams } from 'react-router-dom';
 
 import axios from 'axios';
 
-import { EventAnalyses } from '../EventAnalyses/EventAnalyses';
-import { UploadPhotos } from '../UploadPhotos/UploadPhotos';
+import { EventAnalyses, UploadPhotos } from '../../../components';
+
 
 export const EventContent = () => {
     const { eventId } = useParams();

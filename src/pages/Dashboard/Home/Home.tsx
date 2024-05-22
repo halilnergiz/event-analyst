@@ -3,8 +3,7 @@ import { useEffect } from 'react';
 import axios from 'axios';
 
 import { useDashContext } from '../../../context/dash-context';
-import { EventList } from '../EventList/EventList';
-import { CreateEventPopUp } from '../../../components';
+import { CreateEventPopUp, EventList } from '../../../components';
 
 export const Home = () => {
     const { events, setEvents } = useDashContext();

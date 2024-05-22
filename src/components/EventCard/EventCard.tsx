@@ -37,7 +37,7 @@ export const EventCard = ({ eventId, title, createdAt }: IEventCard) => {
                     style={{ height: '3rem', position: 'relative', bottom: '0' }}
                     onClick={routeDetails}
                 >
-                    İçeriğe Git
+                    Etkinlik İçeriği
                 </Button>
             </CardContent>
         </Card>
