@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
@@ -52,6 +53,20 @@ export const Login = () => {
             alert('Hatalı email veya şifre');
         }
     };
+
+    useEffect(() => {
+        const currentUserControl = async () => {
+            if (localStorage.getItem('access_token')) {
+                try {
+                    await axios.get('profile/');
+                    return navigate('/dashboard');
+                } catch (error) {
+                    return localStorage.clear();
+                }
+            }
+        };
+        currentUserControl();
+    }, []);
 
     return (
         <div className='login'>
