@@ -1,11 +1,11 @@
-import { IEvent } from '../../types';
 import { EventCard } from '../EventCard/EventCard';
+import { useDashContext } from '../../context/dash-context';
+import { IEvent } from '../../types';
 
-interface Props {
-    events: IEvent[];
-}
 
-export const EventList = ({ events }: Props) => {
+export const EventList = () => {
+    const { events } = useDashContext();
+
     return (
         <div className='my-events'>
             {
