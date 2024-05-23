@@ -8,14 +8,15 @@ import { useEventContext } from '../../../context';
 
 
 export const EventContent = () => {
-    const { isPhotoExist, setIsPhotoExist } = useEventContext();
+    const { eventPhotos, setEventPhotos } = useEventContext();
     const { eventId } = useParams();
 
     useEffect(() => {
         const isPhotoExist = async () => {
             try {
                 const res = await axios.get(`events/${eventId}/photos/`);
-                (res.data.length) > 0 ? setIsPhotoExist(true) : setIsPhotoExist(false);
+                setEventPhotos(res.data);
+                console.log(res.data);
             } catch (err) {
                 console.log(err);
             }
@@ -23,7 +24,7 @@ export const EventContent = () => {
         isPhotoExist();
     }, []);
 
-    if (!isPhotoExist) {
+    if (!eventPhotos.length) {
         return <UploadPhotos />;
     }
     return <EventAnalyses />;

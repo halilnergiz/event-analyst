@@ -12,8 +12,10 @@ import { useDashContext } from '../../context/dash-context';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { useNavigate } from 'react-router-dom';
 
 export const CreateEventPopUp = () => {
+    const navigate = useNavigate();
     const [open, setOpen] = useState(false);
     const { events, setEvents } = useDashContext();
 
@@ -42,6 +44,7 @@ export const CreateEventPopUp = () => {
             alert('Etkinlik Oluşturuldu');
             setOpen(false);
             setEvents([...events, res.data]);
+            navigate('/dashboard');
             console.log(res.data);
         } catch (err) {
             alert('Başarısız Bağlantı İsteği');

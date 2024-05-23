@@ -1,9 +1,10 @@
 import React, { useContext, useState } from 'react';
+import { IPhoto } from '../types';
 
 
 interface IEventContext {
-    isPhotoExist: boolean;
-    setIsPhotoExist: React.Dispatch<React.SetStateAction<boolean>>;
+    eventPhotos: IPhoto[];
+    setEventPhotos: React.Dispatch<React.SetStateAction<IPhoto[]>>;
 }
 
 interface IEventContextProvider {
@@ -13,10 +14,10 @@ interface IEventContextProvider {
 const EventContext = React.createContext<IEventContext | undefined>(undefined);
 
 export const EventContextProvider = ({ children }: IEventContextProvider) => {
-    const [isPhotoExist, setIsPhotoExist] = useState<boolean>(false);
+    const [eventPhotos, setEventPhotos] = useState<IPhoto[]>([]);
 
     return (
-        <EventContext.Provider value={{ isPhotoExist, setIsPhotoExist }}>
+        <EventContext.Provider value={{ eventPhotos, setEventPhotos }}>
             {children}
         </EventContext.Provider>
     );

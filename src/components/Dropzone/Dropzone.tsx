@@ -13,7 +13,7 @@ import { useEventContext } from '../../context';
 
 
 export const Dropzone = () => {
-    const { setIsPhotoExist } = useEventContext();
+    const { setEventPhotos } = useEventContext();
     const { eventId } = useParams();
     const [files, setFile] = useState<ImgFilePreview[]>([]);
 
@@ -73,7 +73,7 @@ export const Dropzone = () => {
             const res = await axiosFileUploadInterceptor.post('photos/upload/', formData);
             console.log(res);
             if (res.status === 201) {
-                setIsPhotoExist(true);
+                setEventPhotos(res.data);
             }
         } catch (err) {
             alert("Fotoğraflar eklenemedi");

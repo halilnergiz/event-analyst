@@ -18,3 +18,10 @@ export interface IUser {
     password: string;
     isActive: boolean;
 }
+
+export interface IPhoto{
+    photoId: string;
+    event: string;
+    path: string;
+    createdAt: string;
+}
