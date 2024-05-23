@@ -55,7 +55,7 @@ export const Login = () => {
     };
 
     useEffect(() => {
-        const currentUserControl = async () => {
+        const userCheck = async () => {
             if (localStorage.getItem('access_token')) {
                 try {
                     await axios.get('profile/');
@@ -65,7 +65,7 @@ export const Login = () => {
                 }
             }
         };
-        currentUserControl();
+        userCheck();
     }, []);
 
     return (
