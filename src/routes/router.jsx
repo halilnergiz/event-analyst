@@ -10,6 +10,7 @@ import {
   Profile,
   Register,
 } from '../pages';
+import { EventContextProvider } from '../context';
 
 const router = createBrowserRouter([
   {
@@ -38,7 +39,11 @@ const router = createBrowserRouter([
           },
           {
             path: 'event/:eventId',
-            element: <EventContent />,
+            element: (
+              <EventContextProvider>
+                <EventContent />
+              </EventContextProvider>
+            ),
           },
         ],
       },

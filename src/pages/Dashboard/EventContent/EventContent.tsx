@@ -4,17 +4,18 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
 import { EventAnalyses, UploadPhotos } from '../../../components';
+import { useEventContext } from '../../../context';
 
 
 export const EventContent = () => {
+    const { isPhotoExist, setIsPhotoExist } = useEventContext();
     const { eventId } = useParams();
-    const [photo, setPhoto] = useState<Boolean>(false);
 
     useEffect(() => {
         const isPhotoExist = async () => {
             try {
                 const res = await axios.get(`events/${eventId}/photos/`);
-                (res.data.length) > 0 ? setPhoto(true) : setPhoto(false);
+                (res.data.length) > 0 ? setIsPhotoExist(true) : setIsPhotoExist(false);
             } catch (err) {
                 console.log(err);
             }
@@ -22,15 +23,8 @@ export const EventContent = () => {
         isPhotoExist();
     }, []);
 
-    return (
-        <>
-            {
-                !photo ? (
-                    <UploadPhotos />
-                ) : (
-                    <EventAnalyses />
-                )
-            }
-        </>
-    );
+    if (!isPhotoExist) {
+        return <UploadPhotos />;
+    }
+    return <EventAnalyses />;
 };
