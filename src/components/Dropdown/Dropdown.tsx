@@ -1,15 +1,26 @@
 import { useNavigate } from 'react-router-dom';
 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import axios from 'axios';
 
 
 export const Dropdown = () => {
     const navigate = useNavigate();
-    const logout = () => {
-        localStorage.clear();
-        navigate('/');
-    };
     const userName = localStorage.getItem('username');
+
+    const logout = async () => {
+        try {
+            const res = await axios.post('logout/');
+            if (res) {
+                localStorage.clear();
+                navigate('/');
+                alert('Oturum Sonlandırıldı');
+            }
+            console.log(res);
+        } catch (err) {
+            alert('Lütfen tekrar deneyiniz');
+        };
+    };
 
     return (
         <div className="sec-center">
