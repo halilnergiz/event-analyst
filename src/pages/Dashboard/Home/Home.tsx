@@ -2,8 +2,9 @@ import { useEffect } from 'react';
 
 import axios from 'axios';
 
+import { EventList, NoEvent } from '../../../components';
 import { useDashContext } from '../../../context/dash-context';
-import { CreateEventPopUp, EventList } from '../../../components';
+
 
 export const Home = () => {
     const { events, setEvents } = useDashContext();
@@ -20,23 +21,8 @@ export const Home = () => {
         getUserEvents();
     }, []);
 
-    return (
-        <>
-            {
-                (true) ? (
-                    <>
-                        <EventList events={events} />
-                    </>
-                ) : (
-                    <div className="no-event">
-                        <h2>
-                            Herhangi bir etkinlik oluşturmadınız, <br />
-                            Yeni bir etkinlik oluşturmak için tıklayınız
-                        </h2>
-                        <CreateEventPopUp />
-                    </div>
-                )
-            }
-        </>
-    );
+    if (!events.length) {
+        return <NoEvent />;
+    }
+    return <EventList />;
 };
