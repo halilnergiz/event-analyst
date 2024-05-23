@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
 import { yupResolver } from '@hookform/resolvers/yup';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import * as yup from 'yup';
 import { Button, TextField } from '@mui/material';
 
@@ -47,10 +47,12 @@ export const Login = () => {
             localStorage.setItem('username', `${res.data.user.username}`);
             localStorage.setItem('email', `${res.data.user.email}`);
             navigate('/dashboard');
-            console.log(res);
-        } catch (error) {
-            console.log(error);
-            alert('Hatalı email veya şifre');
+        } catch (err) {
+            if ((err as AxiosError).response?.status === 500) {
+                return alert(`En fazla 5 cihazda aynı anda giriş yapabilirsiniz. 
+                \n Lütfen diğer cihazların en az birinden çıkış yapın ve tekrar deneyin.`);
+            }
+            return alert('Hatalı email veya şifre');
         }
     };
 
