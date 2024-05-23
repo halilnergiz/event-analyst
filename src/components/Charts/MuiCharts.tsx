@@ -49,6 +49,7 @@ export const MuiBarChart = ({ chartName, xAxisLabels, seriesData, width, height 
                     data: seriesData
                 },
             ]}
+            colors={['#000000']}
             width={width}
             height={height}
         />

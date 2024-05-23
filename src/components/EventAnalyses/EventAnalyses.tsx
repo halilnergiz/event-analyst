@@ -6,11 +6,12 @@ import axios from 'axios';
 import { DefaultizedPieValueType } from '@mui/x-charts';
 
 import { MuiBarChart, MuiBarChartDataInfo, MuiPieChart } from '../Charts/MuiCharts';
+import { useEventContext } from '../../context';
 import { IEvent } from '../../types';
 
 
-
 export const EventAnalyses = () => {
+    const { eventPhotos } = useEventContext();
     const { eventId } = useParams();
     const [event, setEvent] = useState<IEvent>();
 
@@ -55,7 +56,7 @@ export const EventAnalyses = () => {
         return `${(percent * 100).toFixed(1)}%`;
     };
 
-    const participantAges = [23, 42, 32, 1, 47, 4];
+    const participantAges = [23, 42, 32, 12, 47, 4];
 
     return (
         <>
@@ -85,6 +86,23 @@ export const EventAnalyses = () => {
                     ]} seriesData={participantAges} width={600} height={300} />
                 </div>
                 <MuiBarChartDataInfo participiants={participantAges} />
+            </div>
+            <div className='img-field'>
+                <h2>Etkinlik Görselleri</h2>
+                <ul className='img-list' >
+                    {eventPhotos.map((item) => {
+                        console.log(item);
+                        return (
+                            <li className='img-item' key={item.photoId}>
+                                <img
+                                    src={`${item.path}`}
+                                    alt={item.path}
+                                    loading="lazy"
+                                />
+                            </li>
+                        );
+                    })}
+                </ul>
             </div>
         </>
     );

@@ -42,7 +42,6 @@
   }
 }
 
-// TODO: overrited mui styles, it should be done properly
 .age-infs {
   display: flex;
   flex-direction: column;
@@ -66,47 +65,78 @@
       line-height: 1;
     }
     &:nth-child(1) > .inf-box {
-      background-color: purple;
+      background-color: #FFD700;
     }
     &:nth-child(2) > .inf-box {
-      background-color: #2e96ff;
+      background-color: #90EE90;
     }
     &:nth-child(3) > .inf-box {
-      background-color: #ab003c;
+      background-color: #4169E1;
     }
     &:nth-child(4) > .inf-box {
-      background-color: #b800d8;
+      background-color: #FF6347;
     }
     &:nth-child(5) > .inf-box {
-      background-color: #651fff;
+      background-color: #690080cc;
     }
     &:nth-child(6) > .inf-box {
-      background-color: #3a3a3a;
+      background-color: #A0522D;
     }
   }
 }
 
 .MuiChartsAxis-label {
-  margin-left: 10rem !important;
+  margin-left: 1rem !important;
+  z-index: 4;
+}
+
+.MuiChartsAxisHighlight-root{
+    color: red !important;
 }
 
 .MuiBarElement-root.MuiBarElement-series-auto-generated-id-0:nth-child(1) {
-  fill: purple !important;
+  fill: #FFD700 !important;
 }
 .MuiBarElement-root.MuiBarElement-series-auto-generated-id-0:nth-child(2) {
-  fill: #2e96ff !important;
+  fill: #90EE90 !important;
 }
 .MuiBarElement-root.MuiBarElement-series-auto-generated-id-0:nth-child(3) {
-  fill: #ab003c !important;
+  fill: #4169E1 !important;
 }
 .MuiBarElement-root.MuiBarElement-series-auto-generated-id-0:nth-child(4) {
-  fill: #7c0492 !important;
+  fill: #FF6347 !important;
 }
 .MuiBarElement-root.MuiBarElement-series-auto-generated-id-0:nth-child(5) {
-  fill: #651fff !important;
+  fill: #690080cc !important;
 }
 .MuiBarElement-root.MuiBarElement-series-auto-generated-id-0:nth-child(6) {
-  fill: #3a3a3a !important;
+  fill: #A0522D !important;
+}
+
+.img-field {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 48px;
+  height: 36rem;
+  .img-list {
+    width: 100%;
+    list-style: none;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    .img-item {
+      img {
+        margin: 32px;
+        max-width: 24rem;
+        max-height: 24rem;
+        object-fit: cover;
+      }
+    }
+  }
 }
 
 .not-found {
