@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 
-import { Header, Main } from '../../layouts';
-import DashContextProvider from '../../context/dash-context';
+import { Header } from '../../layouts';
+import { DashContextProvider } from '../../context';
+
 
 export const Dashboard = () => {
     const navigate = useNavigate();
@@ -22,7 +23,7 @@ export const Dashboard = () => {
             <div className='dash-container'>
                 <div className='dash-content'>
                     <Header />
-                    <Main />
+                    <Outlet />
                 </div>
             </div>
         </DashContextProvider>
