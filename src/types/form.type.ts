@@ -26,3 +26,9 @@ export interface ImgFilePreview {
     file: FileWithPath;
     preview: string;
 }
+
+export interface IChangePassword {
+    old_password: string,
+    new_password: string,
+    new_password_repeat: string,
+}

@@ -1,5 +1,8 @@
 import { Avatar } from '@mui/material';
 
+import { ChangePassword, LogoutAll } from '../../../components';
+
+
 const stringAvatar = (name: string) => {
     return {
         sx: {
@@ -27,6 +30,8 @@ export const Profile = () => {
                         <label className='inf-labels'>Email:</label> {userEmail}
                     </div>
                 </div>
+                <ChangePassword />
+                <LogoutAll />
             </div>
         </div>
     );

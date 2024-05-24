@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   user-select: text;
   margin-top: 6rem;
   .profile-card {
@@ -10,6 +11,9 @@
     padding: 3rem;
     border-radius: 12px;
     background-color: #ffff;
+    > * {
+      margin: 2rem 0;
+    }
     .avatar {
       display: flex;
       justify-content: center;
@@ -25,11 +29,10 @@
       margin-top: 1.4rem;
       & > div {
         margin: 1rem;
-        .inf-labels{
-            font-weight: 700;
+        .inf-labels {
+          font-weight: 700;
         }
       }
-      
     }
   }
 }

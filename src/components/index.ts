@@ -7,3 +7,5 @@ export * from './NoEvent/NoEvent';
 export * from './EventList/EventList';
 export * from './UploadPhotos/UploadPhotos';
 export * from './EventAnalyses/EventAnalyses';
+export * from './ChangePassword/ChangePassword';
+export * from './LogoutAll/LogoutAll';
