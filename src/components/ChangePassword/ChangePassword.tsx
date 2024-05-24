@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import axios, { AxiosError } from 'axios';
-import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { Button, DialogContent, DialogTitle, FormControl, FormLabel, Input, Modal, Stack } from '@mui/joy';
@@ -12,37 +11,8 @@ import SyncLockIcon from '@mui/icons-material/SyncLock';
 import { IconButton } from '@mui/material';
 
 import { IChangePassword } from '../../types';
+import { changePassword } from '../../schemas/form-schemas';
 
-
-const changePassword = yup.object({
-    old_password: yup
-        .string()
-        .matches(
-            /^(?=.*[a-zA-Z])(?=.*\d)[A-Za-z\d@$!%*?&]+$/,
-            "Şifre en az bir harf büyük veya küçük harf, sayı içermelidir. Geçerli özel karakterler: @$!%*?&"
-        )
-        .min(8, 'En az 8 karakter')
-        .max(25, 'En fazla 25 karakter')
-        .required('Zorunlu alan'),
-    new_password: yup
-        .string()
-        .matches(
-            /^(?=.*[a-zA-Z])(?=.*\d)[A-Za-z\d@$!%*?&]+$/,
-            "Şifre en az bir harf büyük veya küçük harf, sayı içermelidir. Geçerli özel karakterler: @$!%*?&"
-        )
-        .min(8, 'En az 8 karakter')
-        .max(25, 'En fazla 25 karakter')
-        .required('Zorunlu alan'),
-    new_password_repeat: yup
-        .string()
-        .matches(
-            /^(?=.*[a-zA-Z])(?=.*\d)[A-Za-z\d@$!%*?&]+$/,
-            "Şifre en az bir harf büyük veya küçük harf, sayı içermelidir. Geçerli özel karakterler: @$!%*?&"
-        )
-        .min(8, 'En az 8 karakter')
-        .max(25, 'En fazla 25 karakter')
-        .required('Zorunlu alan')
-});
 
 export const ChangePassword = () => {
     const [open, setOpen] = useState(false);

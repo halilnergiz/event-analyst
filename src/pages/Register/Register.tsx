@@ -2,41 +2,13 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
 import axios from 'axios';
 
 import { Button, TextField } from '@mui/material';
 
 import { IRegisterForm } from '../../types';
+import { registerSchema } from '../../schemas/form-schemas';
 
-const registerSchema = yup.object({
-    username: yup
-        .string()
-        .matches(/^[a-zA-Z0-9ğüşıöçĞÜŞİÖÇ.\s]+$/, 'Kullanıcı adı formatına uygun değil')
-        .min(3, 'En az 3 karakter')
-        .max(30, 'En fazla 30 karakter')
-        .required("Zorunlu Alan")
-    ,
-    email: yup
-        .string()
-        .matches(/^[a-zA-Z0-9ğüşöçİĞÜŞÖÇ]+@[a-zA-Z0-9.-]+\.[a-zA-Z]/, 'Email formatına uygun değil')
-        .min(3, 'En az 3 karakter')
-        .max(50, 'En fazla 50 karakter')
-        .trim()
-        .required('Zorunlu alan'),
-    password: yup // for register
-        .string()
-        .min(8, 'En az 8 karakter')
-        .max(25, 'En fazla 25 karakter')
-        .matches(/^(?=.*\d)(?=.*[a-zA-Z]).*$/, 'En az 1 tane rakam')
-        .required('Zorunlu alan'),
-    password_again: yup
-        .string()
-        .min(8, 'En az 8 karakter')
-        .max(25, 'En fazla 25 karakter')
-        .oneOf([yup.ref('password')], 'Şifreler eşleşmiyor')
-        .required('Zorunlu alan'),
-});
 
 export const Register = () => {
     const navigate = useNavigate();

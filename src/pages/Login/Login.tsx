@@ -4,27 +4,11 @@ import { useForm } from 'react-hook-form';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios, { AxiosError } from 'axios';
-import * as yup from 'yup';
 import { Button, TextField } from '@mui/material';
 
 import { ILoginForm } from '../../types';
+import { loginSchema } from '../../schemas/form-schemas';
 
-
-
-const loginSchema = yup.object({
-    username: yup
-        .string()
-        .matches(/^[a-zA-Z0-9]+$/, 'Sadece harf ve sayı')
-        .min(4, 'En az 4 karakter')
-        .max(50, 'En fazla 50 karakter')
-        .trim()
-        .required('Zorunlu alan'),
-    password: yup
-        .string()
-        .min(8, 'En az 8 karakter')
-        .max(25, 'En fazla 25 karakter')
-        .required('Zorunlu alan')
-});
 
 export const Login = () => {
     const navigate = useNavigate();
