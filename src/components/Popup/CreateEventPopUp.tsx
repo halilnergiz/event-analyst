@@ -14,6 +14,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useNavigate } from 'react-router-dom';
 
+
 export const CreateEventPopUp = () => {
     const navigate = useNavigate();
     const [open, setOpen] = useState(false);
@@ -30,6 +31,7 @@ export const CreateEventPopUp = () => {
             address: undefined,
         }
     });
+    
     const onCreateEvent: SubmitHandler<ICreateEvent> = async (data: ICreateEvent) => {
         try {
             const res = await axios.post(`create_event/`, {

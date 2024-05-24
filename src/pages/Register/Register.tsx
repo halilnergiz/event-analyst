@@ -7,7 +7,7 @@ import axios from 'axios';
 import { Button, TextField } from '@mui/material';
 
 import { IRegisterForm } from '../../types';
-import { registerSchema } from '../../schemas/form-schemas';
+import { registerSchema } from '../../schemas';
 
 
 export const Register = () => {

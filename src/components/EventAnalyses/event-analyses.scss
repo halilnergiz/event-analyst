@@ -1,155 +1,190 @@
-.event-name {
-  text-align: center;
-}
-.upper-area {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  .chart {
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.15);
-    padding: 24px;
-    margin: 24px;
-    border-radius: 12px;
-    background-color: #ffff;
-  }
-
-  .gender,
-  .race {
-    width: min-content;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-}
-
-.lower-area {
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.15);
-  padding: 24px;
-  margin: 24px;
-  border-radius: 12px;
-  background-color: #ffff;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  .chart.age {
-    box-shadow: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-}
-
-.age-infs {
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  margin-left: 4rem;
-  .infs {
-    display: flex;
-    justify-content: center;
-    .inf-box {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      margin-left: 0;
-      margin-bottom: 10px;
-    }
-    span {
-      margin-left: 10px;
-      font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
-      font-weight: 300;
-      font-size: 1rem;
-      line-height: 1;
-    }
-    &:nth-child(1) > .inf-box {
-      background-color: #FFD700;
-    }
-    &:nth-child(2) > .inf-box {
-      background-color: #90EE90;
-    }
-    &:nth-child(3) > .inf-box {
-      background-color: #4169E1;
-    }
-    &:nth-child(4) > .inf-box {
-      background-color: #FF6347;
-    }
-    &:nth-child(5) > .inf-box {
-      background-color: #690080cc;
-    }
-    &:nth-child(6) > .inf-box {
-      background-color: #A0522D;
-    }
-  }
-}
-
-.MuiChartsAxis-label {
-  margin-left: 1rem !important;
-  z-index: 4;
-}
-
-.MuiChartsAxisHighlight-root{
-    color: red !important;
-}
-
-.MuiBarElement-root.MuiBarElement-series-auto-generated-id-0:nth-child(1) {
-  fill: #FFD700 !important;
-}
-.MuiBarElement-root.MuiBarElement-series-auto-generated-id-0:nth-child(2) {
-  fill: #90EE90 !important;
-}
-.MuiBarElement-root.MuiBarElement-series-auto-generated-id-0:nth-child(3) {
-  fill: #4169E1 !important;
-}
-.MuiBarElement-root.MuiBarElement-series-auto-generated-id-0:nth-child(4) {
-  fill: #FF6347 !important;
-}
-.MuiBarElement-root.MuiBarElement-series-auto-generated-id-0:nth-child(5) {
-  fill: #690080cc !important;
-}
-.MuiBarElement-root.MuiBarElement-series-auto-generated-id-0:nth-child(6) {
-  fill: #A0522D !important;
-}
-
-.img-field {
+.event-container {
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 24px 48px;
-  height: 36rem;
-  .img-list {
-    width: 100%;
-    list-style: none;
-    overflow-y: scroll;
+  padding: 0 4rem;
+  user-select: text;
+  .event-name {
+    text-align: center;
+  }
+  .event-base-informations {
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    flex-wrap: wrap;
-    .img-item {
-      img {
-        margin: 32px;
-        max-width: 24rem;
-        max-height: 24rem;
-        object-fit: cover;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 2rem;
+    letter-spacing: 0.2px;
+    word-spacing: 2px;
+    line-height: 2rem;
+    box-shadow: 2px 6px 2px 6px rgba(0, 0, 0, 0.15);
+    border-radius: 12px;
+    background-color: #ffff;
+    .info-title {
+      margin-right: 8px;
+    }
+    .event-action-content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      flex: 1;
+    }
+    .user-action-content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      flex: 1;
+    }
+  }
+
+  .pie-chart-area {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .chart {
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.15);
+      margin: 3rem 0;
+      border-radius: 12px;
+      background-color: #ffff;
+      width: 45%;
+      padding: 2rem;
+    }
+    .gender,
+    .race {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .bar-chart-area {
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.15);
+    border-radius: 12px;
+    background-color: #ffff;
+    padding: 3rem;
+    .title {
+      text-align: center !important;
+    }
+    .content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .chart.age {
+        box-shadow: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }
     }
   }
-}
 
-.not-found {
-  height: 80vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  color: #6b1d1d;
-  & > * {
-    margin: 0.2rem;
+  .age-infs {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin-left: 4rem;
+    .infs {
+      display: flex;
+      justify-content: center;
+      .inf-box {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        margin-left: 0;
+        margin-bottom: 10px;
+      }
+      span {
+        margin-left: 10px;
+        font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+        font-weight: 300;
+        font-size: 1rem;
+        line-height: 1;
+      }
+      &:nth-child(1) > .inf-box {
+        background-color: #ffd700;
+      }
+      &:nth-child(2) > .inf-box {
+        background-color: #90ee90;
+      }
+      &:nth-child(3) > .inf-box {
+        background-color: #4169e1;
+      }
+      &:nth-child(4) > .inf-box {
+        background-color: #ff6347;
+      }
+      &:nth-child(5) > .inf-box {
+        background-color: #690080cc;
+      }
+      &:nth-child(6) > .inf-box {
+        background-color: #a0522d;
+      }
+    }
   }
-  svg {
-    font-size: 42px;
+
+  .MuiChartsAxis-label {
+    margin-left: 1rem !important;
+    z-index: 4;
+  }
+
+  .MuiChartsAxisHighlight-root {
+    color: red !important;
+  }
+
+  .MuiBarElement-root.MuiBarElement-series-auto-generated-id-0:nth-child(1) {
+    fill: #ffd700 !important;
+  }
+  .MuiBarElement-root.MuiBarElement-series-auto-generated-id-0:nth-child(2) {
+    fill: #90ee90 !important;
+  }
+  .MuiBarElement-root.MuiBarElement-series-auto-generated-id-0:nth-child(3) {
+    fill: #4169e1 !important;
+  }
+  .MuiBarElement-root.MuiBarElement-series-auto-generated-id-0:nth-child(4) {
+    fill: #ff6347 !important;
+  }
+  .MuiBarElement-root.MuiBarElement-series-auto-generated-id-0:nth-child(5) {
+    fill: #690080cc !important;
+  }
+  .MuiBarElement-root.MuiBarElement-series-auto-generated-id-0:nth-child(6) {
+    fill: #a0522d !important;
+  }
+
+  .img-field {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 48px;
+    height: 36rem;
+    .img-list {
+      width: 100%;
+      list-style: none;
+      overflow-y: scroll;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      flex-wrap: wrap;
+      .img-item {
+        img {
+          margin: 32px;
+          max-width: 24rem;
+          max-height: 24rem;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+
+  .not-found {
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: #6b1d1d;
+    & > * {
+      margin: 0.2rem;
+    }
+    svg {
+      font-size: 42px;
+    }
   }
 }

@@ -1,6 +1,7 @@
 import { EventCard } from '../EventCard/EventCard';
 import { useDashContext } from '../../context/dash-context';
 import { IEvent } from '../../types';
+import { customDateFormat } from '../../schemas';
 
 
 export const EventList = () => {
@@ -16,7 +17,7 @@ export const EventList = () => {
                         key={event.eventId}
                         eventId={event.eventId}
                         title={event.title}
-                        createdAt={`${convertedDate.getDate()}/${convertedDate.getMonth() + 1}/${convertedDate.getFullYear()} ${convertedDate.getHours()}:${convertedDate.getMinutes()}`}
+                        createdAt={customDateFormat(convertedDate)}
                     />;
                 })
             }

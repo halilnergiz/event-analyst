@@ -8,6 +8,7 @@ import { DefaultizedPieValueType } from '@mui/x-charts';
 import { MuiBarChart, MuiBarChartDataInfo, MuiPieChart } from '../Charts/MuiCharts';
 import { useEventContext } from '../../context';
 import { IEvent } from '../../types';
+import { customDateFormat } from '../../schemas';
 
 
 export const EventAnalyses = () => {
@@ -58,34 +59,102 @@ export const EventAnalyses = () => {
 
     const participantAges = [23, 42, 32, 12, 47, 4];
 
+    const checkInformationContent = (data: string | Date | undefined) => {
+        if (data instanceof Date) {
+            return data ? customDateFormat(data) : '-';
+        }
+        console.log('not date');
+        return data ? data : '-';
+    };
+
     return (
-        <>
+        <div className='event-container'>
             <h1 className='event-name'> {event?.title} </h1>
-            <div className="upper-area">
+            <div className='event-base-informations'>
+                <div className='event-action-content'>
+                    <div className='description'>
+                        <b className='info-title'>Açıklama:</b>
+                        <span>
+                            {checkInformationContent(event?.description)}
+                        </span>
+                    </div>
+                    <div className='address'>
+                        <b className='info-title'>Adres:</b>
+                        <span>
+                            {checkInformationContent(event?.address)}
+                        </span>
+                    </div>
+                    <div className='dates'>
+                        <b className='info-title'>Başlangıç Tarihi:</b>
+                        <span className='start-date'>
+                            {checkInformationContent(new Date(event?.start_date!))}
+                        </span>
+                    </div>
+                    <div className='dates'>
+                        <b className='info-title'>Bitiş Tarihi:</b>
+                        <span className='end-date'>
+                            {checkInformationContent(new Date(event?.end_date!))}
+                        </span>
+                    </div>
+                </div>
+                <div className='user-action-content'>
+                    <div className='created-at'>
+                        <b className='info-title'>Oluşturulma Tarihi:</b>
+                        <span>
+                            {checkInformationContent(new Date(event?.createdAt!))}
+                        </span>
+                    </div>
+                    <div className='updated-at'>
+                        <b className='info-title'>Son Güncellenme Tarihi:</b>
+                        <span>
+                            {checkInformationContent(new Date(event?.updatedAt!))}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div className='pie-chart-area'>
                 <div className='chart gender'>
                     <h3>Cinsiyet Analizi</h3>
-                    <MuiPieChart participiants={participantGenders} arcLabel={getArcLabel} colors={['#f0c1c0', '#97d6f4']} width={550} height={300} />
+                    <MuiPieChart
+                        participiants={participantGenders}
+                        arcLabel={getArcLabel}
+                        colors={['#f8268f', '#1063a7']}
+                        width={550}
+                        height={300}
+                    />
                 </div>
 
                 <div className='chart race'>
                     <h3>Irk Analizi</h3>
-                    <MuiPieChart participiants={participantRaces} arcLabel={getArcLabel2} width={550} height={300} />
+                    <MuiPieChart
+                        participiants={participantRaces}
+                        arcLabel={getArcLabel2}
+                        width={550}
+                        height={300}
+                    />
                 </div>
             </div>
 
-            <div className="lower-area">
-                <div className="chart age">
-                    <h3>Yaş Analizi</h3>
-                    <MuiBarChart chartName='Yaş Aralığı' xAxisLabels={[
-                        '18 Yaş Altı',
-                        '18-25 Yaş',
-                        '26-35 Yaş',
-                        '36-45 Yaş',
-                        '46-60 Yaş',
-                        '60 Yaş Üzeri'
-                    ]} seriesData={participantAges} width={600} height={300} />
+            <div className='bar-chart-area'>
+                <h3 className='title'>Yaş Analizi</h3>
+                <div className='content'>
+                    <div className='chart age'>
+                        <MuiBarChart
+                            chartName='Yaş Aralığı'
+                            xAxisLabels={[
+                                '18 Yaş Altı',
+                                '18-25 Yaş',
+                                '26-35 Yaş',
+                                '36-45 Yaş',
+                                '46-60 Yaş',
+                                '60 Yaş Üzeri'
+                            ]}
+                            seriesData={participantAges}
+                            width={600}
+                            height={300} />
+                    </div>
+                    <MuiBarChartDataInfo participiants={participantAges} />
                 </div>
-                <MuiBarChartDataInfo participiants={participantAges} />
             </div>
             <div className='img-field'>
                 <h2>Etkinlik Görselleri</h2>
@@ -104,6 +173,6 @@ export const EventAnalyses = () => {
                     })}
                 </ul>
             </div>
-        </>
+        </div>
     );
 };

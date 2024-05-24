@@ -11,7 +11,7 @@ import SyncLockIcon from '@mui/icons-material/SyncLock';
 import { IconButton } from '@mui/material';
 
 import { IChangePassword } from '../../types';
-import { changePassword } from '../../schemas/form-schemas';
+import { changePassword } from '../../schemas';
 
 
 export const ChangePassword = () => {

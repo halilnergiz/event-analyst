@@ -7,7 +7,7 @@ import axios, { AxiosError } from 'axios';
 import { Button, TextField } from '@mui/material';
 
 import { ILoginForm } from '../../types';
-import { loginSchema } from '../../schemas/form-schemas';
+import { loginSchema } from '../../schemas';
 
 
 export const Login = () => {
