@@ -18,6 +18,8 @@ export const Dropdown = () => {
             }
             console.log(res);
         } catch (err) {
+            localStorage.clear();
+            navigate('/');
             alert('Lütfen tekrar deneyiniz');
         };
     };
