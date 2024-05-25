@@ -4,6 +4,7 @@
   user-select: text;
   .event-name {
     text-align: center;
+    word-wrap: break-word;
   }
   .event-base-informations {
     display: flex;
@@ -14,11 +15,13 @@
     letter-spacing: 0.2px;
     word-spacing: 2px;
     line-height: 2rem;
-    // box-shadow: 2px 2px 2px 6px rgba(0, 0, 0, 0.15);
     border-radius: 12px;
     background-color: #ffff;
     .info-title {
       margin-right: 8px;
+      ~ span {
+        word-break: break-all;
+      }
     }
     .event-action-content {
       display: flex;
