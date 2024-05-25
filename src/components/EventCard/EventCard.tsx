@@ -25,7 +25,7 @@ export const EventCard = ({ eventId, title, createdAt }: IEventCard) => {
                 />
             </AspectRatio>
             <div>
-                <Typography level="title-lg"> {title} </Typography>
+                <Typography level="title-lg" sx={{ textOverflow: 'ellipsis', overflow: 'hidden' }}> {title} </Typography>
                 <Typography level="body-sm"> {createdAt}</Typography>
             </div>
             <CardContent orientation="horizontal">
