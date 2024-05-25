@@ -10,6 +10,8 @@ import { useEventContext } from '../../../context';
 import { ICreateEvent } from '../../../types';
 import axios from 'axios';
 import { useEffect } from 'react';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { createEventSchema } from '../../../schemas';
 
 
 export const EventUpdate = () => {
@@ -17,7 +19,7 @@ export const EventUpdate = () => {
     const { eventId } = useParams();
     const navigate = useNavigate();
 
-    const { register, handleSubmit, formState: { errors } } = useForm<ICreateEvent>({
+    const { register, handleSubmit,  formState: { errors } } = useForm<ICreateEvent>({
         defaultValues: {
             title: eventInformations?.title,
             description: eventInformations?.description,
@@ -26,7 +28,8 @@ export const EventUpdate = () => {
             latitude: eventInformations?.latitude,
             start_date: eventInformations?.start_date,
             end_date: eventInformations?.end_date,
-        }
+        },
+        resolver: yupResolver(createEventSchema),
     });
 
     const onUpdateEvent: SubmitHandler<ICreateEvent> = async (data: ICreateEvent) => {
