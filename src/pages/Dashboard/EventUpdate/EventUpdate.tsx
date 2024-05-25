@@ -102,7 +102,6 @@ export const EventUpdate = () => {
                                     name="start_date"
                                     format='DD/MM/YYYY'
                                     value={field.value || null}
-                                    onChange={(date) => field.onChange(date)}
                                     slotProps={{ textField: { size: 'small' } }}
                                 />
                                 {errors.start_date && <p className='alert'>{errors.start_date.message}</p>}
@@ -118,7 +117,6 @@ export const EventUpdate = () => {
                                     name="end_date"
                                     format='DD/MM/YYYY'
                                     value={field.value || null}
-                                    onChange={(date) => field.onChange(date)}
                                     slotProps={{ textField: { size: 'small' } }}
                                 />
                                 {errors.end_date && <p className='alert'>{errors.end_date.message}</p>}
