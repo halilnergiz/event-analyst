@@ -20,6 +20,7 @@ export const Header = () => {
                         src='/images/event-analyst-logo.png'
                         alt=""
                         onClick={() => navigate('/dashboard')}
+                        draggable={'false'}
                     />
                 </div>
                 <div className="logo-text">
