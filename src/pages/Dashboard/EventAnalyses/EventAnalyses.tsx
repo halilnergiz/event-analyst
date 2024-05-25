@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import axios from 'axios';
+import { Dayjs } from 'dayjs';
 
 import { DefaultizedPieValueType } from '@mui/x-charts';
 
@@ -57,53 +58,77 @@ export const EventAnalyses = () => {
 
     const participantAges = [23, 42, 32, 12, 47, 4];
 
-    const checkInformationContent = (data: string | Date | undefined) => {
+    const checkInformationContent = (data: Date | Dayjs | string | undefined) => {
         if (data instanceof Date) {
-            return data ? customDateFormat(data) : '-';
+            data ? data = customDateFormat(data).toString() : data = '-';
+            console.log(data);
+            return data;
         }
-        console.log('not date');
-        return data ? data : '-';
+        console.log(data);
+        return data ? data.toString() : '-';
     };
 
     return (
         <div className='event-container'>
-            <h1 className='event-name'> {eventInformations?.title} </h1>
+            <h1 className='event-name'>
+                {eventInformations?.title}
+            </h1>
             <div className='event-base-informations'>
                 <div className='event-action-content'>
                     <div className='description'>
-                        <b className='info-title'>Açıklama:</b>
+                        <b className='info-title'>
+                            Açıklama:
+                        </b>
                         <span>
                             {checkInformationContent(eventInformations?.description)}
                         </span>
                     </div>
                     <div className='address'>
-                        <b className='info-title'>Adres:</b>
+                        <b className='info-title'>
+                            Adres:
+                        </b>
                         <span>
                             {checkInformationContent(eventInformations?.address)}
                         </span>
                     </div>
                     <div className='dates'>
-                        <b className='info-title'>Başlangıç Tarihi:</b>
+                        <b className='info-title'>
+                            Başlangıç Tarihi:
+                        </b>
                         <span className='start-date'>
-                            {checkInformationContent(new Date(eventInformations?.start_date!))}
+                            {
+                                eventInformations?.start_date ?
+                                    checkInformationContent(new Date((eventInformations?.start_date!).toString()))
+                                    : '-'
+                            }
                         </span>
                     </div>
                     <div className='dates'>
-                        <b className='info-title'>Bitiş Tarihi:</b>
+                        <b className='info-title'>
+                            Bitiş Tarihi:
+                        </b>
                         <span className='end-date'>
-                            {checkInformationContent(new Date(eventInformations?.end_date!))}
+                            {
+                                eventInformations?.end_date ?
+                                    checkInformationContent(new Date((eventInformations?.end_date!).toString()))
+                                    : '-'
+                            }
                         </span>
                     </div>
                 </div>
                 <div className='user-action-content'>
                     <div className='created-at'>
-                        <b className='info-title'>Oluşturulma Tarihi:</b>
+                        <b className='info-title'>
+                            Oluşturulma Tarihi:
+                        </b>
                         <span>
                             {checkInformationContent(new Date(eventInformations?.createdAt!))}
                         </span>
                     </div>
                     <div className='updated-at'>
-                        <b className='info-title'>Son Güncellenme Tarihi:</b>
+                        <b className='info-title'>
+                            Son Güncellenme Tarihi:
+                        </b>
                         <span>
                             {checkInformationContent(new Date(eventInformations?.updatedAt!))}
                         </span>
@@ -112,7 +137,9 @@ export const EventAnalyses = () => {
             </div>
             <div className='pie-chart-area'>
                 <div className='chart gender'>
-                    <h3>Cinsiyet Analizi</h3>
+                    <h3>
+                        Cinsiyet Analizi
+                    </h3>
                     <MuiPieChart
                         participiants={participantGenders}
                         arcLabel={getArcLabel}
@@ -123,7 +150,9 @@ export const EventAnalyses = () => {
                 </div>
 
                 <div className='chart race'>
-                    <h3>Irk Analizi</h3>
+                    <h3>
+                        Irk Analizi
+                    </h3>
                     <MuiPieChart
                         participiants={participantRaces}
                         arcLabel={getArcLabel2}
@@ -134,7 +163,9 @@ export const EventAnalyses = () => {
             </div>
 
             <div className='bar-chart-area'>
-                <h3 className='title'>Yaş Analizi</h3>
+                <h3 className='title'>
+                    Yaş Analizi
+                </h3>
                 <div className='content'>
                     <div className='chart age'>
                         <MuiBarChart
@@ -151,7 +182,9 @@ export const EventAnalyses = () => {
                             width={600}
                             height={300} />
                     </div>
-                    <MuiBarChartDataInfo participiants={participantAges} />
+                    <MuiBarChartDataInfo
+                        participiants={participantAges}
+                    />
                 </div>
             </div>
             <div className='img-field'>
@@ -160,7 +193,10 @@ export const EventAnalyses = () => {
                     {eventPhotos.map((item) => {
                         console.log(item);
                         return (
-                            <li className='img-item' key={item.photoId}>
+                            <li
+                                className='img-item'
+                                key={item.photoId}
+                            >
                                 <img
                                     src={`${item.path}`}
                                     alt={item.path}

@@ -1,16 +1,18 @@
+import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { SubmitHandler, useForm } from 'react-hook-form';
+import axios from 'axios';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import dayjs from 'dayjs';
+import 'dayjs/locale/tr';
 
 import { Button, FormControl, FormLabel, Input, Stack } from '@mui/joy';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 import { useEventContext } from '../../../context';
-import { ICreateEvent } from '../../../types';
-import axios from 'axios';
-import { useEffect } from 'react';
-import { yupResolver } from '@hookform/resolvers/yup';
+import { IUpdateEvent } from '../../../types';
 import { createEventSchema } from '../../../schemas';
 
 
@@ -19,20 +21,20 @@ export const EventUpdate = () => {
     const { eventId } = useParams();
     const navigate = useNavigate();
 
-    const { register, handleSubmit,  formState: { errors } } = useForm<ICreateEvent>({
+    const { register, control, handleSubmit, formState: { errors } } = useForm<IUpdateEvent>({
         defaultValues: {
             title: eventInformations?.title,
             description: eventInformations?.description,
             address: eventInformations?.address,
             longitude: eventInformations?.longitude,
             latitude: eventInformations?.latitude,
-            start_date: eventInformations?.start_date,
-            end_date: eventInformations?.end_date,
+            start_date: dayjs(eventInformations?.start_date),
+            end_date: dayjs(eventInformations?.end_date),
         },
         resolver: yupResolver(createEventSchema),
     });
 
-    const onUpdateEvent: SubmitHandler<ICreateEvent> = async (data: ICreateEvent) => {
+    const onUpdateEvent: SubmitHandler<IUpdateEvent> = async (data: IUpdateEvent) => {
         try {
             const res = await axios.put(`update_event/${eventId}/`, {
                 title: data.title,
@@ -92,16 +94,33 @@ export const EventUpdate = () => {
                         {errors.longitude && <p className='alert'>{errors.longitude.message}</p>}
                     </FormControl>
                     <FormControl>
-                        <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <DatePicker label="Başlangıç Tarihi" name="startDate" slotProps={{ textField: { size: 'small' } }} />
-                            {errors.start_date && <p className='alert'>{errors.start_date.message}</p>}
-                        </LocalizationProvider>
+                        <Controller control={control} name='start_date' render={({ field }) => (
+                            <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='tr'>
+                                <DatePicker
+                                    {...field}
+                                    label="Başlangıç Tarihi"
+                                    name="start_date"
+                                    format='DD/MM/YYYY'
+                                    defaultValue={null}
+                                    slotProps={{ textField: { size: 'small' } }}
+                                />
+                            </LocalizationProvider>
+                        )} />
                     </FormControl>
                     <FormControl>
-                        <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <DatePicker value={null} label="Bitiş Tarihi" name="startDate" slotProps={{ textField: { size: 'small' } }} />
-                            {errors.end_date && <p className='alert'>{errors.end_date.message}</p>}
-                        </LocalizationProvider>
+                        <Controller control={control} name='end_date' render={({ field }) => (
+                            <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='tr'>
+                                <DatePicker
+                                    {...field}
+                                    label="Bitiş Tarihi"
+                                    name="end_date"
+                                    format='DD/MM/YYYY'
+                                    defaultValue={null}
+                                    slotProps={{ textField: { size: 'small' } }}
+                                />
+                                {errors.end_date && <p className='alert'>{errors.end_date.message}</p>}
+                            </LocalizationProvider>
+                        )} />
                     </FormControl>
                     <Button type="submit" color='success'>Etkinliği Güncelle</Button>
                 </Stack>

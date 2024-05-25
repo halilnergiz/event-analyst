@@ -1,4 +1,6 @@
+import { Dayjs } from 'dayjs';
 import { FileWithPath } from 'react-dropzone';
+
 
 export interface IRegisterForm {
     username: string;
@@ -20,6 +22,16 @@ export interface ICreateEvent {
     longitude?: string;
     latitude?: string;
     address?: string;
+};
+
+export interface IUpdateEvent {
+    title: string;
+    description?: string;
+    address?: string;
+    longitude?: string;
+    latitude?: string;
+    start_date?: Dayjs | null;
+    end_date?: Dayjs | null;
 };
 
 export interface ImgFilePreview {

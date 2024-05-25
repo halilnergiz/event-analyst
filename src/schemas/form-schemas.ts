@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import * as yup from 'yup';
 
 
@@ -75,4 +76,10 @@ export const createEventSchema = yup.object({
         .max(200, 'En fazla 200 karakter'),
     longitude: onlyNumberOrEmtyString,
     latitude: onlyNumberOrEmtyString,
+    start_date: yup
+        .date<dayjs.Dayjs | null | any>(),
+    end_date: yup
+        .date<dayjs.Dayjs | null | any>()
+        .nullable()
+        .min(yup.ref('start_date'), 'Bitiş tarihi başlangıç tarihinden sonra olmalıdır.'),
 });

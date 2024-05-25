@@ -1,13 +1,16 @@
+import { Dayjs } from 'dayjs';
+
+
 export interface IEvent {
     event_owner: number;
     eventId: string;
     title: string;
     description?: string;
-    start_date?: Date;
-    end_date?: Date;
+    address?: string;
     longitude?: string;
     latitude?: string;
-    address?: string;
+    start_date?: Dayjs | null;
+    end_date?: Dayjs | null;
     updatedAt?: Date;
     createdAt?: Date;
 }
@@ -19,7 +22,7 @@ export interface IUser {
     isActive: boolean;
 }
 
-export interface IPhoto{
+export interface IPhoto {
     photoId: string;
     event: string;
     path: string;
