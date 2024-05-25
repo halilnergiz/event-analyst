@@ -21,9 +21,13 @@ const passwordValidation = yup
 
 const onlyNumberOrEmtyString = yup
     .string()
+    .test('max-digit', 'En fazla 9 sayı içerebilir', (value) => {
+        if (!value) return true;
+        const valueWithoutDots = value.replace(/\./g, '');
+        return valueWithoutDots.length <= 9;
+    })
     .matches(/^([0-9.]+$)/, "Lütfen sayı giriniz")
-    .min(1, 'En az bir değer girilmeli')
-    .max(9, 'En fazla 9 karakter');
+    .min(1, 'En az bir değer girilmeli');
 
 
 export const registerSchema = yup.object({
@@ -77,9 +81,10 @@ export const createEventSchema = yup.object({
     longitude: onlyNumberOrEmtyString,
     latitude: onlyNumberOrEmtyString,
     start_date: yup
-        .date<dayjs.Dayjs | null | any>(),
-    end_date: yup
         .date<dayjs.Dayjs | null | any>()
+        .nullable(),
+    end_date: yup
+        .date<dayjs.Dayjs | null | any | undefined>()
         .nullable()
         .min(yup.ref('start_date'), 'Bitiş tarihi başlangıç tarihinden sonra olmalıdır.'),
 });

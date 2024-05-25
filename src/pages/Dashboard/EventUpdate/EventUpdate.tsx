@@ -28,8 +28,8 @@ export const EventUpdate = () => {
             address: eventInformations?.address,
             longitude: eventInformations?.longitude,
             latitude: eventInformations?.latitude,
-            start_date: dayjs(eventInformations?.start_date),
-            end_date: dayjs(eventInformations?.end_date),
+            start_date: eventInformations?.start_date ? dayjs(eventInformations.start_date) : null,
+            end_date: eventInformations?.end_date ? dayjs(eventInformations.end_date) : null,
         },
         resolver: yupResolver(createEventSchema),
     });
@@ -101,9 +101,11 @@ export const EventUpdate = () => {
                                     label="Başlangıç Tarihi"
                                     name="start_date"
                                     format='DD/MM/YYYY'
-                                    defaultValue={null}
+                                    value={field.value || null}
+                                    onChange={(date) => field.onChange(date)}
                                     slotProps={{ textField: { size: 'small' } }}
                                 />
+                                {errors.start_date && <p className='alert'>{errors.start_date.message}</p>}
                             </LocalizationProvider>
                         )} />
                     </FormControl>
@@ -115,7 +117,8 @@ export const EventUpdate = () => {
                                     label="Bitiş Tarihi"
                                     name="end_date"
                                     format='DD/MM/YYYY'
-                                    defaultValue={null}
+                                    value={field.value || null}
+                                    onChange={(date) => field.onChange(date)}
                                     slotProps={{ textField: { size: 'small' } }}
                                 />
                                 {errors.end_date && <p className='alert'>{errors.end_date.message}</p>}
