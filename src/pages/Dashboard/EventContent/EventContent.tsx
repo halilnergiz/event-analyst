@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Outlet, useParams } from 'react-router-dom';
 
 import axios from 'axios';
 
-import { EventAnalyses, UploadPhotos } from '../../../components';
+import { UploadPhotos } from '../../../components';
 import { useEventContext } from '../../../context';
 
 
@@ -27,5 +27,5 @@ export const EventContent = () => {
     if (!eventPhotos.length) {
         return <UploadPhotos />;
     }
-    return <EventAnalyses />;
+    return <Outlet />;
 };

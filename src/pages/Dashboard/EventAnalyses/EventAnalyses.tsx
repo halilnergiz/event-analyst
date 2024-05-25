@@ -1,27 +1,25 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import axios from 'axios';
 
 import { DefaultizedPieValueType } from '@mui/x-charts';
 
-import { MuiBarChart, MuiBarChartDataInfo, MuiPieChart } from '../Charts/MuiCharts';
-import { useEventContext } from '../../context';
-import { IEvent } from '../../types';
-import { customDateFormat } from '../../schemas';
+import { useEventContext } from '../../../context';
+import { MuiBarChart, MuiBarChartDataInfo, MuiPieChart } from '../../../components';
+import { customDateFormat } from '../../../schemas';
 
 
 export const EventAnalyses = () => {
-    const { eventPhotos } = useEventContext();
+    const { eventInformations, setEventInformations, eventPhotos } = useEventContext();
     const { eventId } = useParams();
-    const [event, setEvent] = useState<IEvent>();
 
     useEffect(() => {
         const getEventAnalyses = async () => {
             try {
                 const res = await axios.get(`event_detail/${eventId}/`);
                 console.log(res.data);
-                setEvent(res.data);
+                setEventInformations(res.data);
             } catch (err) {
                 console.log(err);
             }
@@ -69,31 +67,31 @@ export const EventAnalyses = () => {
 
     return (
         <div className='event-container'>
-            <h1 className='event-name'> {event?.title} </h1>
+            <h1 className='event-name'> {eventInformations?.title} </h1>
             <div className='event-base-informations'>
                 <div className='event-action-content'>
                     <div className='description'>
                         <b className='info-title'>Açıklama:</b>
                         <span>
-                            {checkInformationContent(event?.description)}
+                            {checkInformationContent(eventInformations?.description)}
                         </span>
                     </div>
                     <div className='address'>
                         <b className='info-title'>Adres:</b>
                         <span>
-                            {checkInformationContent(event?.address)}
+                            {checkInformationContent(eventInformations?.address)}
                         </span>
                     </div>
                     <div className='dates'>
                         <b className='info-title'>Başlangıç Tarihi:</b>
                         <span className='start-date'>
-                            {checkInformationContent(new Date(event?.start_date!))}
+                            {checkInformationContent(new Date(eventInformations?.start_date!))}
                         </span>
                     </div>
                     <div className='dates'>
                         <b className='info-title'>Bitiş Tarihi:</b>
                         <span className='end-date'>
-                            {checkInformationContent(new Date(event?.end_date!))}
+                            {checkInformationContent(new Date(eventInformations?.end_date!))}
                         </span>
                     </div>
                 </div>
@@ -101,13 +99,13 @@ export const EventAnalyses = () => {
                     <div className='created-at'>
                         <b className='info-title'>Oluşturulma Tarihi:</b>
                         <span>
-                            {checkInformationContent(new Date(event?.createdAt!))}
+                            {checkInformationContent(new Date(eventInformations?.createdAt!))}
                         </span>
                     </div>
                     <div className='updated-at'>
                         <b className='info-title'>Son Güncellenme Tarihi:</b>
                         <span>
-                            {checkInformationContent(new Date(event?.updatedAt!))}
+                            {checkInformationContent(new Date(eventInformations?.updatedAt!))}
                         </span>
                     </div>
                 </div>

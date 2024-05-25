@@ -1,7 +1,17 @@
-.create-event-popup{
-    button:nth-child(1){
-        svg{
-            margin-bottom: 4px;
-        }
+.create-event-popup {
+  .create-event-button {
+    height: 100%;
+    .create-icon {
+      margin-right: 0.2rem;
     }
+    span {
+      position: relative;
+      top: 2px;
+    }
+  }
+}
+
+.alert{
+    color: red;
+    font-size: 12px;
 }

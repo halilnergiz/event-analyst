@@ -15,10 +15,10 @@ export interface ILoginForm {
 export interface ICreateEvent {
     title: string;
     description?: string;
-    start_date?: Date;
-    end_date?: Date;
-    longitude?: number;
-    latitude?: number;
+    start_date?: Date | null;
+    end_date?: Date | null;
+    longitude?: string;
+    latitude?: string;
     address?: string;
 };
 

@@ -12,7 +12,7 @@ export const EventList = () => {
             {
                 events?.map((event: IEvent) => {
                     console.log(event);
-                    const convertedDate = new Date(event.createdAt);
+                    const convertedDate = new Date(event.createdAt!);
                     return <EventCard
                         key={event.eventId}
                         eventId={event.eventId}

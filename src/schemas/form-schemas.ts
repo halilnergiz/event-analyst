@@ -18,6 +18,12 @@ const passwordValidation = yup
     .max(25, 'En fazla 25 karakter')
     .required('Zorunlu alan');
 
+const onlyNumberOrEmtyString = yup
+    .string()
+    .matches(/^([0-9.]+$)/, "Lütfen sayı giriniz")
+    .min(1, 'En az bir değer girilmeli')
+    .max(9, 'En fazla 9 karakter');
+
 
 export const registerSchema = yup.object({
     username: usernameValidation,
@@ -46,7 +52,7 @@ export const loginSchema = yup.object({
         .required('Zorunlu alan')
 });
 
-export const changePassword = yup.object({
+export const changePasswordSchema = yup.object({
     old_password: yup
         .string()
         .min(8, 'En az 8 karakter')
@@ -54,4 +60,19 @@ export const changePassword = yup.object({
         .required('Zorunlu alan'),
     new_password: passwordValidation,
     new_password_repeat: passwordValidation,
+});
+
+export const createEventSchema = yup.object({
+    title: yup
+        .string()
+        .max(200, 'En fazla 200 karakter')
+        .required('Zorunlu alan'),
+    description: yup
+        .string()
+        .max(500, 'En fazla 500 karakter'),
+    address: yup
+        .string()
+        .max(200, 'En fazla 200 karakter'),
+    longitude: onlyNumberOrEmtyString,
+    latitude: onlyNumberOrEmtyString,
 });

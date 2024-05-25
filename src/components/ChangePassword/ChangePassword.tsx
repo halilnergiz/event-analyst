@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
 
 import axios, { AxiosError } from 'axios';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { Button, DialogContent, DialogTitle, FormControl, FormLabel, Input, Modal, Stack } from '@mui/joy';
@@ -11,7 +11,7 @@ import SyncLockIcon from '@mui/icons-material/SyncLock';
 import { IconButton } from '@mui/material';
 
 import { IChangePassword } from '../../types';
-import { changePassword } from '../../schemas';
+import { changePasswordSchema } from '../../schemas';
 
 
 export const ChangePassword = () => {
@@ -26,7 +26,7 @@ export const ChangePassword = () => {
             new_password: '',
             new_password_repeat: '',
         },
-        resolver: yupResolver(changePassword),
+        resolver: yupResolver(changePasswordSchema),
     });
 
     const onChangePassword: SubmitHandler<IChangePassword> = async (data: IChangePassword) => {

@@ -1,16 +1,19 @@
 import { createBrowserRouter } from 'react-router-dom';
 
 import App from '../App';
+import { EventContextProvider } from '../context';
 import {
   Dashboard,
   EventContent,
+  EventUpdate,
+  EventAnalyses,
   Home,
   Login,
   NoMatch,
   Profile,
   Register,
 } from '../pages';
-import { EventContextProvider } from '../context';
+
 
 const router = createBrowserRouter([
   {
@@ -44,6 +47,16 @@ const router = createBrowserRouter([
                 <EventContent />
               </EventContextProvider>
             ),
+            children: [
+              {
+                index: true,
+                element: <EventAnalyses />,
+              },
+              {
+                path: 'update',
+                element: <EventUpdate />,
+              },
+            ],
           },
         ],
       },
