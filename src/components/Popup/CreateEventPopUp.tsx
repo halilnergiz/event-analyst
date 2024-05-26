@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { Button, DialogContent, DialogTitle, FormControl, FormLabel, Input, Modal, ModalDialog, Stack } from '@mui/joy';
@@ -22,7 +22,7 @@ export const CreateEventPopUp = () => {
     const [open, setOpen] = useState(false);
     const { events, setEvents } = useDashContext();
 
-    const { register, handleSubmit, reset, formState: { errors } } = useForm<ICreateEvent>({
+    const { register, control, handleSubmit, reset, formState: { errors } } = useForm<ICreateEvent>({
         defaultValues: {
             title: '',
             description: '',
@@ -41,8 +41,8 @@ export const CreateEventPopUp = () => {
                 title: data.title,
                 description: data.description,
                 address: data.address,
-                longitude: Number(data.longitude),
-                latitude: Number(data.latitude),
+                longitude: data.longitude,
+                latitude: data.latitude,
                 start_date: data.start_date,
                 end_date: data.end_date,
             });
@@ -108,22 +108,40 @@ export const CreateEventPopUp = () => {
                                 {errors.longitude && <p className='alert'>{errors.longitude.message}</p>}
                             </FormControl>
                             <FormControl>
-                                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                    <DatePicker label="Başlangıç Tarihi" name="startDate" slotProps={{ textField: { size: 'small' } }} />
-                                    {errors.start_date && <p className='alert'>{errors.start_date.message}</p>}
-                                </LocalizationProvider>
+                                <Controller control={control} name='start_date' render={({ field }) => (
+                                    <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='tr'>
+                                        <DatePicker
+                                            {...field}
+                                            label="Başlangıç Tarihi"
+                                            name="start_date"
+                                            format='DD/MM/YYYY'
+                                            value={field.value || null}
+                                            slotProps={{ textField: { size: 'small' } }}
+                                        />
+                                        {errors.start_date && <p className='alert'>{errors.start_date.message}</p>}
+                                    </LocalizationProvider>
+                                )} />
                             </FormControl>
                             <FormControl>
-                                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                    <DatePicker value={null} label="Bitiş Tarihi" name="startDate" slotProps={{ textField: { size: 'small' } }} />
-                                    {errors.end_date && <p className='alert'>{errors.end_date.message}</p>}
-                                </LocalizationProvider>
+                                <Controller control={control} name='end_date' render={({ field }) => (
+                                    <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='tr'>
+                                        <DatePicker
+                                            {...field}
+                                            label="Bitiş Tarihi"
+                                            name="end_date"
+                                            format='DD/MM/YYYY'
+                                            value={field.value || null}
+                                            slotProps={{ textField: { size: 'small' } }}
+                                        />
+                                        {errors.end_date && <p className='alert'>{errors.end_date.message}</p>}
+                                    </LocalizationProvider>
+                                )} />
                             </FormControl>
                             <Button type="submit">Oluştur</Button>
                         </Stack>
                     </form>
                 </ModalDialog>
             </Modal>
-        </div>
+        </div >
     );
 };

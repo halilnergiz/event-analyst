@@ -17,11 +17,11 @@ export interface ILoginForm {
 export interface ICreateEvent {
     title: string;
     description?: string;
-    start_date?: Date | null;
-    end_date?: Date | null;
+    address?: string;
     longitude?: string;
     latitude?: string;
-    address?: string;
+    start_date?: Dayjs | null;
+    end_date?: Dayjs | null;
 };
 
 export interface IUpdateEvent {
