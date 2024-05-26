@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
 
+import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
 
@@ -44,7 +44,6 @@ export const Register = () => {
                     <form className='register-form' onSubmit={handleSubmit(onRegisterSubmit)} autoComplete='off' >
                         <div className="title">
                             <h2>Kayıt Ol</h2>
-                            {/* <img src="./images/event-analyst-logo.png" alt="" /> */}
                         </div>
                         <div className="user-infs">
                             <div className="form-field user-name">
@@ -97,7 +96,7 @@ export const Register = () => {
 
                 <div className="logo-container">
                     <div className="logo-content">
-                        <img className='logo' src="./images/event-analyst-logo.png" alt="" />
+                        <img className='logo' src="./images/event-analyst-logo.png" alt="event-analyst-logo" />
                     </div>
                     <div className="logo-text">
                         <h1>Event Analyst</h1>

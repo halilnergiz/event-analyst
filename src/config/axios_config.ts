@@ -31,3 +31,14 @@ axiosFileUploadInterceptor.interceptors.request.use((request) => {
         throw new Error(err as string);
     }
 });
+
+export const axiosResetPasswordInterceptor = axios.create();
+axiosResetPasswordInterceptor.interceptors.request.use((request) => {
+    try {
+        request.headers['Content-Type'] = 'application/json';
+        return request;
+    } catch (err) {
+        console.log(err);
+        throw new Error(err as string);
+    }
+});

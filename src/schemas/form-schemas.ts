@@ -9,6 +9,14 @@ const usernameValidation = yup
     .max(30, 'En fazla 30 karakter')
     .required('Zorunlu Alan');
 
+const emailValidation = yup
+    .string()
+    .matches(/^[a-zA-Z0-9ğüşöçİĞÜŞÖÇ]+@[a-zA-Z0-9.-]+\.[a-zA-Z]/, 'Email formatına uygun değil')
+    .min(3, 'En az 3 karakter')
+    .max(50, 'En fazla 50 karakter')
+    .trim()
+    .required('Zorunlu alan');
+
 const passwordValidation = yup
     .string()
     .matches(
@@ -32,13 +40,7 @@ const onlyNumberOrEmtyString = yup
 
 export const registerSchema = yup.object({
     username: usernameValidation,
-    email: yup
-        .string()
-        .matches(/^[a-zA-Z0-9ğüşöçİĞÜŞÖÇ]+@[a-zA-Z0-9.-]+\.[a-zA-Z]/, 'Email formatına uygun değil')
-        .min(3, 'En az 3 karakter')
-        .max(50, 'En fazla 50 karakter')
-        .trim()
-        .required('Zorunlu alan'),
+    email: emailValidation,
     password: passwordValidation,
     password_again: passwordValidation,
 });
@@ -55,6 +57,15 @@ export const loginSchema = yup.object({
         .min(8, 'En az 8 karakter')
         .max(25, 'En fazla 25 karakter')
         .required('Zorunlu alan')
+});
+
+export const forgotPasswordSchema = yup.object({
+    email: emailValidation,
+});
+
+export const passwordResetSchema = yup.object({
+    new_password: passwordValidation,
+    new_password_repeat: passwordValidation,
 });
 
 export const changePasswordSchema = yup.object({

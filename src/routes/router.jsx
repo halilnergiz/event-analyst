@@ -3,17 +3,19 @@ import { createBrowserRouter } from 'react-router-dom';
 import App from '../App';
 import { EventContextProvider } from '../context';
 import {
+  Login,
+  Register,
+  ForgotPassword,
+  PasswordReset,
   Dashboard,
+  Home,
+  Profile,
   EventContent,
   EventUpdate,
   EventAnalyses,
-  Home,
-  Login,
   NoMatch,
-  Profile,
-  Register,
+  
 } from '../pages';
-
 
 const router = createBrowserRouter([
   {
@@ -27,6 +29,14 @@ const router = createBrowserRouter([
       {
         path: 'register',
         element: <Register />,
+      },
+      {
+        path: 'forgot-password',
+        element: <ForgotPassword />,
+      },
+      {
+        path: 'password-reset',
+        element: <PasswordReset />,
       },
       {
         path: 'dashboard',

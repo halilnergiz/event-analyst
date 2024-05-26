@@ -68,7 +68,6 @@ export const Login = () => {
                                     variant='outlined'
                                     label='Kullanıcı adı'
                                     size='small'
-                                    error={Boolean(errors.username)}
                                     {...register('username')}
                                 />
                                 {errors.username?.message && <p className='error'> {errors.username?.message}</p>}
@@ -79,14 +78,13 @@ export const Login = () => {
                                     label='Şifre'
                                     type='password'
                                     size='small'
-                                    error={Boolean(errors.password)}
                                     {...register('password')} />
                                 {errors.password?.message && <p className='error'> {errors.password?.message}</p>}
                             </div>
                         </div>
                         <Button variant='contained' type='submit' sx={{ textTransform: 'none' }}>Giriş Yap</Button>
                         <div className="nav-area">
-                            <span onClick={() => navigate('')}>Şifremi Unuttum?</span>
+                            <span onClick={() => navigate('/forgot-password')}>Şifremi Unuttum?</span>
                             <span onClick={() => navigate('/register')}>Kayıt Ol</span>
                         </div>
                     </form>
