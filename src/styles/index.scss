@@ -7,6 +7,7 @@
 @import url('../components/Dropdown/dropdown.scss');
 @import url('../components/Popup/create-event-popup.scss');
 @import url('../components/Dropzone/dropzone.scss');
+@import url('../components/EventCard/event-card.scss');
 @import url('../components/EventList/event-list.scss');
 @import url('../components/UploadPhotos/upload-photos.scss');
 @import url('../components/NoEvent/no-event.scss');
@@ -18,7 +19,7 @@
 @import url('../pages/Dashboard/EventAnalyses/event-analyses.scss');
 @import url('../pages/Dashboard/EventUpdate/event-update.scss');
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&family=Quicksand:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600&family=Quicksand:wght@400;500;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap');
 
 * {

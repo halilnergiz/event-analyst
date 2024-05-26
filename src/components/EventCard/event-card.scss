@@ -1,0 +1,43 @@
+.event-card {
+  width: 22rem;
+  height: 12rem;
+  justify-content: space-between;
+  padding: 1rem 2rem 1rem 2rem;
+  border-radius: 10px;
+  box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px,
+    rgba(17, 17, 26, 0.05) 0px 8px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  .headers {
+    margin-bottom: 1rem;
+    .title {
+      text-align: center;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      margin-top: 0;
+    }
+    .description {
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+    .non-description {
+      font-size: 14px;
+      opacity: 0.3;
+    }
+  }
+  .footnote {
+    .details {
+      position: relative;
+      bottom: 6px;
+      font-size: 14px;
+      opacity: 0.6;
+      * {
+        display: block;
+      }
+    }
+    .route-event-content-button {
+      height: 2.2rem;
+    }
+  }
+}

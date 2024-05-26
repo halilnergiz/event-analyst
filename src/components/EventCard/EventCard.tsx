@@ -1,45 +1,54 @@
 import { useNavigate } from 'react-router-dom';
 
-import { AspectRatio, Button, Card, CardContent, Typography } from '@mui/joy';
+import { Button } from '@mui/joy';
+
 
 interface IEventCard {
-    eventId: string,
-    title: string,
-    createdAt: string | number,
+    eventId: string;
+    title: string;
+    createdAt: string | number;
+    description: string | undefined;
 }
 
-export const EventCard = ({ eventId, title, createdAt }: IEventCard) => {
+export const EventCard = ({ eventId, title, createdAt, description }: IEventCard) => {
     const navigate = useNavigate();
-    const routeDetails = () => {
+    const onRouteDetails = () => {
         navigate(`event/${eventId}/`);
     };
 
     return (
-        <Card sx={{ width: 320, justifyContent: 'space-between' }}>
-            <AspectRatio minHeight="120px" maxHeight="200px">
-                <img
-                    src="/images/card-bg.jpg"
-                    loading="lazy"
-                    alt=""
-                    height={0}
-                />
-            </AspectRatio>
-            <div>
-                <Typography level="title-lg" sx={{ textOverflow: 'ellipsis', overflow: 'hidden' }}> {title} </Typography>
-                <Typography level="body-sm"> {createdAt}</Typography>
+        <div className='event-card'>
+            <div className='headers'>
+                <h3 className='title'>
+                    {title}
+                </h3>
+                <div className='description'>
+                    {description
+                        ? <span>{description}</span>
+                        : <span className='non-description'>Etkinliğe açıklama ekleyiniz</span>
+                    }
+                </div>
             </div>
-            <CardContent orientation="horizontal">
+            <div className='footnote'>
+                <div className='details'>
+                    <span>
+                        Oluşturulma Tarihi
+                    </span>
+                    <span>
+                        {createdAt}
+                    </span>
+                </div>
                 <Button
-                    variant="solid"
-                    size="sm"
-                    color="primary"
+                    className='route-event-content-button'
+                    variant='solid'
+                    size='sm'
+                    color='primary'
                     fullWidth
-                    style={{ height: '3rem', position: 'relative', bottom: '0' }}
-                    onClick={routeDetails}
+                    onClick={onRouteDetails}
                 >
                     Etkinlik İçeriği
                 </Button>
-            </CardContent>
-        </Card>
+            </div>
+        </div>
     );
 };

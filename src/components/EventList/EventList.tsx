@@ -17,6 +17,7 @@ export const EventList = () => {
                         key={event.eventId}
                         eventId={event.eventId}
                         title={event.title}
+                        description={event.description}
                         createdAt={customDateFormat(convertedDate)}
                     />;
                 })
