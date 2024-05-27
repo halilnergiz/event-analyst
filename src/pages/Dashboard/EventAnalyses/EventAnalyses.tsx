@@ -6,13 +6,13 @@ import { Dayjs } from 'dayjs';
 
 import { DefaultizedPieValueType } from '@mui/x-charts';
 
+import { CarousePhotoArea, MuiBarChart, MuiBarChartDataInfo, MuiPieChart } from '../../../components';
 import { useEventContext } from '../../../context';
-import { MuiBarChart, MuiBarChartDataInfo, MuiPieChart } from '../../../components';
 import { customDateFormat } from '../../../schemas';
 
 
 export const EventAnalyses = () => {
-    const { eventInformations, setEventInformations, eventPhotos } = useEventContext();
+    const { eventInformations, setEventInformations } = useEventContext();
     const { eventId } = useParams();
 
     useEffect(() => {
@@ -137,9 +137,9 @@ export const EventAnalyses = () => {
             </div>
             <div className='pie-chart-area'>
                 <div className='chart gender'>
-                    <h3>
+                    <h2>
                         Cinsiyet Analizi
-                    </h3>
+                    </h2>
                     <MuiPieChart
                         participiants={participantGenders}
                         arcLabel={getArcLabel}
@@ -150,9 +150,9 @@ export const EventAnalyses = () => {
                 </div>
 
                 <div className='chart race'>
-                    <h3>
+                    <h2>
                         Irk Analizi
-                    </h3>
+                    </h2>
                     <MuiPieChart
                         participiants={participantRaces}
                         arcLabel={getArcLabel2}
@@ -163,9 +163,9 @@ export const EventAnalyses = () => {
             </div>
 
             <div className='bar-chart-area'>
-                <h3 className='title'>
+                <h2>
                     Yaş Analizi
-                </h3>
+                </h2>
                 <div className='content'>
                     <div className='chart age'>
                         <MuiBarChart
@@ -187,26 +187,7 @@ export const EventAnalyses = () => {
                     />
                 </div>
             </div>
-            <div className='img-field'>
-                <h2>Etkinlik Görselleri</h2>
-                <ul className='img-list' >
-                    {eventPhotos.map((item) => {
-                        console.log(item);
-                        return (
-                            <li
-                                className='img-item'
-                                key={item.photoId}
-                            >
-                                <img
-                                    src={`${item.path}`}
-                                    alt={item.path}
-                                    loading="lazy"
-                                />
-                            </li>
-                        );
-                    })}
-                </ul>
-            </div>
+            <CarousePhotoArea />
         </div>
     );
 };

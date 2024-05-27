@@ -8,3 +8,4 @@ export * from './EventList/EventList';
 export * from './UploadPhotos/UploadPhotos';
 export * from './ChangePassword/ChangePassword';
 export * from './LogoutAll/LogoutAll';
+export * from './CarouselPhoto/CarouselPhotoArea';
