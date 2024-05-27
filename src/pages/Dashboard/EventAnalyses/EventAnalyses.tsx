@@ -12,7 +12,7 @@ import { customDateFormat } from '../../../schemas';
 
 
 export const EventAnalyses = () => {
-    const { eventInformations, setEventInformations } = useEventContext();
+    const { eventInformations, setEventInformations,  eventPhotos, setEventPhotos  } = useEventContext();
     const { eventId } = useParams();
 
     useEffect(() => {
@@ -26,6 +26,20 @@ export const EventAnalyses = () => {
             }
         };
         getEventAnalyses();
+    }, []);
+
+    // TODO: this context's logic usage should be proper for getting photos. Don't  
+    useEffect(() => {
+        const isPhotoExist = async () => {
+            try {
+                const res = await axios.get(`events/${eventId}/photos/`);
+                setEventPhotos(res.data);
+                console.log(res.data);
+            } catch (err) {
+                console.log(err);
+            }
+        };
+        isPhotoExist();
     }, []);
 
     // TEMPORARY DUMMY DATA

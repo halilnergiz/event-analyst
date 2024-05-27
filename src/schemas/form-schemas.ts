@@ -21,7 +21,7 @@ const passwordValidation = yup
     .string()
     .matches(
         /^(?=.*[a-zA-Z])(?=.*\d)[A-Za-z\d@$!%*?&]+$/,
-        "Şifre en az bir harf büyük veya küçük harf, sayı içermelidir. Geçerli özel karakterler: @$!%*?&"
+        "Şifre en az bir büyük veya küçük harf ve sayı içermelidir. Geçerli özel karakterler: @$!%*?&"
     )
     .min(8, 'En az 8 karakter')
     .max(25, 'En fazla 25 karakter')
