@@ -30,13 +30,18 @@ export const Login = () => {
             localStorage.setItem('access_token', `${res.data.token}`);
             localStorage.setItem('username', `${res.data.user.username}`);
             localStorage.setItem('email', `${res.data.user.email}`);
-            navigate('/dashboard');
+            return navigate('/dashboard');
         } catch (err) {
-            if ((err as AxiosError).response?.status === 500) {
+            console.log(err);
+            if ((err as AxiosError).response?.status === 500)
                 return alert(`En fazla 5 cihazda aynı anda giriş yapabilirsiniz. 
                 \n Lütfen diğer cihazların en az birinden çıkış yapın ve tekrar deneyin.`);
-            }
-            return alert('Hatalı email veya şifre');
+
+            if ((err as AxiosError).response?.status === 403)
+                return alert('Lütfen mailinizi doğrulayınız ve tekrar giriş yapınız');
+
+            if ((err as AxiosError).response?.status === 400)
+                return alert('Kullanıcı bulunamadı\nLütfen şifrenizi ve kullanıcı adınızı doğru yazdığınızdan emin olunuz');
         }
     };
 

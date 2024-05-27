@@ -19,7 +19,7 @@ export interface IUser {
     username: string;
     email: string;
     password: string;
-    isActive: boolean;
+    isVerified: boolean;
 }
 
 export interface IPhoto {
