@@ -6,7 +6,7 @@ import { Dayjs } from 'dayjs';
 
 import { DefaultizedPieValueType } from '@mui/x-charts';
 
-import { CarousePhotoArea, MuiBarChart, MuiBarChartDataInfo, MuiPieChart } from '../../../components';
+import { CarouselPhotoArea, MuiBarChart, MuiBarChartDataInfo, MuiPieChart } from '../../../components';
 import { useEventContext } from '../../../context';
 import { customDateFormat } from '../../../schemas';
 
@@ -201,7 +201,7 @@ export const EventAnalyses = () => {
                     />
                 </div>
             </div>
-            <CarousePhotoArea />
+            <CarouselPhotoArea />
         </div>
     );
 };

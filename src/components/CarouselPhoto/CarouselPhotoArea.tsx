@@ -16,7 +16,7 @@ export const responsive = {
     },
 };
 
-export const CarousePhotoArea = () => {
+export const CarouselPhotoArea = () => {
     const { eventPhotos } = useEventContext();
     const navigatePhotoLink = (photoURL: string) => {
         window.open(photoURL, '_blank');
