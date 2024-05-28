@@ -58,7 +58,11 @@ export const Dropzone = () => {
     });
 
     const removeFile = (fileName: string) => {
-        return setFile(prevFiles => prevFiles.filter(file => file.file.name !== fileName));
+        const deleteConfirmation = window.confirm('Fotoğrafı silmek istediğinize emin misiniz?');
+        if (deleteConfirmation) {
+            alert('Fotoğraf silindi');
+            return setFile(prevFiles => prevFiles.filter(file => file.file.name !== fileName));
+        }
     };
 
     const onStartAnalyze = async () => {
