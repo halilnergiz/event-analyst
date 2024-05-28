@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import { Button } from '@mui/joy';
 import AutoModeIcon from '@mui/icons-material/AutoMode';
@@ -11,6 +11,7 @@ import axios from 'axios';
 export const Header = () => {
     const navigate = useNavigate();
     const { eventId } = useParams();
+    const location = useLocation();
 
     const deleteEvent = async () => {
         try {
@@ -43,7 +44,7 @@ export const Header = () => {
             </div>
             <div className='nav'>
                 <CreateEventPopUp />
-                {eventId &&
+                {eventId && !location.pathname.includes('update') &&
                     <>
                         <Button
                             className='update-event-button'
