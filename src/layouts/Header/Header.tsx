@@ -5,11 +5,25 @@ import AutoModeIcon from '@mui/icons-material/AutoMode';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 import { CreateEventPopUp, Dropdown } from '../../components';
+import axios from 'axios';
 
 
 export const Header = () => {
     const navigate = useNavigate();
     const { eventId } = useParams();
+
+    const deleteEvent = async () => {
+        try {
+            const deleteConfirmation = window.confirm('Etkinlik silmek istediğinizden emin misiniz?');
+            if (deleteConfirmation) {
+                await axios.delete(`delete_event/${eventId}/`);
+                alert('Etkinlik silindi');
+                return navigate('/dashboard');
+            }
+        } catch (err) {
+            alert('Etkinlik silinirken hata oluştu\nLütfen tekrar deneyiniz');
+        }
+    };
 
     return (
         <div className='header-container'>
@@ -30,15 +44,26 @@ export const Header = () => {
             <div className='nav'>
                 <CreateEventPopUp />
                 {eventId &&
-                    <Button
-                        className='update-event-button'
-                        variant='outlined'
-                        color='success'
-                        onClick={() => navigate(`event/${eventId}/update`)}
-                    >
-                        <AutoModeIcon className='update-icon' />
-                        <span>Etkinliği Güncelle</span>
-                    </Button>
+                    <>
+                        <Button
+                            className='update-event-button'
+                            variant='outlined'
+                            color='success'
+                            onClick={() => navigate(`event/${eventId}/update`)}
+                        >
+                            <AutoModeIcon className='update-icon' />
+                            <span>Etkinliği Güncelle</span>
+                        </Button>
+                        <Button
+                            className='update-event-button'
+                            variant="outlined"
+                            color="danger"
+                            onClick={deleteEvent}
+                        >
+                            <DeleteIcon className='update-icon' />
+                            <span>Etkinliği Sil</span>
+                        </Button>
+                    </>
                 }
                 <Dropdown />
             </div>
