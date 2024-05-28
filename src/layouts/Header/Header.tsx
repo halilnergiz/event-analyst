@@ -13,7 +13,7 @@ export const Header = () => {
     const { eventId } = useParams();
     const location = useLocation();
 
-    const deleteEvent = async () => {
+    const onDeleteEvent = async () => {
         try {
             const deleteConfirmation = window.confirm('Etkinlik silmek istediğinizden emin misiniz?');
             if (deleteConfirmation) {
@@ -59,7 +59,7 @@ export const Header = () => {
                             className='update-event-button'
                             variant="outlined"
                             color="danger"
-                            onClick={deleteEvent}
+                            onClick={onDeleteEvent}
                         >
                             <DeleteIcon className='update-icon' />
                             <span>Etkinliği Sil</span>

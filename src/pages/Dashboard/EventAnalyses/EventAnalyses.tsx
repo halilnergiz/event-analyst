@@ -12,7 +12,7 @@ import { customDateFormat } from '../../../schemas';
 
 
 export const EventAnalyses = () => {
-    const { eventInformations, setEventInformations,  eventPhotos, setEventPhotos  } = useEventContext();
+    const { eventInformations, setEventInformations, setEventPhotos  } = useEventContext();
     const { eventId } = useParams();
 
     useEffect(() => {
