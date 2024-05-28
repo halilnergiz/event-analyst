@@ -57,8 +57,8 @@ export const ChangePassword = () => {
         <div className='change-password'>
             <Button
                 className='change-password-button'
-                variant="soft"
-                color="warning"
+                variant='soft'
+                color='success'
                 onClick={() => setOpen(true)}
             >
                 <SyncLockIcon className='password-icon' />
@@ -94,7 +94,7 @@ export const ChangePassword = () => {
                             >
                                 {showPassword ? <Visibility /> : <VisibilityOff />}
                             </IconButton>
-                            <Button type="submit" color='success'>Şifre Değiştir</Button>
+                            <Button type='submit' color='success'>Şifre Değiştir</Button>
                         </Stack>
                     </form>
                 </ModalDialog>

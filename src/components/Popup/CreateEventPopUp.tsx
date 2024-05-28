@@ -67,8 +67,8 @@ export const CreateEventPopUp = () => {
         <div className='create-event-popup'>
             <Button
                 className='create-event-button'
-                variant="outlined"
-                color="neutral"
+                variant='outlined'
+                color='primary'
                 onClick={() => setOpen(true)}
             >
                 <Add className='create-icon' />
@@ -112,8 +112,8 @@ export const CreateEventPopUp = () => {
                                     <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='tr'>
                                         <DatePicker
                                             {...field}
-                                            label="Başlangıç Tarihi"
-                                            name="start_date"
+                                            label='Başlangıç Tarihi'
+                                            name='start_date'
                                             format='DD/MM/YYYY'
                                             value={field.value || null}
                                             slotProps={{ textField: { size: 'small' } }}
@@ -127,8 +127,8 @@ export const CreateEventPopUp = () => {
                                     <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='tr'>
                                         <DatePicker
                                             {...field}
-                                            label="Bitiş Tarihi"
-                                            name="end_date"
+                                            label='Bitiş Tarihi'
+                                            name='end_date'
                                             format='DD/MM/YYYY'
                                             value={field.value || null}
                                             slotProps={{ textField: { size: 'small' } }}
@@ -137,7 +137,7 @@ export const CreateEventPopUp = () => {
                                     </LocalizationProvider>
                                 )} />
                             </FormControl>
-                            <Button type="submit">Oluştur</Button>
+                            <Button type='submit'>Oluştur</Button>
                         </Stack>
                     </form>
                 </ModalDialog>

@@ -28,7 +28,7 @@ export const EventAnalyses = () => {
         getEventAnalyses();
     }, []);
 
-    // TODO: this context's logic usage should be proper for getting photos. Don't  
+    // TODO: this context's logic usage should be proper for getting photos. Avoid the request duplicate  
     useEffect(() => {
         const isPhotoExist = async () => {
             try {
