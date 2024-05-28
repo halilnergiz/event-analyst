@@ -57,6 +57,10 @@ export const EventUpdate = () => {
         }
     };
 
+    const onCancelUpdate = () => {
+        navigate(`/dashboard/event/${eventId}/`);
+    };
+
     useEffect(() => {
         if (!eventInformations) {
             navigate(`/dashboard/event/${eventId}/`);
@@ -124,6 +128,7 @@ export const EventUpdate = () => {
                         )} />
                     </FormControl>
                     <Button type="submit" color='success'>Etkinliği Güncelle</Button>
+                    <Button type='button' variant='outlined' color='danger' onClick={onCancelUpdate}>İptal Et</Button>
                 </Stack>
             </form>
         </div>
