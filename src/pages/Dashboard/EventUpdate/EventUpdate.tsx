@@ -7,7 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import dayjs from 'dayjs';
 import 'dayjs/locale/tr';
 
-import { Button, FormControl, FormLabel, Input, Stack } from '@mui/joy';
+import { Alert, Button, FormControl, FormLabel, Input, Stack, Tab, TabList, TabPanel, Tabs } from '@mui/joy';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
@@ -70,69 +70,81 @@ export const EventUpdate = () => {
 
     return (
         <div className='event-update-container'>
-            <h3>Etkinliği Güncelle</h3>
-            <UpdateEventDropzone />
-            <form onSubmit={handleSubmit(onUpdateEvent)} >
-                <Stack spacing={2}>
-                    <FormControl>
-                        <FormLabel>Etkinlik Adı</FormLabel>
-                        <Input {...register('title', { required: true })} autoComplete='off' />
-                        {errors.title && <p className='alert'>{errors.title.message}</p>}
-                    </FormControl>
-                    <FormControl>
-                        <FormLabel>Açıklama</FormLabel>
-                        <Input {...register('description')} autoComplete='off' />
-                        {errors.description && <p className='alert'>{errors.description.message}</p>}
-                    </FormControl>
-                    <FormControl>
-                        <FormLabel>Adres</FormLabel>
-                        <Input {...register('address')} autoComplete='off' />
-                        {errors.address && <p className='alert'>{errors.address.message}</p>}
-                    </FormControl>
-                    <FormControl>
-                        <FormLabel>Enlem</FormLabel>
-                        <Input {...register('latitude')} autoComplete='off' />
-                        {errors.latitude && <p className='alert'>{errors.latitude.message}</p>}
-                    </FormControl>
-                    <FormControl>
-                        <FormLabel>Boylam</FormLabel>
-                        <Input {...register('longitude')} autoComplete='off' />
-                        {errors.longitude && <p className='alert'>{errors.longitude.message}</p>}
-                    </FormControl>
-                    <FormControl>
-                        <Controller control={control} name='start_date' render={({ field }) => (
-                            <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='tr'>
-                                <DatePicker
-                                    {...field}
-                                    label="Başlangıç Tarihi"
-                                    name="start_date"
-                                    format='DD/MM/YYYY'
-                                    value={field.value || null}
-                                    slotProps={{ textField: { size: 'small' } }}
-                                />
-                                {errors.start_date && <p className='alert'>{errors.start_date.message}</p>}
-                            </LocalizationProvider>
-                        )} />
-                    </FormControl>
-                    <FormControl>
-                        <Controller control={control} name='end_date' render={({ field }) => (
-                            <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='tr'>
-                                <DatePicker
-                                    {...field}
-                                    label="Bitiş Tarihi"
-                                    name="end_date"
-                                    format='DD/MM/YYYY'
-                                    value={field.value || null}
-                                    slotProps={{ textField: { size: 'small' } }}
-                                />
-                                {errors.end_date && <p className='alert'>{errors.end_date.message}</p>}
-                            </LocalizationProvider>
-                        )} />
-                    </FormControl>
-                    <Button type="submit" color='success'>Etkinliği Güncelle</Button>
-                    <Button type='button' variant='outlined' color='danger' onClick={onCancelUpdate}>İptal Et</Button>
-                </Stack>
-            </form>
+            <Tabs>
+                <TabList>
+                    <Tab value={0}>Etkinlik Bilgilerini Güncelle</Tab>
+                    <Tab value={1}>Etkinlik Görsellerini Güncelle</Tab>
+                </TabList>
+                <TabPanel value={0}>
+                    <form onSubmit={handleSubmit(onUpdateEvent)} >
+                        <Stack spacing={2}>
+                            <FormControl>
+                                <FormLabel>Etkinlik Adı</FormLabel>
+                                <Input {...register('title', { required: true })} autoComplete='off' />
+                                {errors.title && <p className='alert'>{errors.title.message}</p>}
+                            </FormControl>
+                            <FormControl>
+                                <FormLabel>Açıklama</FormLabel>
+                                <Input {...register('description')} autoComplete='off' />
+                                {errors.description && <p className='alert'>{errors.description.message}</p>}
+                            </FormControl>
+                            <FormControl>
+                                <FormLabel>Adres</FormLabel>
+                                <Input {...register('address')} autoComplete='off' />
+                                {errors.address && <p className='alert'>{errors.address.message}</p>}
+                            </FormControl>
+                            <FormControl>
+                                <FormLabel>Enlem</FormLabel>
+                                <Input {...register('latitude')} autoComplete='off' />
+                                {errors.latitude && <p className='alert'>{errors.latitude.message}</p>}
+                            </FormControl>
+                            <FormControl>
+                                <FormLabel>Boylam</FormLabel>
+                                <Input {...register('longitude')} autoComplete='off' />
+                                {errors.longitude && <p className='alert'>{errors.longitude.message}</p>}
+                            </FormControl>
+                            <FormControl>
+                                <Controller control={control} name='start_date' render={({ field }) => (
+                                    <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='tr'>
+                                        <DatePicker
+                                            {...field}
+                                            label="Başlangıç Tarihi"
+                                            name="start_date"
+                                            format='DD/MM/YYYY'
+                                            value={field.value || null}
+                                            slotProps={{ textField: { size: 'small' } }}
+                                        />
+                                        {errors.start_date && <p className='alert'>{errors.start_date.message}</p>}
+                                    </LocalizationProvider>
+                                )} />
+                            </FormControl>
+                            <FormControl>
+                                <Controller control={control} name='end_date' render={({ field }) => (
+                                    <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='tr'>
+                                        <DatePicker
+                                            {...field}
+                                            label="Bitiş Tarihi"
+                                            name="end_date"
+                                            format='DD/MM/YYYY'
+                                            value={field.value || null}
+                                            slotProps={{ textField: { size: 'small' } }}
+                                        />
+                                        {errors.end_date && <p className='alert'>{errors.end_date.message}</p>}
+                                    </LocalizationProvider>
+                                )} />
+                            </FormControl>
+                            <Button type="submit" color='success'>Güncelle</Button>
+                            <Button type='button' variant='outlined' color='danger' onClick={onCancelUpdate}>İptal Et</Button>
+                        </Stack>
+                    </form>
+                </TabPanel>
+                <TabPanel value={1}>
+                    <Stack>
+                        <Alert color='warning'>Görselleri düzenlemeniz, etkinlik değerlendirme sürecini baştan başlatacaktır</Alert>
+                        <UpdateEventDropzone onCancelUpdate={onCancelUpdate} />
+                    </Stack>
+                </TabPanel>
+            </Tabs>
         </div>
     );
 };

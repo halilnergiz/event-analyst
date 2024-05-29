@@ -1,14 +1,13 @@
 .dropzone-container {
   width: 100%;
   padding: 20px;
-//   border: 2px dashed #66b3ff;
   text-align: center;
 
   .photo-alert {
     display: none;
   }
 
-  .photo-alert-active{
+  .photo-alert-active {
     margin-bottom: 2rem;
   }
 
@@ -36,7 +35,22 @@
     }
   }
 
-  .start-analyze-button{
+  // update event dropzone
+  .update-photos-buttons {
     text-transform: capitalize;
+    width: 100%;
+    & > * {
+      width: 100%;
+      margin: 0.5rem 0;
+    }
   }
+}
+
+.MuiTabList-root {
+  border: none !important;
+}
+.MuiTab-root {
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  padding: 0.8rem !important;
 }

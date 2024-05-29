@@ -1,20 +1,25 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import axios from 'axios';
 import { useDropzone, FileWithPath } from 'react-dropzone';
 
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import CancelTwoToneIcon from '@mui/icons-material/CancelTwoTone';
-import { Alert, Button, Typography } from '@mui/material';
+import { Alert, Button, Typography } from '@mui/joy';
 
 import { useEventContext } from '../../context';
 import { ImgFilePreview } from '../../types';
 import { axiosFileUploadInterceptor } from '../../config/axios_config';
 
 
-export const UpdateEventDropzone = () => {
+interface ICancelUpdate {
+    onCancelUpdate: () => void;
+}
+
+export const UpdateEventDropzone = ({ onCancelUpdate }: ICancelUpdate) => {
     const { setEventPhotos, eventPhotos } = useEventContext();
+    const navigate = useNavigate();
     const { eventId } = useParams();
     const [files, setFile] = useState<ImgFilePreview[]>([]);
 
@@ -70,16 +75,14 @@ export const UpdateEventDropzone = () => {
         if (deletedPreviousPhotos.length !== 0) {
             deletedPreviousPhotos.forEach(async (photo) => {
                 try {
-                    const res = await axios.delete(`photos/${photo.photoId}/delete/`);
-                    console.log(`${photo.photoId} silindi`, res);
+                    await axios.delete(`photos/${photo.photoId}/delete/`);
                 } catch (err) {
-                    alert(`${photo.photoId} silinemedi`);
+                    alert(`${photo.path} silinemedi`);
                     throw new Error(err as string);
                 }
             });
         }
 
-        // TODO: add event result table to db before the this page's logic
         if (eventId && addedNewPhotoFiles.length !== 0) {
             const formData = new FormData();
 
@@ -92,15 +95,15 @@ export const UpdateEventDropzone = () => {
                 const res = await axiosFileUploadInterceptor.post('photos/upload/', formData);
                 console.log(res);
                 if (res.status === 201) {
-                    alert("Değişiklikler kaydedildi");
-                    return setEventPhotos(res.data);
+                    setEventPhotos(res.data);
                 }
             } catch (err) {
                 alert("Fotoğraflar eklenemedi");
                 throw new Error(err as string);
             }
         }
-        return alert("Hiçbir değişiklik yapılmadı");
+        alert("Etkinlik Güncellendi");
+        return navigate(`/dashboard/event/${eventId}`);
     };
 
     useEffect(() => {
@@ -125,7 +128,7 @@ export const UpdateEventDropzone = () => {
     return (
         <section className="dropzone-container">
             <div className={`photo-alert${!files.length ? '-active' : ''}`}>
-                <Alert severity="warning">
+                <Alert color="warning">
                     Etkinliğe ait hiçbir fotoğraf bulunamadı, lütfen fotoğraf yükleyiniz.
                 </Alert>
             </div>
@@ -142,7 +145,7 @@ export const UpdateEventDropzone = () => {
             <aside>
                 <Typography
                     display={!files.length ? 'none' : 'block'}
-                    variant='subtitle1'
+                    level='body-lg'
                 >
                     Yüklenen Görseller
                 </Typography>
@@ -150,15 +153,18 @@ export const UpdateEventDropzone = () => {
                     {fileElements}
                 </ul>
             </aside>
-            <Button
-                className='start-analyze-button'
-                variant='contained'
-                color='success'
-                disabled={!files.length}
-                onClick={onStartAnalyze}
-            >
-                Kaydet
-            </Button>
+            <div className='update-photos-buttons'>
+                <Button
+                    type='submit'
+                    variant='solid'
+                    color='success'
+                    disabled={!files.length}
+                    onClick={onStartAnalyze}
+                >
+                    Güncelle
+                </Button>
+                <Button type='button' variant='outlined' color='danger' onClick={onCancelUpdate}>İptal Et</Button>
+            </div>
         </section>
     );
 };
