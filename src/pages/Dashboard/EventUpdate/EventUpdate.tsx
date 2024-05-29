@@ -11,10 +11,10 @@ import { Button, FormControl, FormLabel, Input, Stack } from '@mui/joy';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
+import { UpdateEventDropzone } from '../../../components';
 import { useEventContext } from '../../../context';
 import { IUpdateEvent } from '../../../types';
 import { createEventSchema } from '../../../schemas';
-import { UpdatePhotoDropzone } from '../../../components';
 
 
 export const EventUpdate = () => {
@@ -71,7 +71,7 @@ export const EventUpdate = () => {
     return (
         <div className='event-update-container'>
             <h3>Etkinliği Güncelle</h3>
-            <UpdatePhotoDropzone />
+            <UpdateEventDropzone />
             <form onSubmit={handleSubmit(onUpdateEvent)} >
                 <Stack spacing={2}>
                     <FormControl>

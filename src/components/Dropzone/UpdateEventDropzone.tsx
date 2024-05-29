@@ -13,7 +13,7 @@ import { ImgFilePreview } from '../../types';
 import { axiosFileUploadInterceptor } from '../../config/axios_config';
 
 
-export const UpdatePhotoDropzone = () => {
+export const UpdateEventDropzone = () => {
     const { setEventPhotos, eventPhotos } = useEventContext();
     const { eventId } = useParams();
     const [files, setFile] = useState<ImgFilePreview[]>([]);
