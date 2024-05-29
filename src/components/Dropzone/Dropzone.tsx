@@ -49,9 +49,7 @@ export const Dropzone = () => {
                 />
                 <CancelTwoToneIcon
                     className='cancel-icon'
-                    onClick={() => {
-                        return removeFile(file.file.name);
-                    }}
+                    onClick={() => removeFile(file.file.name)}
                 />
             </li>
         );
@@ -68,20 +66,22 @@ export const Dropzone = () => {
     const onStartAnalyze = async () => {
         const formData = new FormData();
 
-        formData.append('event', eventId!);
-        files.forEach((file) => {
-            formData.append('path', file.file);
-        });
+        if (eventId) {
+            formData.append('event', eventId);
+            files.forEach((file) => {
+                formData.append('path', file.file);
+            });
 
-        try {
-            const res = await axiosFileUploadInterceptor.post('photos/upload/', formData);
-            console.log(res);
-            if (res.status === 201) {
-                setEventPhotos(res.data);
+            try {
+                const res = await axiosFileUploadInterceptor.post('photos/upload/', formData);
+                console.log(res);
+                if (res.status === 201) {
+                    setEventPhotos(res.data);
+                }
+            } catch (err) {
+                alert("Fotoğraflar eklenemedi");
+                throw new Error(err as string);
             }
-        } catch (err) {
-            alert("Fotoğraflar eklenemedi");
-            throw new Error(err as string);
         }
     };
 
