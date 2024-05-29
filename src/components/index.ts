@@ -3,6 +3,7 @@ export * from './EventCard/EventCard';
 export * from './Popup/CreateEventPopUp';
 export * from './Charts/MuiCharts';
 export * from './Dropzone/Dropzone';
+export * from './Dropzone/UpdatePhotoDropzone';
 export * from './NoEvent/NoEvent';
 export * from './EventList/EventList';
 export * from './UploadPhotos/UploadPhotos';

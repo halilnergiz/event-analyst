@@ -14,6 +14,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { useEventContext } from '../../../context';
 import { IUpdateEvent } from '../../../types';
 import { createEventSchema } from '../../../schemas';
+import { UpdatePhotoDropzone } from '../../../components';
 
 
 export const EventUpdate = () => {
@@ -70,6 +71,7 @@ export const EventUpdate = () => {
     return (
         <div className='event-update-container'>
             <h3>Etkinliği Güncelle</h3>
+            <UpdatePhotoDropzone />
             <form onSubmit={handleSubmit(onUpdateEvent)} >
                 <Stack spacing={2}>
                     <FormControl>
