@@ -89,8 +89,9 @@ export const Login = () => {
                         </div>
                         <Button variant='contained' type='submit' sx={{ textTransform: 'none' }}>Giriş Yap</Button>
                         <div className="nav-area">
-                            <span onClick={() => navigate('/forgot-password')}>Şifremi Unuttum?</span>
-                            <span onClick={() => navigate('/register')}>Kayıt Ol</span>
+                            <span onClick={() => navigate('/register')}>Kayıt Ol</span> <br />
+                            <span onClick={() => navigate('/forgot-password')}>Şifremi Unuttum</span> <br />
+                            {/* <span onClick={() => navigate('/resend-email-verification')}>Doğrulama Maili Gönder</span> */}
                         </div>
                     </form>
                 </div>

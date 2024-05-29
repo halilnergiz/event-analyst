@@ -14,7 +14,6 @@ import {
   EventUpdate,
   EventAnalyses,
   NoMatch,
-  
 } from '../pages';
 
 const router = createBrowserRouter([
