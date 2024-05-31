@@ -2,13 +2,12 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import axios from 'axios';
-import { Dayjs } from 'dayjs';
 
 import { DefaultizedPieValueType } from '@mui/x-charts';
 
 import { CarouselPhotoArea, MuiBarChart, MuiBarChartDataInfo, MuiPieChart } from '../../../components';
 import { useEventContext } from '../../../context';
-import { customDateFormat } from '../../../schemas';
+import { checkInformationContentSystem, checkInformationContentUser } from '../../../schemas';
 
 
 export const EventAnalyses = () => {
@@ -72,15 +71,6 @@ export const EventAnalyses = () => {
 
     const participantAges = [23, 42, 32, 12, 47, 4];
 
-    const checkInformationContent = (data: Date | Dayjs | string | undefined) => {
-        if (data instanceof Date) {
-            data ? data = customDateFormat(data).toString() : data = '-';
-            console.log(data);
-            return data;
-        }
-        console.log(data);
-        return data ? data.toString() : '-';
-    };
 
     return (
         <div className='event-container'>
@@ -94,7 +84,7 @@ export const EventAnalyses = () => {
                             Açıklama:
                         </b>
                         <span>
-                            {checkInformationContent(eventInformations?.description)}
+                            {checkInformationContentUser(eventInformations?.description)}
                         </span>
                     </div>
                     <div className='address'>
@@ -102,7 +92,7 @@ export const EventAnalyses = () => {
                             Adres:
                         </b>
                         <span>
-                            {checkInformationContent(eventInformations?.address)}
+                            {checkInformationContentUser(eventInformations?.address)}
                         </span>
                     </div>
                     <div className='dates'>
@@ -112,7 +102,7 @@ export const EventAnalyses = () => {
                         <span className='start-date'>
                             {
                                 eventInformations?.start_date ?
-                                    checkInformationContent(new Date((eventInformations?.start_date!).toString()))
+                                    checkInformationContentUser(new Date((eventInformations?.start_date!).toString()))
                                     : '-'
                             }
                         </span>
@@ -124,7 +114,7 @@ export const EventAnalyses = () => {
                         <span className='end-date'>
                             {
                                 eventInformations?.end_date ?
-                                    checkInformationContent(new Date((eventInformations?.end_date!).toString()))
+                                    checkInformationContentUser(new Date((eventInformations?.end_date!).toString()))
                                     : '-'
                             }
                         </span>
@@ -136,7 +126,7 @@ export const EventAnalyses = () => {
                             Oluşturulma Tarihi:
                         </b>
                         <span>
-                            {checkInformationContent(new Date(eventInformations?.createdAt!))}
+                            {checkInformationContentSystem(new Date(eventInformations?.createdAt!))}
                         </span>
                     </div>
                     <div className='updated-at'>
@@ -144,7 +134,7 @@ export const EventAnalyses = () => {
                             Son Güncellenme Tarihi:
                         </b>
                         <span>
-                            {checkInformationContent(new Date(eventInformations?.updatedAt!))}
+                            {checkInformationContentSystem(new Date(eventInformations?.updatedAt!))}
                         </span>
                     </div>
                 </div>
