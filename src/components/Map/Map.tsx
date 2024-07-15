@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SetValueConfig } from 'react-hook-form';
 
 import L from 'leaflet';
@@ -12,7 +12,9 @@ import { ICreateEvent } from '../../types';
 
 
 interface IMap {
-    setValue: (name: keyof ICreateEvent, value: any, config?: SetValueConfig) => void;
+    setValue?: (name: keyof ICreateEvent, value: any, config?: SetValueConfig) => void;
+    eventLatitude?: string;
+    eventLongitude?: string;
 }
 
 let DefaultIcon = L.icon({
@@ -22,22 +24,34 @@ let DefaultIcon = L.icon({
 
 L.Marker.prototype.options.icon = DefaultIcon;
 
-export const Map = ({ setValue }: IMap) => {
-    const [position, setPosition] = useState<L.LatLng | null>(null);
+export const Map = ({ setValue, eventLatitude, eventLongitude }: IMap) => {
+    const [position, setPosition] = useState<L.LatLngExpression | null>(null);
+    const [center, setCenter] = useState<[number, number]>([38.7080281, 35.5274213]);
+
+    useEffect(() => {
+        if (eventLatitude && eventLongitude) {
+            const newPosition: L.LatLngExpression = [Number(eventLatitude), Number(eventLongitude)];
+            setPosition(newPosition);
+            setCenter([Number(eventLatitude), Number(eventLongitude)]);
+        }
+    }, [eventLatitude, eventLongitude]);
 
     const LocationMarker = () => {
         useMapEvents({
             dblclick(e) {
-                setValue('latitude', e.latlng.lat);
-                setValue('longitude', e.latlng.lng);
-                setPosition(e.latlng);
-            },
+                if (!eventLatitude && !eventLongitude) {
+                    setValue?.('latitude', e.latlng.lat);
+                    setValue?.('longitude', e.latlng.lng);
+                    setPosition(e.latlng);
+                }
+            }
         });
 
         return position === null ? null : (
             <Marker position={position}>
                 <Popup>
                     Seçili Konum
+                    <div> {eventLatitude}, {eventLongitude} </div>
                 </Popup>
             </Marker>
         );
@@ -45,8 +59,9 @@ export const Map = ({ setValue }: IMap) => {
 
     return (
         <MapContainer
+            key={`${center[0]}-${center[1]}`}
             className='map-container'
-            center={[38.7080281, 35.5274213]}
+            center={center}
             zoom={16}
             doubleClickZoom={false}
             attributionControl={false}
@@ -55,8 +70,8 @@ export const Map = ({ setValue }: IMap) => {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             />
+            {!eventLatitude && !eventLongitude && <SearchBar />}
             <LocationMarker />
-            <SearchBar setPosition={setPosition} />
         </MapContainer >
     );
 };

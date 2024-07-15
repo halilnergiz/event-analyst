@@ -6,7 +6,7 @@ import 'leaflet-control-geocoder/dist/Control.Geocoder.css';
 import 'leaflet-control-geocoder';
 
 
-const SearchBar = ({ setPosition }: { setPosition: (position: L.LatLng) => void; }) => {
+const SearchBar = () => {
     const [searchText, setSearchText] = useState('');
     const map = useMap();
 
@@ -18,7 +18,6 @@ const SearchBar = ({ setPosition }: { setPosition: (position: L.LatLng) => void;
             if (results.length > 0) {
                 const result = results[0];
                 const newCenter = result.center;
-                setPosition(newCenter);
                 map.setView(newCenter, 16);
             }
         });

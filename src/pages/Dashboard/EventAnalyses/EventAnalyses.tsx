@@ -5,13 +5,13 @@ import axios from 'axios';
 
 import { DefaultizedPieValueType } from '@mui/x-charts';
 
-import { CarouselPhotoArea, Dropzone, MuiBarChart, MuiBarChartDataInfo, MuiPieChart } from '../../../components';
+import { CarouselPhotoArea, Dropzone, Map, MuiBarChart, MuiBarChartDataInfo, MuiPieChart } from '../../../components';
 import { useEventContext } from '../../../context';
 import { checkInformationContentSystem, checkInformationContentUser } from '../../../schemas';
 
 
 export const EventAnalyses = () => {
-    const { eventInformations, eventPhotos, setEventInformations, setEventPhotos } = useEventContext();
+    const { eventInformations, eventPhotos, setEventInformations } = useEventContext();
     const { eventId } = useParams();
 
     useEffect(() => {
@@ -28,18 +28,18 @@ export const EventAnalyses = () => {
     }, []);
 
     // TODO: this context's logic usage should be proper for getting photos. Avoid the request duplicate  
-    useEffect(() => {
-        const isPhotoExist = async () => {
-            try {
-                const res = await axios.get(`events/${eventId}/photos/`);
-                setEventPhotos(res.data);
-                console.log(res.data);
-            } catch (err) {
-                console.log(err);
-            }
-        };
-        isPhotoExist();
-    }, []);
+    // useEffect(() => {
+    //     const isPhotoExist = async () => {
+    //         try {
+    //             const res = await axios.get(`events/${eventId}/photos/`);
+    //             setEventPhotos(res.data);
+    //             console.log(res.data);
+    //         } catch (err) {
+    //             console.log(err);
+    //         }
+    //     };
+    //     isPhotoExist();
+    // }, []);
 
     // TEMPORARY DUMMY DATA
     const participantGenders = [
@@ -196,7 +196,12 @@ export const EventAnalyses = () => {
                 </>
             ) : (
                 <Dropzone />
-            )
+            )}
+            {
+                !!Number(eventInformations?.latitude) && (<Map
+                    eventLatitude={eventInformations?.latitude}
+                    eventLongitude={eventInformations?.longitude}
+                />)
             }
         </div>
     );
