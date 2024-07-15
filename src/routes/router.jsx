@@ -9,6 +9,7 @@ import {
   PasswordReset,
   Dashboard,
   Home,
+  CreateEvent,
   Profile,
   EventContent,
   EventUpdate,
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
           {
             path: 'profile',
             element: <Profile />,
+          },
+          {
+            path: 'create-event',
+            element: <CreateEvent />,
           },
           {
             path: 'event/:eventId',

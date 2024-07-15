@@ -32,7 +32,7 @@ const onlyNumberOrEmtyString = yup
     .test('max-digit', 'En fazla 9 sayı içerebilir', (value) => {
         if (!value) return true;
         const valueWithoutDots = value.replace(/\./g, '');
-        return valueWithoutDots.length <= 9;
+        return valueWithoutDots.length <= 28;
     })
     .matches(/^([0-9.]+$)/, "Lütfen sayı giriniz")
     .min(1, 'En az bir değer girilmeli');

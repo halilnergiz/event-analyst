@@ -3,12 +3,11 @@ import { Outlet, useParams } from 'react-router-dom';
 
 import axios from 'axios';
 
-import { UploadPhotos } from '../../../components';
 import { useEventContext } from '../../../context';
 
 
 export const EventContent = () => {
-    const { eventPhotos, setEventPhotos } = useEventContext();
+    const { setEventPhotos } = useEventContext();
     const { eventId } = useParams();
 
     useEffect(() => {
@@ -24,8 +23,5 @@ export const EventContent = () => {
         isPhotoExist();
     }, []);
 
-    if (!eventPhotos.length) {
-        return <UploadPhotos />;
-    }
     return <Outlet />;
 };
