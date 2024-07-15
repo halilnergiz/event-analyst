@@ -1,5 +1,4 @@
 .header-container {
-  height: max;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -36,6 +35,12 @@
     display: flex;
     & > * {
       margin: 0 1rem;
+    }
+    .create-event-button {
+      .text {
+        position: relative;
+        top: 2.2px;
+      }
     }
     .update-event-button {
       .update-icon {

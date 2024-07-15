@@ -1,11 +1,13 @@
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
+import axios from 'axios';
+
 import { Button } from '@mui/joy';
 import AutoModeIcon from '@mui/icons-material/AutoMode';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { Add } from '@mui/icons-material';
 
-import { CreateEventPopUp, Dropdown } from '../../components';
-import axios from 'axios';
+import { Dropdown } from '../../components';
 
 
 export const Header = () => {
@@ -43,7 +45,17 @@ export const Header = () => {
                 </div>
             </div>
             <div className='nav'>
-                <CreateEventPopUp />
+                <Button
+                    className='create-event-button'
+                    variant='outlined'
+                    color='primary'
+                    startDecorator={<Add />}
+                    onClick={() => navigate('/dashboard/create-event')}
+                >
+                    <span className='text'>
+                        Etkinlik Oluştur
+                    </span>
+                </Button>
                 {eventId && !location.pathname.includes('update') &&
                     <>
                         <Button
