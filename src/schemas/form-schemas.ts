@@ -34,7 +34,7 @@ const onlyNumberOrEmtyString = yup
         const valueWithoutDots = value.replace(/\./g, '');
         return valueWithoutDots.length <= 28;
     })
-    .matches(/^([0-9.]+$)/, "Lütfen sayı giriniz")
+    .matches(/^([0-9.-]+$)/, "Lütfen sayı giriniz")
     .min(1, 'En az bir değer girilmeli');
 
 

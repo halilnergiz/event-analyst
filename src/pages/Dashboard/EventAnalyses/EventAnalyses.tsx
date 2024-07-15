@@ -27,20 +27,6 @@ export const EventAnalyses = () => {
         getEventAnalyses();
     }, []);
 
-    // TODO: this context's logic usage should be proper for getting photos. Avoid the request duplicate  
-    // useEffect(() => {
-    //     const isPhotoExist = async () => {
-    //         try {
-    //             const res = await axios.get(`events/${eventId}/photos/`);
-    //             setEventPhotos(res.data);
-    //             console.log(res.data);
-    //         } catch (err) {
-    //             console.log(err);
-    //         }
-    //     };
-    //     isPhotoExist();
-    // }, []);
-
     // TEMPORARY DUMMY DATA
     const participantGenders = [
         { id: 0, value: 6, label: 'Kadın Katılımcı' },

@@ -171,7 +171,9 @@ export const CreateEvent = () => {
                             <Input {...register('address')} autoComplete='off' />
                             {errors.address && <p className='alert'>{errors.address.message}</p>}
                         </FormControl>
-
+                        <span className='select-location'>
+                            Lokasyon seçimi için çift tıklayınız
+                        </span>
                         <Map setValue={setValue} />
                         {errors.latitude && <p className='alert'>{errors.latitude.message}</p>}
                         {errors.longitude && <p className='alert'>{errors.longitude.message}</p>}
