@@ -76,26 +76,6 @@ export const CreateEvent = () => {
         setCurrentStep((prevStep) => prevStep - 1);
     };
 
-    const stepperStyle = {
-        '& .MuiStepLabel-label': {
-            fontSize: '1rem',
-            margin: '8px'
-        },
-        '& .MuiStepIcon-root': {
-            fontSize: '2rem',
-        },
-        '& .MuiStepIcon-text': {
-            fontFamily: 'Arial, sans-serif',
-        },
-        '& .MuiStepConnector-root': {
-            margin: '0 2rem',
-        },
-        '& .MuiStepLabel-root': {
-            flexDirection: 'column',
-            alignItems: 'center',
-        },
-    };
-
     const ConnectorStyle = styled(StepConnector)(({ theme }) => ({
         [`&.${stepConnectorClasses.alternativeLabel}`]: {
             top: 10,
