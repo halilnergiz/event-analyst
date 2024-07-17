@@ -1,8 +1,6 @@
 .img-field {
   text-align: center;
-  h2 {
-    padding: 3rem 0 0 0;
-  }
+  margin: 4rem 0;
   .img-item {
     margin: 0 1rem;
     img {
@@ -11,6 +9,32 @@
       max-width: 100%;
       object-fit: cover;
       border-radius: 6px;
+    }
+  }
+}
+
+.photos-modal {
+  display: flex;
+  justify-content: flex-start;
+  .photo-album-btn {
+    left: 3rem;
+  }
+}
+
+.modal-img-field {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  padding: 1rem;
+  .img-item {
+    margin: 0;
+    width: calc((100% / 3) - 2rem);
+    img {
+      margin: 0;
+      width: 100%;
+      border-radius: 6px;
+      user-select: none;
     }
   }
 }
