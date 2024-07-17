@@ -6,7 +6,7 @@ import 'leaflet-control-geocoder/dist/Control.Geocoder.css';
 import 'leaflet-control-geocoder';
 
 
-const SearchBar = () => {
+const MapSearchInput = () => {
     const [searchText, setSearchText] = useState('');
     const map = useMap();
 
@@ -38,4 +38,4 @@ const SearchBar = () => {
     );
 };
 
-export default SearchBar;
+export default MapSearchInput;
