@@ -9,6 +9,7 @@ import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 
 import MapSearchInput from './MapSearchInput';
 import { ICreateEvent } from '../../types';
+import { useLocation } from 'react-router-dom';
 
 
 interface IMap {
@@ -27,6 +28,9 @@ L.Marker.prototype.options.icon = DefaultIcon;
 export const Map = ({ setValue, eventLatitude, eventLongitude }: IMap) => {
     const [position, setPosition] = useState<L.LatLngExpression | null>(null);
     const [center, setCenter] = useState<[number, number]>([38.7080281, 35.5274213]);
+    const getURL = useLocation();
+
+    const mapCondition = (!eventLatitude || !eventLongitude) || (getURL.pathname.includes('update'));
 
     useEffect(() => {
         if (eventLatitude && eventLongitude) {
@@ -39,7 +43,7 @@ export const Map = ({ setValue, eventLatitude, eventLongitude }: IMap) => {
     const LocationMarker = () => {
         useMapEvents({
             dblclick(e) {
-                if (!eventLatitude && !eventLongitude) {
+                if (mapCondition) {
                     setValue?.('latitude', e.latlng.lat);
                     setValue?.('longitude', e.latlng.lng);
                     setPosition(e.latlng);
@@ -70,7 +74,7 @@ export const Map = ({ setValue, eventLatitude, eventLongitude }: IMap) => {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             />
-            {!eventLatitude && !eventLongitude && <MapSearchInput />}
+            {(mapCondition) && (<MapSearchInput />)}
             <LocationMarker />
         </MapContainer >
     );

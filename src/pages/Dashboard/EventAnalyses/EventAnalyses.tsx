@@ -184,10 +184,12 @@ export const EventAnalyses = () => {
                 <Dropzone />
             )}
             {
-                !!Number(eventInformations?.latitude) && (<Map
-                    eventLatitude={eventInformations?.latitude}
-                    eventLongitude={eventInformations?.longitude}
-                />)
+                !!Number(eventInformations?.latitude) && (
+                    <Map
+                        eventLatitude={eventInformations?.latitude}
+                        eventLongitude={eventInformations?.longitude}
+                    />
+                )
             }
         </div>
     );

@@ -11,7 +11,7 @@ import { Alert, Button, FormControl, FormLabel, Input, Stack, Tab, TabList, TabP
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
-import { UpdateEventDropzone } from '../../../components';
+import { Map, UpdateEventDropzone } from '../../../components';
 import { useEventContext } from '../../../context';
 import { IUpdateEvent } from '../../../types';
 import { createEventSchema } from '../../../schemas';
@@ -22,7 +22,7 @@ export const EventUpdate = () => {
     const { eventId } = useParams();
     const navigate = useNavigate();
 
-    const { register, control, handleSubmit, formState: { errors } } = useForm<IUpdateEvent>({
+    const { register, control, handleSubmit, setValue, formState: { errors } } = useForm<IUpdateEvent>({
         defaultValues: {
             title: eventInformations?.title,
             description: eventInformations?.description,
@@ -89,19 +89,11 @@ export const EventUpdate = () => {
                                 {errors.description && <p className='alert'>{errors.description.message}</p>}
                             </FormControl>
                             <FormControl>
-                                <FormLabel>Adres</FormLabel>
-                                <Input {...register('address')} autoComplete='off' />
-                                {errors.address && <p className='alert'>{errors.address.message}</p>}
-                            </FormControl>
-                            <FormControl>
-                                <FormLabel>Enlem</FormLabel>
-                                <Input {...register('latitude')} autoComplete='off' />
-                                {errors.latitude && <p className='alert'>{errors.latitude.message}</p>}
-                            </FormControl>
-                            <FormControl>
-                                <FormLabel>Boylam</FormLabel>
-                                <Input {...register('longitude')} autoComplete='off' />
-                                {errors.longitude && <p className='alert'>{errors.longitude.message}</p>}
+                                <Map
+                                    setValue={setValue}
+                                    eventLatitude={eventInformations?.latitude}
+                                    eventLongitude={eventInformations?.longitude}
+                                />
                             </FormControl>
                             <FormControl>
                                 <Controller control={control} name='start_date' render={({ field }) => (
