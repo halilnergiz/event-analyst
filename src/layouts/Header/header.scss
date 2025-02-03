@@ -2,54 +2,49 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   box-shadow: rgba(99, 99, 99, 0.2) 0px 5px 8px 0px;
   background-color: #fff;
   border-radius: 6px;
-  .logo-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 12px 28px;
-    & > div {
-      margin: 0 8px;
-    }
-    .logo-content {
-      cursor: pointer;
-      img {
-        width: 3vw;
-      }
-    }
-    .logo-text {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      span {
-        width: min-content;
-        margin-bottom: 3px;
-      }
-    }
-  }
-  .nav {
-    margin: 12px 28px;
-    display: flex;
-    & > * {
-      margin: 0 1rem;
-    }
-    .create-event-button {
-      .text {
-        position: relative;
-        top: 2.2px;
-      }
-    }
-    .update-event-button {
-      .update-icon {
-        margin-right: 0.4rem;
-      }
-      span {
-        position: relative;
-        top: 2px;
-      }
-    }
-  }
+}
+.header-container .logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 12px 28px;
+}
+.header-container .logo-container > div {
+  margin: 0 8px;
+}
+.header-container .logo-container .logo-content {
+  cursor: pointer;
+}
+.header-container .logo-container .logo-content img {
+  width: 3vw;
+}
+.header-container .logo-container .logo-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.header-container .logo-container .logo-text span {
+  width: min-content;
+  margin-bottom: 3px;
+}
+.header-container .nav {
+  margin: 12px 28px;
+  display: flex;
+}
+.header-container .nav > * {
+  margin: 0 1rem;
+}
+.header-container .nav .create-event-button .text {
+  position: relative;
+  top: 2.2px;
+}
+.header-container .nav .update-event-button .update-icon {
+  margin-right: 0.4rem;
+}
+.header-container .nav .update-event-button span {
+  position: relative;
+  top: 2px;
 }

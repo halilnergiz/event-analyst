@@ -9,7 +9,6 @@ import { Add } from '@mui/icons-material';
 
 import { Dropdown } from '../../components';
 
-
 export const Header = () => {
     const navigate = useNavigate();
     const { eventId } = useParams();
@@ -17,7 +16,9 @@ export const Header = () => {
 
     const onDeleteEvent = async () => {
         try {
-            const deleteConfirmation = window.confirm('Etkinlik silmek istediğinizden emin misiniz?');
+            const deleteConfirmation = window.confirm(
+                'Etkinlik silmek istediğinizden emin misiniz?'
+            );
             if (deleteConfirmation) {
                 await axios.delete(`delete_event/${eventId}/`);
                 alert('Etkinlik silindi');
@@ -50,13 +51,11 @@ export const Header = () => {
                     variant='outlined'
                     color='primary'
                     startDecorator={<Add />}
-                    onClick={() => navigate('/dashboard/create-event')}
+                    onClick={() => navigate('create-event', { state: { from: location.pathname } })}
                 >
-                    <span className='text'>
-                        Etkinlik Oluştur
-                    </span>
+                    <span className='text'>Etkinlik Oluştur</span>
                 </Button>
-                {eventId && !location.pathname.includes('update') &&
+                {eventId && !location.pathname.includes('update') && (
                     <>
                         <Button
                             className='update-event-button'
@@ -69,17 +68,17 @@ export const Header = () => {
                         </Button>
                         <Button
                             className='update-event-button'
-                            variant="outlined"
-                            color="danger"
+                            variant='outlined'
+                            color='danger'
                             onClick={onDeleteEvent}
                         >
                             <DeleteIcon className='update-icon' />
                             <span>Etkinliği Sil</span>
                         </Button>
                     </>
-                }
+                )}
                 <Dropdown />
             </div>
-        </div >
+        </div>
     );
 };
