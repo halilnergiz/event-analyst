@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import axios from 'axios';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
@@ -14,21 +14,33 @@ import { ICreateEvent } from '../../../types';
 import { createEventSchema } from '../../../schemas';
 import { useDashContext } from '../../../context';
 import { DatePicker } from '@mui/x-date-pickers';
-import { Box, Step, StepConnector, StepLabel, Stepper, stepConnectorClasses, styled } from '@mui/material';
+import {
+    Box,
+    Step,
+    StepConnector,
+    StepLabel,
+    Stepper,
+    stepConnectorClasses,
+    styled,
+} from '@mui/material';
 import { Map } from '../../../components';
 
-const steps = [
-    'Etkinlik İçeriği',
-    'Etkinlik Adresi',
-];
-
+const steps = ['Etkinlik İçeriği', 'Etkinlik Adresi'];
 
 export const CreateEvent = () => {
     const navigate = useNavigate();
+    const location = useLocation();
     const { events, setEvents } = useDashContext();
     const [currentStep, setCurrentStep] = useState(1);
 
-    const { register, control, handleSubmit, setValue, formState: { errors, isValid }, trigger } = useForm({
+    const {
+        register,
+        control,
+        handleSubmit,
+        setValue,
+        formState: { errors, isValid },
+        trigger,
+    } = useForm({
         defaultValues: {
             title: '',
             description: '',
@@ -68,12 +80,12 @@ export const CreateEvent = () => {
     const nextStep = async () => {
         const isStepValid = await trigger(['title', 'description']);
         if (isStepValid) {
-            setCurrentStep((prevStep) => prevStep + 1);
+            setCurrentStep(prevStep => prevStep + 1);
         }
     };
 
     const prevStep = () => {
-        setCurrentStep((prevStep) => prevStep - 1);
+        setCurrentStep(prevStep => prevStep - 1);
     };
 
     const ConnectorStyle = styled(StepConnector)(({ theme }) => ({
@@ -91,11 +103,15 @@ export const CreateEvent = () => {
         [`& .${stepConnectorClasses.line}`]: {
             height: 3,
             border: 0,
-            backgroundColor:
-                theme.palette.mode === 'dark' ? theme.palette.grey[800] : '#eaeaf0',
+            backgroundColor: theme.palette.mode === 'dark' ? theme.palette.grey[800] : '#eaeaf0',
             borderRadius: 1,
         },
     }));
+
+    const onCancelCreate = () => {
+        const previousPath = location.state?.from || '/dashboard';
+        navigate(previousPath);
+    };
 
     return (
         <div className='create-event'>
@@ -105,7 +121,7 @@ export const CreateEvent = () => {
                     alternativeLabel
                     connector={<ConnectorStyle />}
                 >
-                    {steps.map((label) => (
+                    {steps.map(label => (
                         <Step key={label}>
                             <StepLabel>{label}</StepLabel>
                         </Step>
@@ -117,43 +133,73 @@ export const CreateEvent = () => {
                     <Stack spacing={2}>
                         <FormControl>
                             <FormLabel>Etkinlik Adı</FormLabel>
-                            <Input {...register('title', { required: true })} autoComplete='off' />
+                            <Input
+                                {...register('title', { required: true })}
+                                autoComplete='off'
+                            />
                             {errors.title && <p className='alert'>{errors.title.message}</p>}
                         </FormControl>
                         <FormControl>
                             <FormLabel>Açıklama</FormLabel>
-                            <Input {...register('description')} autoComplete='off' />
-                            {errors.description && <p className='alert'>{errors.description.message}</p>}
+                            <Input
+                                {...register('description')}
+                                autoComplete='off'
+                            />
+                            {errors.description && (
+                                <p className='alert'>{errors.description.message}</p>
+                            )}
                         </FormControl>
                         <FormControl>
-                            <Controller control={control} name='start_date' render={({ field }) => (
-                                <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='tr'>
-                                    <DatePicker
-                                        {...field}
-                                        label='Başlangıç Tarihi'
-                                        name='start_date'
-                                        format='DD/MM/YYYY'
-                                        value={field.value || null}
-                                        slotProps={{ textField: { size: 'small' } }}
-                                    />
-                                    {errors.start_date && <p className='alert'>{errors.start_date?.message?.toString()}</p>}
-                                </LocalizationProvider>
-                            )} />
+                            <Controller
+                                control={control}
+                                name='start_date'
+                                render={({ field }) => (
+                                    <LocalizationProvider
+                                        dateAdapter={AdapterDayjs}
+                                        adapterLocale='tr'
+                                    >
+                                        <DatePicker
+                                            {...field}
+                                            label='Başlangıç Tarihi'
+                                            name='start_date'
+                                            format='DD/MM/YYYY'
+                                            value={field.value || null}
+                                            slotProps={{ textField: { size: 'small' } }}
+                                        />
+                                        {errors.start_date && (
+                                            <p className='alert'>
+                                                {errors.start_date?.message?.toString()}
+                                            </p>
+                                        )}
+                                    </LocalizationProvider>
+                                )}
+                            />
                         </FormControl>
                         <FormControl>
-                            <Controller control={control} name='end_date' render={({ field }) => (
-                                <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='tr'>
-                                    <DatePicker
-                                        {...field}
-                                        label='Bitiş Tarihi'
-                                        name='end_date'
-                                        format='DD/MM/YYYY'
-                                        value={field.value || null}
-                                        slotProps={{ textField: { size: 'small' } }}
-                                    />
-                                    {errors.end_date && <p className='alert'>{errors.end_date?.message?.toString()}</p>}
-                                </LocalizationProvider>
-                            )} />
+                            <Controller
+                                control={control}
+                                name='end_date'
+                                render={({ field }) => (
+                                    <LocalizationProvider
+                                        dateAdapter={AdapterDayjs}
+                                        adapterLocale='tr'
+                                    >
+                                        <DatePicker
+                                            {...field}
+                                            label='Bitiş Tarihi'
+                                            name='end_date'
+                                            format='DD/MM/YYYY'
+                                            value={field.value || null}
+                                            slotProps={{ textField: { size: 'small' } }}
+                                        />
+                                        {errors.end_date && (
+                                            <p className='alert'>
+                                                {errors.end_date?.message?.toString()}
+                                            </p>
+                                        )}
+                                    </LocalizationProvider>
+                                )}
+                            />
                         </FormControl>
                         <Button
                             type='button'
@@ -162,13 +208,23 @@ export const CreateEvent = () => {
                         >
                             İleri
                         </Button>
+                        <Button
+                            type='button'
+                            onClick={onCancelCreate}
+                            color='danger'
+                        >
+                            İptal
+                        </Button>
                     </Stack>
                 )}
                 {currentStep === 2 && (
                     <Stack spacing={2}>
                         <FormControl>
                             <FormLabel>Adres</FormLabel>
-                            <Input {...register('address')} autoComplete='off' />
+                            <Input
+                                {...register('address')}
+                                autoComplete='off'
+                            />
                             {errors.address && <p className='alert'>{errors.address.message}</p>}
                         </FormControl>
                         <span className='select-location'>
@@ -177,10 +233,16 @@ export const CreateEvent = () => {
                         <Map setValue={setValue} />
                         {errors.latitude && <p className='alert'>{errors.latitude.message}</p>}
                         {errors.longitude && <p className='alert'>{errors.longitude.message}</p>}
-                        <Button type='button' onClick={prevStep}>
+                        <Button
+                            type='button'
+                            onClick={prevStep}
+                        >
                             Geri
                         </Button>
-                        <Button type='submit' color='success'>
+                        <Button
+                            type='submit'
+                            color='success'
+                        >
                             Oluştur
                         </Button>
                     </Stack>
@@ -189,4 +251,3 @@ export const CreateEvent = () => {
         </div>
     );
 };
-
