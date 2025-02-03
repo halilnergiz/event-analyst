@@ -9,17 +9,20 @@ import { Button, TextField } from '@mui/material';
 import { IRegisterForm } from '../../types';
 import { registerSchema } from '../../schemas';
 
-
 export const Register = () => {
     const navigate = useNavigate();
-    const { register, handleSubmit, formState: { errors } } = useForm<IRegisterForm>({
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<IRegisterForm>({
         defaultValues: {
             username: '',
             email: '',
             password: '',
             password_again: '',
         },
-        resolver: yupResolver(registerSchema)
+        resolver: yupResolver(registerSchema),
     });
 
     const onRegisterSubmit = async (inputs: IRegisterForm) => {
@@ -31,22 +34,33 @@ export const Register = () => {
             });
             alert('Kayıt Başarılı, Lütfen Giriş Yapınız');
             navigate('/');
-        } catch (err) {
-            alert('Başarısız Bağlantı İsteği');
+        } catch (err: any) {
+            if (err.response?.data.username) {
+                alert('Bu kullanıcı adı zaten kullanılıyor');
+            }
+            if (err.response?.data.email) {
+                alert('Bu email zaten kullanılıyor');
+            } else {
+                alert('Başarısız Bağlantı İsteği');
+            }
             console.log(err);
         }
     };
 
     return (
         <div className='register'>
-            <div className="sign-in-container">
-                <div className="form-container">
-                    <form className='register-form' onSubmit={handleSubmit(onRegisterSubmit)} autoComplete='off' >
-                        <div className="title">
+            <div className='sign-in-container'>
+                <div className='form-container'>
+                    <form
+                        className='register-form'
+                        onSubmit={handleSubmit(onRegisterSubmit)}
+                        autoComplete='off'
+                    >
+                        <div className='title'>
                             <h2>Kayıt Ol</h2>
                         </div>
-                        <div className="user-infs">
-                            <div className="form-field user-name">
+                        <div className='user-infs'>
+                            <div className='form-field user-name'>
                                 <TextField
                                     variant='outlined'
                                     label='Kullanıcı Adı'
@@ -54,9 +68,11 @@ export const Register = () => {
                                     error={Boolean(errors.username)}
                                     {...register('username')}
                                 />
-                                {errors.username?.message && <p className='error'> {errors.username?.message}</p>}
+                                {errors.username?.message && (
+                                    <p className='error'> {errors.username?.message}</p>
+                                )}
                             </div>
-                            <div className="form-field email">
+                            <div className='form-field email'>
                                 <TextField
                                     variant='outlined'
                                     label='Email'
@@ -64,46 +80,63 @@ export const Register = () => {
                                     error={Boolean(errors.email)}
                                     {...register('email')}
                                 />
-                                {errors.email?.message && <p className='error'> {errors.email?.message}</p>}
+                                {errors.email?.message && (
+                                    <p className='error'> {errors.email?.message}</p>
+                                )}
                             </div>
-                            <div className="form-field password">
+                            <div className='form-field password'>
                                 <TextField
                                     variant='outlined'
                                     label='Şifre'
                                     type='password'
                                     size='small'
                                     error={Boolean(errors.password)}
-                                    {...register('password')} />
-                                {errors.password?.message && <p className='error'> {errors.password?.message}</p>}
+                                    {...register('password')}
+                                />
+                                {errors.password?.message && (
+                                    <p className='error'> {errors.password?.message}</p>
+                                )}
                             </div>
-                            <div className="form-field repeat-password">
+                            <div className='form-field repeat-password'>
                                 <TextField
                                     variant='outlined'
                                     label='Şifre (Tekrar)'
                                     type='password'
                                     size='small'
                                     error={Boolean(errors.password_again)}
-                                    {...register('password_again')} />
-                                {errors.password_again?.message && <p className='error'> {errors.password_again?.message}</p>}
+                                    {...register('password_again')}
+                                />
+                                {errors.password_again?.message && (
+                                    <p className='error'> {errors.password_again?.message}</p>
+                                )}
                             </div>
                         </div>
-                        <Button variant='contained' type='submit' sx={{ textTransform: 'none' }}>Kayıt Ol</Button>
-                        <div className="nav-area">
+                        <Button
+                            variant='contained'
+                            type='submit'
+                            sx={{ textTransform: 'none' }}
+                        >
+                            Kayıt Ol
+                        </Button>
+                        <div className='nav-area'>
                             <span onClick={() => navigate('/')}>Giriş Yap</span>
                         </div>
                     </form>
                 </div>
 
-                <div className="logo-container">
-                    <div className="logo-content">
-                        <img className='logo' src="./images/event-analyst-logo.png" alt="event-analyst-logo" />
+                <div className='logo-container'>
+                    <div className='logo-content'>
+                        <img
+                            className='logo'
+                            src='./images/event-analyst-logo.png'
+                            alt='event-analyst-logo'
+                        />
                     </div>
-                    <div className="logo-text">
+                    <div className='logo-text'>
                         <h1>Event Analyst</h1>
                     </div>
                 </div>
             </div>
-
         </div>
     );
 };
