@@ -4,28 +4,27 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import { Header } from '../../layouts';
 import { DashContextProvider } from '../../context';
 
-
 export const Dashboard = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        const auth = () => {
-            if (!localStorage.getItem('access_token')) {
-                alert('Lütfen giriş yapınız');
-                navigate('/');
-            }
-        };
-        auth();
-    }, [navigate]);
+  useEffect(() => {
+    const auth = () => {
+      if (!localStorage.getItem('access_token')) {
+        alert('Lütfen giriş yapınız');
+        navigate('/');
+      }
+    };
+    auth();
+  }, [navigate]);
 
-    return (
-        <DashContextProvider>
-            <div className='dash-container'>
-                <div className='dash-content'>
-                    <Header />
-                    <Outlet />
-                </div>
-            </div>
-        </DashContextProvider>
-    );
+  return (
+    <DashContextProvider>
+      <div className='dash-container'>
+        <div className='dash-content'>
+          <Header />
+          <Outlet />
+        </div>
+      </div>
+    </DashContextProvider>
+  );
 };

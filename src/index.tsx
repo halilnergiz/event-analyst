@@ -3,13 +3,11 @@ import './styles/index.scss';
 import { RouterProvider } from 'react-router-dom';
 import router from './routes/router';
 
-export const root = ReactDOM.createRoot(
-    document.getElementById('root') as HTMLElement
-);
+export const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
 root.render(
-    <RouterProvider
-        router={router}
-    // TODO: fallbackElement={} 
-    />
+  <RouterProvider
+    router={router}
+    // TODO: fallbackElement={}
+  />
 );

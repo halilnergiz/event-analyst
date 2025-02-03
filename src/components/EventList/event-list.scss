@@ -1,9 +1,9 @@
-.my-events{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    & > div{
-        margin: 2rem;
-    }
+.my-events {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  & > div {
+    margin: 2rem;
+  }
 }

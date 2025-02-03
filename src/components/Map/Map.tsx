@@ -11,71 +11,73 @@ import MapSearchInput from './MapSearchInput';
 import { ICreateEvent } from '../../types';
 import { useLocation } from 'react-router-dom';
 
-
 interface IMap {
-    setValue?: (name: keyof ICreateEvent, value: any, config?: SetValueConfig) => void;
-    eventLatitude?: string;
-    eventLongitude?: string;
+  setValue?: (name: keyof ICreateEvent, value: any, config?: SetValueConfig) => void;
+  eventLatitude?: string;
+  eventLongitude?: string;
 }
 
 let DefaultIcon = L.icon({
-    iconUrl: iconUrl,
-    shadowUrl: iconShadow
+  iconUrl: iconUrl,
+  shadowUrl: iconShadow,
 });
 
 L.Marker.prototype.options.icon = DefaultIcon;
 
 export const Map = ({ setValue, eventLatitude, eventLongitude }: IMap) => {
-    const [position, setPosition] = useState<L.LatLngExpression | null>(null);
-    const [center, setCenter] = useState<[number, number]>([38.7080281, 35.5274213]);
-    const getURL = useLocation();
+  const [position, setPosition] = useState<L.LatLngExpression | null>(null);
+  const [center, setCenter] = useState<[number, number]>([38.7080281, 35.5274213]);
+  const getURL = useLocation();
 
-    const mapCondition = (!eventLatitude || !eventLongitude) || (getURL.pathname.includes('update'));
+  const mapCondition = !eventLatitude || !eventLongitude || getURL.pathname.includes('update');
 
-    useEffect(() => {
-        if (eventLatitude && eventLongitude) {
-            const newPosition: L.LatLngExpression = [Number(eventLatitude), Number(eventLongitude)];
-            setPosition(newPosition);
-            setCenter([Number(eventLatitude), Number(eventLongitude)]);
+  useEffect(() => {
+    if (eventLatitude && eventLongitude) {
+      const newPosition: L.LatLngExpression = [Number(eventLatitude), Number(eventLongitude)];
+      setPosition(newPosition);
+      setCenter([Number(eventLatitude), Number(eventLongitude)]);
+    }
+  }, [eventLatitude, eventLongitude]);
+
+  const LocationMarker = () => {
+    useMapEvents({
+      dblclick(e) {
+        if (mapCondition) {
+          setValue?.('latitude', e.latlng.lat);
+          setValue?.('longitude', e.latlng.lng);
+          setPosition(e.latlng);
         }
-    }, [eventLatitude, eventLongitude]);
+      },
+    });
 
-    const LocationMarker = () => {
-        useMapEvents({
-            dblclick(e) {
-                if (mapCondition) {
-                    setValue?.('latitude', e.latlng.lat);
-                    setValue?.('longitude', e.latlng.lng);
-                    setPosition(e.latlng);
-                }
-            }
-        });
-
-        return position === null ? null : (
-            <Marker position={position}>
-                <Popup>
-                    Seçili Konum
-                    <div> {eventLatitude}, {eventLongitude} </div>
-                </Popup>
-            </Marker>
-        );
-    };
-
-    return (
-        <MapContainer
-            key={`${center[0]}-${center[1]}`}
-            className='map-container'
-            center={center}
-            zoom={16}
-            doubleClickZoom={false}
-            attributionControl={false}
-        >
-            <TileLayer
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            />
-            {(mapCondition) && (<MapSearchInput />)}
-            <LocationMarker />
-        </MapContainer >
+    return position === null ? null : (
+      <Marker position={position}>
+        <Popup>
+          Seçili Konum
+          <div>
+            {' '}
+            {eventLatitude}, {eventLongitude}{' '}
+          </div>
+        </Popup>
+      </Marker>
     );
+  };
+
+  return (
+    <MapContainer
+      key={`${center[0]}-${center[1]}`}
+      className='map-container'
+      center={center}
+      zoom={16}
+      doubleClickZoom={false}
+      attributionControl={false}
+    >
+      <TileLayer
+        url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      />
+      {mapCondition && <MapSearchInput />}
+      <LocationMarker />
+    </MapContainer>
+  );
 };
