@@ -1,6 +1,6 @@
 .event-card {
   width: 22rem;
-  height: 12rem;
+  height: 13rem;
   justify-content: space-between;
   padding: 1rem 2rem 1rem 2rem;
   border-radius: 10px;
@@ -19,8 +19,13 @@
       margin-top: 0;
     }
     .description {
-      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
       overflow: hidden;
+      text-overflow: ellipsis;
+      max-height: 3em;
+      line-height: 1.5em;
     }
     .non-description {
       font-size: 14px;
