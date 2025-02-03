@@ -10,7 +10,7 @@ import { Alert, Button, Typography } from '@mui/material';
 import { ImgFilePreview } from '../../types';
 import { axiosFileUploadInterceptor } from '../../config/axios_config';
 import { useEventContext } from '../../context';
-
+import axios from 'axios';
 
 export const Dropzone = () => {
     const { setEventPhotos } = useEventContext();
@@ -20,7 +20,7 @@ export const Dropzone = () => {
     const onDrop = useCallback((acceptedFiles: FileWithPath[]) => {
         const mappedFiles = acceptedFiles.map(file => ({
             file,
-            preview: URL.createObjectURL(file)
+            preview: URL.createObjectURL(file),
         }));
         setFile(prevFiles => [...prevFiles, ...mappedFiles]);
     }, []);
@@ -28,14 +28,14 @@ export const Dropzone = () => {
     const { getRootProps, getInputProps } = useDropzone({
         accept: {
             'image/jpeg': [],
-            'image/png': []
+            'image/png': [],
         },
         maxSize: 10000000, // max 10MB
         multiple: true,
         onDrop,
     });
 
-    const fileElements = files.map((file) => {
+    const fileElements = files.map(file => {
         console.log(file);
         return (
             <li
@@ -68,18 +68,18 @@ export const Dropzone = () => {
 
         if (eventId) {
             formData.append('event', eventId);
-            files.forEach((file) => {
+            files.forEach(file => {
                 formData.append('path', file.file);
             });
 
             try {
                 const res = await axiosFileUploadInterceptor.post('photos/upload/', formData);
-                console.log(res);
                 if (res.status === 201) {
-                    setEventPhotos(res.data);
+                    const updatedPhotos = await axios.get(`events/${eventId}/photos/`);
+                    setEventPhotos(updatedPhotos.data);
                 }
             } catch (err) {
-                alert("Fotoğraflar eklenemedi");
+                alert('Fotoğraflar eklenemedi');
                 throw new Error(err as string);
             }
         }
@@ -94,21 +94,19 @@ export const Dropzone = () => {
     }, [files]);
 
     return (
-        <section className="dropzone-container">
+        <section className='dropzone-container'>
             <div className={`photo-alert${!files.length ? '-active' : ''}`}>
-                <Alert severity="warning">
+                <Alert severity='warning'>
                     Etkinliğe ait hiçbir fotoğraf bulunamadı, lütfen fotoğraf yükleyiniz.
                 </Alert>
             </div>
             <div {...getRootProps({ className: 'dropzone' })}>
                 <input {...getInputProps()} />
-                <p className='select-text' >
+                <p className='select-text'>
                     Görselleri buraya sürükleyip bırakın veya tıklayarak seçin
                 </p>
                 <CloudUploadIcon color={'primary'} />
-                <p>
-                    (Sadece *.png *.jpg ve *.jpeg formatı)
-                </p>
+                <p>(Sadece *.png *.jpg ve *.jpeg formatı)</p>
             </div>
             <aside>
                 <Typography
@@ -117,9 +115,7 @@ export const Dropzone = () => {
                 >
                     Yüklenen Görseller
                 </Typography>
-                <ul className='selected-img-list'>
-                    {fileElements}
-                </ul>
+                <ul className='selected-img-list'>{fileElements}</ul>
             </aside>
             <Button
                 className='start-analyze-button'
