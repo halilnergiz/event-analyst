@@ -1,10 +1,13 @@
 import axios from 'axios';
 
-
 axios.defaults.baseURL = `${process.env.REACT_APP_API_URL}`;
 
+const axiosInstance = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}`, // API base URL
+});
+
 axios.interceptors.request.use(
-    (request) => {
+    request => {
         const token = localStorage.getItem('access_token');
         if (token) {
             request.headers['Authorization'] = `Token ${token}`;
@@ -12,13 +15,13 @@ axios.interceptors.request.use(
         request.headers['Content-Type'] = 'application/json';
         return request;
     },
-    (error) => {
+    error => {
         return Promise.reject(error);
     }
 );
 
 export const axiosFileUploadInterceptor = axios.create();
-axiosFileUploadInterceptor.interceptors.request.use((request) => {
+axiosFileUploadInterceptor.interceptors.request.use(request => {
     try {
         const token = localStorage.getItem('access_token');
         if (token) {
@@ -33,7 +36,7 @@ axiosFileUploadInterceptor.interceptors.request.use((request) => {
 });
 
 export const axiosResetPasswordInterceptor = axios.create();
-axiosResetPasswordInterceptor.interceptors.request.use((request) => {
+axiosResetPasswordInterceptor.interceptors.request.use(request => {
     try {
         request.headers['Content-Type'] = 'application/json';
         return request;

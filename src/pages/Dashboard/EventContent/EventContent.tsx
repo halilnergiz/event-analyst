@@ -5,7 +5,6 @@ import axios from 'axios';
 
 import { useEventContext } from '../../../context';
 
-
 export const EventContent = () => {
     const { setEventPhotos } = useEventContext();
     const { eventId } = useParams();
