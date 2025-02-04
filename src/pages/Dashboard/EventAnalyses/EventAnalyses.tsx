@@ -100,15 +100,23 @@ export const EventAnalyses = () => {
         <div className='user-action-content'>
           <div className='created-at'>
             <b className='info-title'>Oluşturulma Tarihi:</b>
-            <span>{checkInformationContentSystem(new Date(eventInformations?.createdAt!))}</span>
+            <span>
+              {eventInformations?.createdAt
+                ? checkInformationContentSystem(new Date(eventInformations.createdAt))
+                : '-'}
+            </span>
           </div>
           <div className='updated-at'>
             <b className='info-title'>Son Güncellenme Tarihi:</b>
-            <span>{checkInformationContentSystem(new Date(eventInformations?.updatedAt!))}</span>
+            <span>
+              {eventInformations?.updatedAt
+                ? checkInformationContentSystem(new Date(eventInformations.updatedAt))
+                : '-'}
+            </span>
           </div>
         </div>
       </div>
-      {!!eventPhotos.length ? (
+      {eventPhotos.length ? (
         <>
           <div className='pie-chart-area'>
             <div className='chart gender'>
