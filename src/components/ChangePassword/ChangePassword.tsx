@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -54,8 +54,8 @@ export const ChangePassword = () => {
 
       alert('Şifre başarıyla değiştirildi');
       setOpen(false);
-    } catch (err) {
-      const error = (err as AxiosError).response?.data!;
+    } catch (err: any) {
+      const error = err.response?.data;
       const errorMessage = Object.values(error).join(' ');
       errorMessage.includes('common')
         ? alert('Lütfen başka bir yeni şifre deneyin, mevcut şifre ile çok benzer')
