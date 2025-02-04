@@ -11,7 +11,7 @@ const MapSearchInput = () => {
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    // @ts-ignore
+    // @ts-expect-error - Leaflet Control.Geocoder type definition issue
     const geocoder = L.Control.Geocoder.nominatim();
     geocoder.geocode(searchText, (results: any) => {
       if (results.length > 0) {

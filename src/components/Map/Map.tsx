@@ -10,6 +10,7 @@ import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 import MapSearchInput from './MapSearchInput';
 import { ICreateEvent } from '../../types';
 import { useLocation } from 'react-router-dom';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
 interface IMap {
   setValue?: (name: keyof ICreateEvent, value: any, config?: SetValueConfig) => void;
@@ -17,7 +18,7 @@ interface IMap {
   eventLongitude?: string;
 }
 
-let DefaultIcon = L.icon({
+const DefaultIcon = L.icon({
   iconUrl: iconUrl,
   shadowUrl: iconShadow,
 });
@@ -53,10 +54,21 @@ export const Map = ({ setValue, eventLatitude, eventLongitude }: IMap) => {
     return position === null ? null : (
       <Marker position={position}>
         <Popup>
-          Seçili Konum
-          <div>
-            {' '}
-            {eventLatitude}, {eventLongitude}{' '}
+          <div className='position-info'>
+            Seçili Konum
+            <ContentCopyIcon
+              sx={{ cursor: 'pointer', fontSize: '18px' }}
+              onClick={() => {
+                const coordinates = `${L.latLng(position).lat.toFixed(6)}, ${L.latLng(
+                  position
+                ).lng.toFixed(6)}`;
+                navigator.clipboard.writeText(coordinates);
+                alert('Koordinatlar kopyalandı!');
+              }}
+            />
+          </div>
+          <div className='position-coordinates'>
+            {L.latLng(position).lat.toFixed(6)}, {L.latLng(position).lng.toFixed(6)}
           </div>
         </Popup>
       </Marker>
