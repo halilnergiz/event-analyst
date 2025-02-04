@@ -4,11 +4,13 @@
   .img-item {
     margin: 0 1rem;
     img {
+      max-width: 400px;
+      max-height: 400px;
       user-select: none;
       margin: 32px;
-      max-width: 100%;
-      object-fit: cover;
       border-radius: 6px;
+      object-fit: contain;
+      cursor: pointer;
     }
   }
 }
@@ -24,7 +26,7 @@
 .modal-img-field {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: start;
   gap: 2rem;
   padding: 1rem;
   .img-item {

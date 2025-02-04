@@ -43,7 +43,7 @@ export const CarouselPhotoArea = () => {
   return (
     <div className='img-field'>
       <h2>Etkinlik Görselleri</h2>
-      {photos.length >= 6 ? (
+      {photos.length >= 4 ? (
         <div className='photos-modal'>
           <Modal
             open={open}
