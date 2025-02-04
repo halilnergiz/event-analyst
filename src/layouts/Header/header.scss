@@ -12,14 +12,20 @@
   justify-content: center;
   margin: 12px 28px;
 }
+
 .header-container .logo-container > div {
   margin: 0 8px;
 }
 .header-container .logo-container .logo-content {
   cursor: pointer;
 }
-.header-container .logo-container .logo-content img {
-  width: 3vw;
+.header-container .logo-container .logo-content .logo {
+  max-width: 60px;
+  min-width: 40px;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1/1;
+  object-fit: contain;
 }
 .header-container .logo-container .logo-text {
   display: flex;
