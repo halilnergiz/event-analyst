@@ -226,16 +226,16 @@ export const CreateEvent = () => {
             {errors.latitude && <p className='alert'>{errors.latitude.message}</p>}
             {errors.longitude && <p className='alert'>{errors.longitude.message}</p>}
             <Button
-              type='button'
-              onClick={prevStep}
-            >
-              Geri
-            </Button>
-            <Button
               type='submit'
               color='success'
             >
               Oluştur
+            </Button>
+            <Button
+              type='button'
+              onClick={prevStep}
+            >
+              Geri
             </Button>
           </Stack>
         )}
